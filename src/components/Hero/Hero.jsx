@@ -10,8 +10,7 @@ import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { sanityClient } from "../../../../server/big-elefant/utils/sanityClient";
-
+import { sanityClient } from "../../utils/sanityClient";
 
 
 // const products = [

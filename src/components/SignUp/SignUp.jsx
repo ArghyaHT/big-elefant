@@ -3,8 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignUp.module.css"; // Create this CSS file
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css'; // This includes default styles
-import {sanityClient} from "../../../../server/big-elefant/utils/sanityClient"
-
+import { sanityClient } from "../../utils/sanityClient";
 const SignUp = () => {
     const navigate = useNavigate();
 

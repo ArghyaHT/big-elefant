@@ -11,8 +11,7 @@ import { useEffect } from "react";
 
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
-import { sanityClient } from "../../../../server/big-elefant/utils/sanityClient";
-
+import { sanityClient } from "../../utils/sanityClient";
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState("profile");
     const [editMode, setEditMode] = useState(false);

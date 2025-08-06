@@ -21,7 +21,7 @@ import partner7 from "../../assets/partner7.png"
 import Marquee from "react-fast-marquee";
 import Reviews from "../Reviews/Reviews";
 import { Link, useNavigate } from "react-router-dom";
-import { sanityClient } from "../../../../server/big-elefant/utils/sanityClient";
+import { sanityClient } from "../../utils/sanityClient";
 
 
 

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css"; // Make sure you create this CSS file
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
-import { sanityClient } from "../../../../server/big-elefant/utils/sanityClient";
-
+import { sanityClient } from "../../utils/sanityClient";
 // const signInData = {
 //     firstName: "John",
 //     lastName: "Doe",

@@ -6,8 +6,7 @@ import sparklingWater from "../../assets/sparkling-water.png"
 import drinnkingWater from "../../assets/drinking-water.png"
 import beveragesBanner from "../../assets/beveragesBanner.png"
 import { useNavigate } from "react-router-dom";
-import { sanityClient } from "../../../../server/big-elefant/utils/sanityClient";
-
+import { sanityClient } from "../../utils/sanityClient";
 // // Dummy product data
 // const products = [
 //     {
