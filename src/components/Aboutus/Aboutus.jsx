@@ -126,6 +126,7 @@ const Aboutus = () => {
             console.warn("Missing slug for product:", product.productName);
         }
     };
+    
     return (
         <>
             <div className={styles.aboutherosection}>
