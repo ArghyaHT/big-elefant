@@ -1,0 +1,207 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 64px;
+  background-color: var(--primary-black);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  flex: 1;
+}
+
+.logoImage {
+  height: 45px;
+  object-fit: contain;
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 50px;
+  justify-content: center;
+  flex: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--primary-white);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--primary-white);
+}
+
+.customerName{
+  color: var(--primary-white);
+  cursor: pointer;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+/* Hide hamburger on desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.cartIcon {
+  display: none;
+  cursor: pointer;
+}
+
+.cartIconWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -13px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  /* fixed width */
+  height: 18px;
+  /* fixed height */
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  /* center text vertically */
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .logoImage {
+    height: 30px;
+  }
+
+  /* Show hamburger */
+  .hamburger {
+    display: block;
+    color: var(--primary-white);
+  }
+
+  .cartIcon {
+    display: block;
+    color: var(--primary-white);
+    margin-right: 10px;
+  }
+
+  /* Hide nav links and desktop icons */
+  .navLinks,
+  .icons {
+    display: none;
+  }
+
+  /* Center logo */
+  .logo {
+    flex: none;
+    margin: 0 auto;
+  }
+
+  /* Mobile dropdown menu */
+  .mobileMenu {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 90%;
+    height: 100vh;
+    background: var(--primary-black);
+    padding: 15px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+
+  /* Add styles for section headings */
+  .sectionHeading {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: var(--primary-white);
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  /* Style for each section (Shop, Info, etc.) */
+  .mobileNavSection {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Sub-items (links) */
+  .navItem {
+    color: var(--primary-white);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    gap: 10px;
+  }
+
+  /* Optional: hover effect */
+  .navItem:hover {
+    text-decoration: underline;
+  }
+
+
+  .cartIconWrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 12px;
+    /* Add space between icons */
+  }
+
+.userButton {
+  position: absolute;
+  background-color: var(--button-color);
+  color: var(--primary-white);
+  border: none;
+  border-radius: 10px;
+  width: 350px;
+  height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  bottom: 120px;
+  text-transform: capitalize;
+  /* Center horizontally */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+}

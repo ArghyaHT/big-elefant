@@ -1,0 +1,223 @@
+.orderProductListContainer {
+    padding: 32px 0px;
+    width: 800px;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Adjust spacing between input and button */
+    margin-bottom: 16px;
+    width: 730px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+.searchButton {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: var(--primary-black);
+    /* Or a specific color like #007bff */
+    color: var(--primary-white);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.productList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 650px;
+    overflow-y: auto;
+    /* Enables vertical scroll */
+    padding-right: 15px;
+    /* Optional: space for scrollbar */
+}
+
+.productListItem {
+    width: 700px;
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.imageWrapper {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+}
+
+.productImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.productContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.productTopRow {
+    display: flex;
+    justify-content: space-between;
+    /* spread items */
+    align-items: center;
+    /* vertical align */
+    margin-bottom: 4px;
+    gap: 8px;
+    flex-wrap: nowrap;
+    /* no wrapping */
+}
+
+
+.productBottomRow {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.customerName {
+    font-weight: 600;
+}
+
+.productPrice {
+    font-weight: 600;
+    color: var(--primary-black);
+}
+
+.orderDate,
+.packSize,
+.orderStatus {
+    font-size: 14px;
+    color: var(--primary-black-50);
+}
+
+
+@media screen and (max-width: 480px) {
+    .orderProductListContainer {
+        width: 100%;
+        padding: 0px;
+    }
+
+    .searchContainer {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .searchInput {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .searchButton {
+        width: 100%;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .productList {
+        padding-right: 0;
+        height: 600px;
+        overflow-y: auto;
+    }
+
+    .productListItem {
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 92%;
+        padding: 12px;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .imageWrapper {
+        width: 60px;
+        height: 60px;
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .productImage {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .productDetailsWrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .productTopRow,
+    .productBottomRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 4px 8px;
+    }
+
+    .customerName,
+    .productPrice,
+    .orderDate,
+    .packSize,
+    .orderStatus {
+        font-size: 14px;
+        flex: 1 1 auto;
+        word-break: break-word;
+        min-width: 0;
+    }
+}
+
+@media screen and (max-width: 360px) {
+
+    .productListItem {
+        width: 70%;
+    }
+
+    .searchInput,
+    .searchButton {
+        font-size: 13px;
+    }
+
+    .customerName,
+    .productPrice,
+    .orderDate,
+    .packSize,
+    .orderStatus {
+        font-size: 13px;
+    }
+
+    .productListItem {
+        padding: 10px;
+    }
+}

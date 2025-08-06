@@ -1,0 +1,27 @@
+.paymentHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  margin-bottom: 10px;
+}
+
+.paymentHeading:hover {
+  background-color: #eaeaea;
+}
+
+.arrow {
+  font-size: 18px;
+  color: #555;
+  transition: transform 0.3s ease;
+}
+
+.arrowExpanded {
+  transform: rotate(180deg); /* points upward */
+}

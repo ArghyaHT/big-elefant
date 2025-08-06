@@ -1,0 +1,205 @@
+.heroWrapper {
+    width: 100%;
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+/* Dark overlay for better text visibility */
+.heroWrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Adjust darkness */
+    z-index: 1;
+}
+
+/* Swiper slides */
+.slideContent {
+    position: relative;
+    z-index: 2;
+    /* Above the overlay */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    width: 100%;
+    max-width: 1440px;
+    box-sizing: border-box;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+    content: "";
+    display: inline-block;
+    color: var(--primary-white);
+  width: 24px;   /* adjust size here */
+  height: 24px;  
+    padding: 0px 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+      filter: brightness(0) invert(1); /* turns icon white */
+
+}
+
+
+.textContent {
+    flex: 1;
+    color: var(--primary-white);
+    max-width: 720px;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    padding-left: 60px;
+}
+
+.writer {
+    margin-top: 0px;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 0px;
+}
+
+.ctaButton {
+    width: 130px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-left: 60px;
+}
+
+.image {
+    flex: 1;
+    height: 650px;
+    width: 580px;
+    object-fit: contain;
+    margin-left: 40px;
+}
+
+
+/* ========== MOBILE STYLES (480px and below) ========== */
+@media (max-width: 480px) {
+    .slideContent {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .textContent {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .writer {
+        font-size: 18px;
+    }
+
+    .ctaButton {
+        margin: 15px auto 0;
+    }
+
+    .image {
+        width: 100%;
+        max-height: 550px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+}
+
+/* ========== MOBILE STYLES (480px and below) ========== */
+@media (max-width: 480px) {
+    .slideContent {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .textContent {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .writer {
+        font-size: 18px;
+    }
+
+    .ctaButton {
+        margin: 15px auto 0;
+    }
+
+    .image {
+        width: 100%;
+        max-height: 550px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+}
+
+/* ========== MOBILE STYLES (360px and below) ========== */
+@media (max-width: 390px) {
+    .slideContent {
+        flex-direction: column;
+        padding: 12px 15px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .textContent {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .title {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .writer {
+        font-size: 14px;
+    }
+
+    .ctaButton {
+        margin: 12px auto 0;
+    }
+
+    .image {
+        width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+}
+

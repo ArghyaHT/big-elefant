@@ -1,0 +1,347 @@
+.aboutherosection {
+    overflow: hidden;
+}
+
+.aboutImage {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+    display: block;
+    border: none;
+}
+
+/* Content Section Below the Hero */
+.aboutContent {
+    max-width: 800px;
+    /* better readability */
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 10px;
+    color: var(--primary-black);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* aligns content to the left */
+}
+
+.aboutTitle {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-black);
+    margin: 0px;
+    padding-top: 10px;
+
+}
+
+.aboutText {
+    font-size: 18px;
+    line-height: 22px;
+    color: var(--primary-black);
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 20px 0px;
+    text-align: left;
+    font-weight: 400;
+    /* optional but ensures left alignment */
+}
+
+.aboutText:nth-child(5) {
+    padding-bottom: 0;
+}
+
+.aboutText:last-child {
+    margin: 0;
+    padding: 0;
+}
+
+.ctaWrapper {
+    max-width: 800px;
+    width: 100%;
+    margin: 30px auto;
+    /* same horizontal centering and spacing below aboutContent */
+    display: flex;
+    justify-content: flex-start;
+    /* align button to the left */
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.ctaButton {
+    background-color: transparent;
+    color: var(--primary-black);
+    padding: 12px 24px;
+    border: 1px solid var(--primary-black);
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+
+.partnerSection {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.partnerHeading {
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: var(--primary-black);
+    text-transform: uppercase;
+}
+
+.partnerLogoWrapper {
+    padding: 10px 20px;
+}
+
+.partnerLogo {
+    height: 80px;
+    margin: 0 60px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.partnerLogo:hover {
+    transform: scale(1.1);
+}
+
+.productSection {
+    padding: 40px 20px;
+}
+
+.productBlock {
+    margin-bottom: 60px;
+}
+
+.productHeader {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.productName {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2%;
+    line-height: 60px;
+    color: var(--primary-black);
+}
+
+.productFeatures {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--primary-black);
+    margin-top: 8px;
+    letter-spacing: 2%;
+    line-height: 16px;
+}
+
+.productHero {
+    height: 90vh;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heroContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+    width: 100%;
+    max-width: 1440px;
+    box-sizing: border-box;
+
+}
+
+.heroText {
+    width: 720px;
+    flex: 1;
+}
+
+.heroTitle {
+    font-size: 60px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    color: var(--primary-white);
+}
+
+.heroWriter {
+    font-size: 30px;
+    color: var(--primary-white);
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.heroButton {
+    width: 130px;
+    height: 50px;
+    margin-top: 15px;
+    background-color: var(--primary-white);
+    color: var(--primary-black);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+
+}
+
+.heroImage {
+    flex: 1;
+    height: 650px;
+    width: 580px;
+    object-fit: contain;
+    margin-left: 40px;
+}
+
+
+@media (max-width: 480px) {
+  .aboutherosection {
+    overflow: visible; /* allow content to flow naturally */
+  }
+
+  .aboutImage {
+    height: auto;
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+ .aboutContent {
+  max-width: 100%;
+  padding: 10px 16px;
+  box-sizing: border-box;    /* important to include padding inside width */
+  align-items: flex-start;
+  text-align: center;
+  overflow-wrap: break-word; /* prevent long words from overflowing */
+  word-break: break-word;    /* break long words on smaller screens */
+}
+
+  .aboutTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    padding-top: 5px;
+  }
+
+  .aboutText {
+    font-size: 16px;
+    line-height: 1.4;
+    padding: 10px 0;
+    text-align: start;
+  }
+
+  .ctaWrapper {
+    max-width: 100%;
+    margin: 20px auto;
+    justify-content: center; /* center the button */
+    padding-bottom: 0;
+  }
+
+  .ctaButton {
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .partnerSection {
+    padding: 20px 10px;
+  }
+
+  .partnerHeading {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .partnerLogoWrapper {
+    padding: 8px 10px;
+  }
+
+  .partnerLogo {
+    height: 50px;
+    margin: 0 20px;
+  }
+
+  .productSection {
+    padding: 20px 12px;
+  }
+
+  .productBlock {
+    margin-bottom: 40px;
+  }
+
+  .productHeader {
+    margin-bottom: 12px;
+  }
+
+  .productName {
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 1px;
+  }
+
+  .productFeatures {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 1px;
+  }
+
+  .productHero {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 12px;
+    justify-content: center;
+  }
+
+  .heroContent {
+    flex-direction: column;
+    padding: 0 16px;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .heroText {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .heroTitle {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .heroWriter {
+    font-size: 18px;
+    margin-top: 8px;
+  }
+
+  .heroButton {
+    width: 140px;
+    height: 45px;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  .heroImage {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    margin-left: 0;
+  }
+}

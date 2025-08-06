@@ -1,0 +1,254 @@
+.contactWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--primary-black);
+
+}
+
+.banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.bannerImage {
+    width: 100%;
+    height: 90vh;
+    object-fit: cover;
+}
+
+.contactContent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 70px 135px;
+    /* for responsiveness */
+}
+
+/* Left: Image */
+.contactInfoWrapper {
+    padding: 10px 32px 32px 32px;
+    background-color: var(--primary-black);
+    border-radius: 12px;
+    max-width: 400px;
+}
+
+.contactHeading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-top:20px;
+    margin-bottom: 0px;
+    color: var(--primary-white);
+}
+
+.contactDescription {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--secondary-text-color);
+}
+
+.contactFlexContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 70px;
+}
+
+/* Flex row for each item */
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--primary-white);
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: var(--primary-white);
+}
+
+.contactItem {
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+    color: var(--primary-white);
+    text-decoration: none;
+}
+
+.contactItem a {
+  font-size: 16px;
+  color: var(--primary-white);
+  text-decoration: none; 
+}
+
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formSection {
+    padding-left: 30px;
+}
+
+.formHeading {
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--primary-black);
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.selectField {
+    color: var(--primary-grey);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.requiredTag {
+    color: var(--primary-black);
+    font-weight: 400;
+    padding-left: 2px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submitButton {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+
+@media (max-width: 480px) {
+     .banner {
+    height: auto;
+  }
+
+  .bannerImage {
+    height: 300px; /* or 50vh or any value that looks good on small screens */
+    object-fit: inherit;
+  }
+  .contactContent {
+    flex-direction: column;
+    padding: 20px 20px;
+  }
+
+  .contactInfoWrapper {
+    margin-bottom: 20px;
+  }
+
+  .formSection {
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .formHeading {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+
+  .submitButton {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .contactFlexContainer {
+    margin-top: 40px;
+    gap: 24px;
+  }
+
+  .contactHeading {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .contactDescription {
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 390px) {
+      .bannerImage {
+    height: 250px; /* slightly less for ultra-small screens */
+  }
+  .formHeading {
+    font-size: 24px;
+  }
+
+  .contactHeading {
+    font-size: 20px;
+  }
+
+  .contactDescription {
+    font-size: 14px;
+  }
+
+  .submitButton {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+}

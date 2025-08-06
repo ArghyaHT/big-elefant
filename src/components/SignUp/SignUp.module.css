@@ -1,0 +1,152 @@
+.wrapper {
+  border-bottom: 1px solid var(--primary-black);
+  width: 100%;
+}
+
+.container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 40px;
+}
+
+.title {
+  text-align: start ;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: var(--primary-black);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.inputGroup label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #555;
+}
+
+.inputGroup input {
+  padding: 10px;
+  font-size: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.createButton {
+  padding: 12px;
+  background-color: var(--button-color);
+  color: var(--primary-white);
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.signinButton {
+  display: block;
+  padding: 12px;
+  background-color: #f0f0f0;
+  color: var(--button-color);
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Responsive styles for screen width ≤ 480px */
+@media (max-width: 480px) {
+  .container {
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+
+  .nameRow {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .inputGroup {
+    margin-bottom: 16px;
+  }
+
+  .inputGroup input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .buttonGroup {
+    gap: 10px;
+  }
+
+  .createButton,
+  .signinButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Responsive styles for screen width ≤ 360px */
+@media (max-width: 360px) {
+  .container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .nameRow {
+    gap: 12px;
+  }
+
+  .inputGroup label {
+    font-size: 13px;
+  }
+
+  .inputGroup input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .createButton,
+  .signinButton {
+    font-size: 13px;
+    padding: 9px;
+  }
+}
+

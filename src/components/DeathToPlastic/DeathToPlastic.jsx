@@ -1,0 +1,72 @@
+import styles from './DeathToPlastic.module.css';
+import plastic1 from "../../assets/plastic3.png"
+import plastic2 from "../../assets/plastic2.png"
+import plastic3 from "../../assets/plastic1.png"
+import logo from "../../assets/logo.png"
+
+const deathToPlasticMedia = [
+  {
+    heading: "Plastic? Mostly trash. Aluminum? Recycled forever.",
+    image: plastic1,
+  },
+  {
+    heading: "If we don’t reduce plastic pollution, there will be more plastic than fish in our oceans by 2050.",
+    image: plastic2,
+  },
+  {
+    heading: "The truth about plastic recycling? It rarely happens. Landfills tell the real story.",
+    image: plastic3,
+  },
+];
+
+
+const DeathToPlastic= () => {
+  return (
+    <>
+    <div className={styles.heroSection}>
+      <div className={styles.overlay}>
+        <div className={styles.badgeText}>
+          <p>Elefant</p>
+          <p>crushes</p>
+          <p>Plastic</p>
+        </div>
+      </div>
+    </div>
+
+          {/* MEDIA SECTION */}
+   <div className={styles.mediaSection}>
+  {deathToPlasticMedia.map((item, index) => (
+    <div key={index}>
+      <div className={styles.mediaCard}>
+        <h2 className={styles.mediaHeading}>{item.heading}</h2>
+        {item.image && <img src={item.image} alt={item.heading} className={styles.mediaImage} />}
+        {item.video && (
+          <video className={styles.mediaVideo} controls>
+            <source src={item.video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+      </div>
+
+      {/* Extra section after first item */}
+      {index === 0 && (
+        <section className={styles.extraSection}>
+          <p>Plastic isn’t really recyclable anymore—it’s just not profitable. Most recycling centers now send plastic straight to landfills because recycling it would put them out of business. Some environmental economists even suggest it's better to toss plastic in the trash to reduce the emissions from extra trucking. Sad, but true. Meanwhile, over 75% of all aluminum made since 2025 is still in use today. #CrushToPlastic</p>
+        </section>
+      )}
+    </div>
+  ))}
+</div>
+
+{/* LOGO SECTION */}
+<div className={styles.logoSection}>
+  <img src= {logo} className={styles.logoImage} />
+  <p className={styles.logoText}>5 Gyres is a non-profit organization that uses science, education and adventure to empower action against the global crisis of plastic pollution.</p>
+</div>
+
+
+    </>
+  );
+};
+
+export default DeathToPlastic;

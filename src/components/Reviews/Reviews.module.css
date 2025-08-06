@@ -1,0 +1,109 @@
+.reviewWrapper {
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  letter-spacing: 0.02em;
+}
+
+.swiperContainer {
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.reviewCard {
+  border-radius: 12px;
+}
+
+.reviewText {
+  margin-top: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.reviewerName {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.stars {
+  font-size: 1.5rem;
+  color: gold;
+}
+
+:global(.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet) {
+  width: 35px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #ccc;
+  opacity: 1;
+  margin: 0 6px !important;
+  transition: background-color 0.3s ease;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background-color: var(--primary-black) !important; /* or your desired color */
+  opacity: 1;
+}
+
+
+@media (max-width: 480px) {
+  .reviewWrapper {
+    padding: 20px 10px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+.swiperContainer {
+  width: 100%;
+  max-width: 1200px; /* optional, control max width */
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.swiperContainer :global(.swiper-slide) {
+  display: flex !important;
+  justify-content: center;
+  align-items: center; /* Optional: vertical centering */
+  flex-direction: column;
+}
+
+.reviewCard {
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 90%;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center; /* Optional if your content needs it */
+}
+
+  .reviewText {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .reviewerName {
+    font-size: 1.1rem;
+  }
+
+  .stars {
+    font-size: 1.2rem;
+  }
+
+  :global(.swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet) {
+    width: 20px;
+    height: 2px;
+    margin: 0 10px !important;
+  }
+}
+
+

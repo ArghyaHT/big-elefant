@@ -1,0 +1,232 @@
+.wrapper {
+  width: 100%;
+  height: 60vh;
+  background-image: url('../../assets/banner3.png'); /* ✅ Use relative path */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.4); /* optional overlay color */
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0px;
+}
+
+.logoBadge {
+  position: relative;
+  width: 150px; /* adjust as needed */
+  height: 150px;
+}
+
+.badgeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.badgeText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: white; /* or black depending on image */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* optional for better contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badgeText p {
+  margin: 0;
+  color: var(--badge-text);
+}
+
+.badgeText p:nth-child(1) {
+  font-family: 'Traditio AH', serif;
+  font-size: 25px;
+  letter-spacing: 5px;
+}
+
+.badgeText p:nth-child(2) {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.badgeText p:nth-child(3) {
+  font-size: 25px; 
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+}
+
+.description {
+  font-size: 32px;
+  color: var(--primary-white);
+  font-weight: 900;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0 auto 30px auto;
+  max-width: 900px; 
+  white-space: normal;
+}
+
+.ctaWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px; /* optional spacing */
+}
+
+.ctaButton {
+  background-color: transparent; 
+  color: var(--primary-white);
+  padding: 12px 24px;
+  border: 1px solid var(--primary-white); 
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+
+@media (max-width: 480px) {
+  .wrapper {
+    height: 35vh;
+    padding: 24px 16px;
+    background-position: center;
+    background-size: cover;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logoContainer {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .logoBadge {
+    width: 120px;
+    height: 120px;
+  }
+
+  .badgeText {
+    font-size: 14px;
+    top: 45%;
+  }
+
+  .badgeText p:nth-child(1) {
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+
+  .badgeText p:nth-child(2) {
+    font-size: 12px;
+  }
+
+  .badgeText p:nth-child(3) {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .ctaWrapper {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+
+  .ctaButton {
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 390px) {
+  .wrapper {
+    height: 50vh;
+    background-position: center;
+    background-size: cover;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logoContainer {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+
+  .logoBadge {
+    width: 100px;
+    height: 100px;
+  }
+
+  .badgeText {
+    font-size: 13px;
+    top: 45%;
+  }
+
+  .badgeText p:nth-child(1) {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+
+  .badgeText p:nth-child(2) {
+    font-size: 11px;
+  }
+
+  .badgeText p:nth-child(3) {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  .description {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    max-width: 100%;
+  }
+
+  .ctaWrapper {
+    margin-top: 16px;
+    flex-direction: column;
+  }
+
+  .ctaButton {
+    font-size: 13px;
+    padding: 8px 16px;
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+

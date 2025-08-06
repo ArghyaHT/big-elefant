@@ -1,0 +1,407 @@
+.merchContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.merchImageSection {
+  flex: 1;
+  min-width: 300px;
+  padding: 32px;
+
+}
+
+.mySwiper {
+  padding-bottom: 30px; /* create space for pagination */
+}
+
+.merchImage {
+  width: 100%;
+  height: 570px;
+  object-fit: contain;
+}
+
+.merchContentSection {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 0px;
+  padding: 0px 15px;
+  gap: 5px;
+}
+
+.merchName {
+  font-size: 56px;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  line-height: 60px;
+}
+
+.merchPrice {
+  font-size: 56px;
+  font-weight: bold;
+  color: var(--primary-black);
+  /* A solid dark color */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  letter-spacing: 0.5px;
+}
+
+.stars {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.sectionHeading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  color: var(--primary-black);
+  /* Or white, based on background */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sizeOptions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.sizeButton {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.selectedSize {
+  background: #000;
+  color: white;
+  border-color: #000;
+}
+
+
+.colorsSection {
+  margin-bottom: 1rem;
+}
+
+.colorOptions {
+  display: flex;
+  gap: 10px;
+}
+
+.colorDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+
+.buyNowWrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.buyNowSolidButton {
+  background-color: var(--primary-black);
+  /* solid black or your primary color */
+  color: var(--primary-white);
+  width: 445px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+
+.favIconButton {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-white);
+  border: 1px solid var(--primary-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.merchDescriptionWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 0px;
+}
+
+.merchDescription {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-black);
+  line-height: 1.2;
+  text-align: left;
+  margin-top: 0px;
+}
+
+.featureList {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+  color: var(--primary-black);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.reviewSectionWrapper {
+  padding: 20px 80px;
+  border-bottom: 1px solid var(--primary-black);
+}
+
+.reviewSectionHeading {
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+.reviewSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.reviewLeft,
+.reviewMiddle,
+.reviewRight {
+  flex: 1;
+}
+
+.reviewLeft,
+.reviewMiddle {
+  height: 150px;
+  border-right: 1px solid var(--primary-black);
+  /* light vertical separator */
+  padding-right: 20px;
+  /* space before the border */
+  margin-right: 20px;
+  /* space after the border */
+}
+
+.subHeading {
+  font-size: 30px;
+  color: var(--primary-black);
+  margin: 0px;
+  font-weight: bold;
+}
+
+.reviewCount {
+  margin-top: 0px;
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.averageRating {
+  font-size: 56px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.starIcon {
+  color: #ffc107;
+  font-size: 20px;
+}
+
+.starRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.starLabel {
+  width: 40px;
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.starBarContainer {
+  height: 8px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.starBar {
+  height: 100%;
+  background-color: #fbbf24;
+  /* amber-400 */
+  border-radius: 9999px;
+}
+
+.starCount {
+  margin-left: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--primary-black);
+  min-width: 20px;
+  /* to align counts */
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+.merchContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.merchImageSection,
+.merchContentSection {
+  flex: 1 1 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+  .merchImage {
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+  }
+
+  .merchName {
+    font-size: 28px;
+    line-height: 34px;
+    text-align: start;
+  }
+
+  .merchPrice {
+    font-size: 28px;
+    text-align: start;
+  }
+
+  .stars {
+    justify-content: start;
+  }
+
+  .sectionHeading {
+    font-size: 16px;
+    text-align: start;
+  }
+
+  .sizeOptions,
+  .colorOptions,
+  .buyNowWrapper {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .buyNowSolidButton {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .buyNowSolidButton {
+    background-color: var(--primary-black);
+    /* solid black or your primary color */
+    color: var(--primary-white);
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+
+  .favIconButton {
+    width: 50px;
+    height: 50px;
+    font-size: 16px;
+  }
+
+  .merchDescriptionWrapper {
+    width: 400px;
+  }
+
+  .merchDescription {
+    font-size: 13px;
+    text-align: start;
+  }
+
+  .mySwiper {
+  padding-bottom: 30px; /* create space for pagination */
+}
+
+  .featureList {
+    font-size: 13px;
+    padding-left: 16px;
+  }
+
+  .reviewSectionWrapper {
+    padding: 20px 16px;
+  }
+
+  .reviewSectionHeading {
+    font-size: 22px;
+    text-align: start;
+  }
+
+  .reviewSection {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .reviewLeft,
+  .reviewMiddle,
+  .reviewRight {
+    width: 100%;
+    border: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  .subHeading {
+    font-size: 20px;
+    text-align: start;
+  }
+
+  .reviewCount,
+  .averageRating {
+    font-size: 32px;
+    text-align: start;
+  }
+
+  .starLabel {
+    width: 30px;
+    font-size: 0.75rem;
+  }
+
+  .starCount {
+    font-size: 0.75rem;
+  }
+
+}

@@ -1,0 +1,215 @@
+.heroSection {
+    height: 90vh;
+    background-size: cover;
+    background-color: var(--primary-white);
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-top: 40px;
+    justify-content: center;
+}
+
+.badgeText {
+    text-align: center;
+    color: var(--badge-text);
+    font-family: 'Traditio AH', serif;
+}
+
+.badgeText p:nth-child(1) {
+    font-family: 'Traditio AH', serif;
+    font-size: 200px;
+    font-weight: 400;
+    margin: 0px;
+    letter-spacing: 5px;
+
+}
+
+.badgeText p:nth-child(2) {
+    font-size: 60px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0px;
+
+}
+
+.badgeText p:nth-child(3) {
+    font-size: 150px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0px;
+
+}
+
+.mediaSection {
+  display: flex;
+  flex-direction: column;
+  /* background-color: ; */
+}
+
+.mediaCard {
+  padding: 24px;
+  border-radius: 12px;
+  text-align: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mediaHeading {
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.mediaImage,
+.mediaVideo {
+  width: 100%;
+  height: 650px;
+}
+
+.extraSection {
+  background-color: var(--primary-black);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-white);
+  margin-top: 40px;
+  text-align: start;
+}
+
+.extraSection p {
+  max-width: 1200px;
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--primary-white);
+}
+
+.logoSection {
+  text-align: center;
+  padding: 24px;
+  border-bottom: 1px solid var(--primary-black); 
+
+}
+
+.logoImage {
+  width: 300px;
+  height: 300px;
+  margin-bottom: 16px;
+  border: 2px solid var(--primary-black); 
+  padding: 8px; 
+}
+
+.logoText {
+  font-size: 16px;
+  color: var(--primary-black); /* Or white, depending on background */
+  max-width: 320px;
+  text-align: start;
+  margin: 0 auto 24px;
+}
+
+
+/* ========== SMALL SCREEN STYLES (max-width: 480px) ========== */
+@media (max-width: 480px) {
+  .heroSection {
+    height: auto;
+    padding: 40px 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .badgeText p:nth-child(1) {
+    font-size: 80px;
+    letter-spacing: 2px;
+  }
+
+  .badgeText p:nth-child(2) {
+    font-size: 24px;
+  }
+
+  .badgeText p:nth-child(3) {
+    font-size: 60px;
+    letter-spacing: 1px;
+  }
+
+  .mediaHeading {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .mediaImage,
+  .mediaVideo {
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .mediaCard {
+    padding: 16px;
+  }
+
+  .extraSection p {
+    font-size: 18px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .logoImage {
+    width: 180px;
+    height: 180px;
+  }
+
+  .logoText {
+    font-size: 14px;
+    max-width: 100%;
+    padding: 0 12px;
+  }
+}
+
+/* ========== EXTRA SMALL SCREEN STYLES (max-width: 390px) ========== */
+@media (max-width: 390px) {
+  .badgeText p:nth-child(1) {
+    font-size: 60px;
+  }
+
+  .badgeText p:nth-child(2) {
+    font-size: 20px;
+  }
+
+  .badgeText p:nth-child(3) {
+    font-size: 48px;
+  }
+
+  .mediaHeading {
+    font-size: 24px;
+  }
+
+  .mediaImage,
+  .mediaVideo {
+    height: 200px;
+  }
+
+  .extraSection p {
+    font-size: 16px;
+  }
+
+  .logoImage {
+    width: 150px;
+    height: 150px;
+  }
+
+  .logoText {
+    font-size: 13px;
+  }
+}
+

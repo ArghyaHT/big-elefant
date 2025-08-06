@@ -1,0 +1,219 @@
+.wrapper {
+  border-bottom: 1px solid var(--primary-black); /* or any color you want */
+  width: 100%;
+}
+
+.container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 40px;
+    
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 40px;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 0px 45px;
+}
+
+.inputGroup label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #555;
+}
+
+.inputGroup input {
+    padding: 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-transform: lowercase; /* This keeps typed text normal */
+
+}
+
+.inputGroup input::placeholder {
+  text-transform: uppercase;
+}
+
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper input {
+  flex: 1;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+  top: 10px;
+}
+
+
+.forgotPassword {
+    text-align: right;
+    margin-bottom: 20px;
+    padding: 0px 45px;
+
+}
+
+.forgotPassword a {
+    color: var(--primary-black);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgotPassword a:hover {
+    text-decoration: underline;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0px 45px;
+
+}
+
+.loginButton,
+.signupButton {
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.loginButton {
+    background-color: var(--button-color);
+    color: var(--primary-white);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+.signupButton {
+    display: block;
+    padding: 12px;
+    background-color: #f0f0f0;
+    color: var(--button-color);
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+
+.signupLink {
+    text-align: center;
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .inputGroup {
+    padding: 0;
+    margin-bottom: 16px;
+  }
+
+  .inputGroup input {
+    font-size: 14px;
+  }
+
+  .forgotPassword {
+    padding: 0 20px;
+    font-size: 13px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    padding: 0;
+    gap: 10px;
+  }
+
+  .loginButton,
+  .signupButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .signupLink {
+    font-size: 13px;
+  }
+
+  .passwordWrapper input {
+    padding-right: 36px;
+  }
+
+  .eyeIcon {
+    font-size: 16px;
+    top: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .inputGroup {
+    padding: 0 15px;
+  }
+
+  .forgotPassword {
+    padding: 0 15px;
+    font-size: 12px;
+  }
+
+  .buttonGroup {
+    padding: 0 15px;
+  }
+
+  .loginButton,
+  .signupButton {
+    font-size: 13px;
+    padding: 9px;
+  }
+
+  .eyeIcon {
+    font-size: 15px;
+    right: 10px;
+    top: 8px;
+  }
+}

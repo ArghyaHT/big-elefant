@@ -1,0 +1,277 @@
+.footer {
+  background-color: var(--primary-white);
+  color: var(--primary-white);
+  padding: 20px 64px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* Center horizontally */
+  justify-content: flex-start;
+  /* Start vertically from top */
+  top: 0;
+  margin-top: 10px;
+}
+
+.logo {
+  width: 170px;
+  height: 40px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--primary-black);
+  max-width: 300px;
+  font-weight: 400;
+}
+
+.linksHeading {
+  margin-top: 10px;
+  font-size: 25px;
+  color: var(--primary-black);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.linksListWrapper ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* replaces margin-bottom on li */
+}
+
+.linksListWrapper li {
+  /* You can keep this if you need extra spacing */
+  margin: 0;
+}
+
+.linksListWrapper a {
+  color: var(--primary-black);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 14px;
+}
+
+.links{
+  color: var(--primary-black);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 14px;
+}
+
+.socialSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  /* space between heading and icons */
+  padding-top: 10px;
+}
+
+.socialHeading {
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--primary-black);
+  /* or your preferred heading color */
+  margin: 0;
+  text-transform: uppercase;
+
+}
+
+.socialIcons {
+  display: flex;
+  gap: 60px;
+  /* spacing between Instagram and X */
+  height: auto;
+}
+
+.socialItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  color: var(--primary-black);
+  gap: 20px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialItem svg {
+  font-size: 28px;
+  color: var(--primary-black);
+  transition: color 0.3s;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+.followerCount {
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.socialHandle {
+  font-size: 20px;
+  color: var(--primary-black);
+  opacity: 0.7;
+  font-weight: 900;
+}
+
+
+.subscribeSection {
+  margin-top: 0px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: start;
+  text-transform: uppercase;
+}
+
+.subscribeTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.subscribeForm {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+.subscribeInput {
+  width: 260px;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.subscribeInput:focus {
+  outline: none;
+  border-color: var(--primary-black);
+}
+
+.subscribeButton {
+  width: 50px;
+  height: 40px;
+  color: var(--primary-black);
+  border: 1px solid var(--primary-black);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center; /* ✅ Center all child items */
+  }
+
+  .logoSection,
+  .socialSection,
+  .subscribeSection,
+  .linksListWrapper {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .logo {
+    width: 160px;
+    height: auto;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--primary-black);
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .linksHeading,
+  .socialHeading {
+    font-size: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .linksListWrapper ul {
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .linksListWrapper a,
+  .links {
+    font-size: 15px;
+  }
+
+  .socialIcons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .followerCount {
+    font-size: 20px;
+  }
+
+  .socialHandle {
+    font-size: 16px;
+  }
+
+  .subscribeTitle {
+    font-size: 18px;
+  }
+
+  .subscribeForm {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .subscribeInput {
+    width: 100%;
+    max-width: 320px;
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .subscribeButton {
+    width: 100%;
+    max-width: 50px;
+    height: 46px;
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,352 @@
+.productContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.productImageSection {
+  flex: 1;
+  min-width: 300px;
+  padding: 32px;
+
+}
+
+.productImage {
+  width: 100%;
+  height: 570px;
+  object-fit: contain;
+}
+
+.productContentSection {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 0px;
+  padding: 0px 15px;
+  gap: 10px;
+}
+
+.productName {
+  font-size: 56px;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+  line-height: 60px;
+}
+
+.productPrice {
+  font-size: 56px;
+  font-weight: bold;
+  color: var(--primary-black);
+  /* A solid dark color */
+  margin-top: 10px;
+  margin-bottom: 0px;
+  letter-spacing: 0.5px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-weight: 900;
+  color: var(--primary-black);
+  margin-top: 10px;
+
+}
+
+.tag {
+  background: none;
+  color: var(--primary-black);
+  padding: 0;
+  border-radius: 0;
+  font-size: 18px;
+  text-transform: capitalize;
+  position: relative;
+}
+
+/* Add vertical bar separator after each tag except the last */
+.tag::after {
+  content: "|";
+  margin-left: 8px;
+  color: var(--primary-black);
+}
+
+/* Remove separator from last tag */
+.tag:last-child::after {
+  content: "";
+  margin: 0;
+}
+
+.productDescriptionWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0px;
+}
+
+.productDescription {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--primary-black);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.primaryButton {
+  width: 205px;
+  height: 46px;
+  background-color: var(--button-background);
+  color: var(--primary-black);
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sectionHeading {
+  font-size: 25px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.packOptions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.packOption {
+  border: 1px solid var(--primary-black);
+  /* or any color you want */
+  border-radius: 4px;
+  padding: 10px 10px;
+  text-align: center;
+  background-color: transparent;
+  box-shadow: none;
+  min-width: 120px;
+  gap: 2px;
+}
+
+.packLabel {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.packPrice {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-black);
+  margin-bottom: 5px;
+}
+
+/* NEW: Styles when a pack is selected */
+.selectedPack {
+  background-color: var(--primary-black);
+  /* slightly darker grey */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+  color: var(--primary-white);
+}
+
+.selectedPack .packPrice {
+  color: var(--primary-white);
+}
+
+.buyNowWrapper {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.buyNowSolidButton {
+  background-color: var(--primary-black);
+  /* solid black or your primary color */
+  color: var(--primary-white);
+  width: 445px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.attitudeSection {
+  padding: 10px, 10px;
+}
+
+.twoColumnSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* Enables stacking on small screens */
+}
+
+.leftContent {
+  flex: 1;
+  min-width: 600px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* centers child elements horizontally */
+  text-align: center;
+  /* centers text */
+}
+
+.attitudeTagline {
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--primary-black);
+  line-height: 60px;
+  margin-bottom: 0px;
+  letter-spacing: 1px;
+  padding: 0px 20px;
+  text-transform: uppercase;
+}
+
+.attitudeDesc {
+  padding: 0px 100px;
+  text-align: end;
+  letter-spacing: 1px;
+
+}
+
+.rightVideo {
+  flex: 1;
+  min-width: 600px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0px;
+}
+
+.videoPlayer {
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* In your CSS module */
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+
+@media (max-width: 480px) {
+  .productContainer {
+    padding: 0 10px;
+    /* or remove horizontal padding */
+    box-sizing: border-box;
+  }
+
+  .productImageSection,
+  .productContentSection {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .productImage {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .productName,
+  .productPrice {
+    font-size: 23px;
+    line-height: 36px;
+    text-align: start;
+  }
+
+  .tags {
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  .tag {
+    font-size: 14px;
+  }
+
+  .productDescription {
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: start;
+  }
+
+  .primaryButton,
+  .buyNowSolidButton {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .buyNowWrapper {
+    justify-content: center;
+  }
+
+  .sectionHeading {
+    font-size: 20px;
+    text-align: start;
+  }
+
+  .packOptions {
+    justify-content: flex-start;
+  }
+
+  .packOption {
+    min-width: 70px;
+    padding: 8px 10px;
+  }
+
+  .packLabel,
+  .packPrice {
+    font-size: 14px;
+  }
+
+  .attitudeSection {
+    padding: 10px;
+  }
+
+  .twoColumnSection {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .leftContent {
+    min-width: 100%;
+  }
+
+  .attitudeTagline {
+    font-size: 28px;
+    line-height: 34px;
+    padding: 0;
+  }
+
+  .attitudeDesc {
+    padding: 0 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .rightVideo {
+    min-width: 100%;
+    height: auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .videoPlayer {
+    max-width: 380px;
+    height: 380px;
+  }
+}

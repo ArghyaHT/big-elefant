@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+
+/* --- Add your Traditio AH font definition below --- */
+@font-face {
+  font-family: 'Traditio AH'; /* The name you'll use to reference it */
+  src: url('./assets/fonts/traditio.woff2') format('woff2'),
+       url('./assets/fonts/traditio.woff') format('woff'),
+       url('./assets/fonts/traditio.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-white);
+}
+
+h1,
+h2,
+h3,
+button,
+p {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+:root {
+--primary-black: #000000;
+--primary-white: #ffffff;
+--radial-color: #8F8F8F;
+--badge-text: #CCA14F;
+--rgba-black: 0, 0, 0; 
+--button-background: #E6E6E6;
+--secondary-text-color: #666666;
+--faq-background: #E8E8E8;
+--checkout-button-background: #CCCCCC;
+--primary-black-50: rgba(0, 0, 0, 0.5);
+--checkout-session-background: #fafafa;
+--button-color: #CBA14F;
+--border-background: #DDDDDD;
+}
+
+
+
