@@ -3,8 +3,84 @@ import styles from "./ContactUs.module.css";
 
 import contactusimage from "../../assets/contactusImage.png"
 import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { useState } from "react";
+import { sanityClient } from "../../utils/sanityClient";
 
 const Contactus = () => {
+    // Form state
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        message: ""
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(null);
+    const [error, setError] = useState(null);
+
+    // Handle input changes (text inputs)
+    const handleChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
+
+    // Handle phone input separately because it returns just the phone string
+    const handlePhoneChange = (phone) => {
+        setFormData(prev => ({
+            ...prev,
+            phoneNumber: phone
+        }));
+    };
+
+    // Submit handler
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Basic validation
+        if (!formData.firstName || !formData.email || !formData.phoneNumber) {
+            setError("Please fill in all required fields.");
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+        setSuccess(null);
+
+        // Prepare the lead document to send to Sanity
+        const leadDocument = {
+            _type: "lead",
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            phoneNumber: formData.phoneNumber,
+            message: formData.message,
+            submittedAt: new Date().toISOString(),
+        };
+
+        try {
+            await sanityClient.create(leadDocument);
+
+            setSuccess("Thank you! Your message has been sent.");
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                phoneNumber: "91",
+                message: ""
+            });
+        } catch (err) {
+            console.error("Failed to submit lead:", err);
+            setError("Failed to send your message. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className={styles.contactWrapper}>
             {/* Banner */}
@@ -40,114 +116,63 @@ const Contactus = () => {
                 </div>
 
                 <div className={styles.formSection}>
-
-                    <form className={styles.contactForm}
-                    // onSubmit={handleSubmit}
-                    >
+                    <form className={styles.contactForm} onSubmit={handleSubmit}>
                         <div className={styles.row}>
                             <div className={styles.formGroup}>
-                                <label htmlFor="firstName">First Name<span className={styles.requiredTag}>(Required)</span></label>
+                                <label htmlFor="firstName">
+                                    First Name<span className={styles.requiredTag}>(Required)</span>
+                                </label>
                                 <input
                                     type="text"
                                     id="firstName"
                                     name="firstName"
-                                    // value={formData.fullName}
-                                    // onChange={handleChange}
+                                    value={formData.firstName}
+                                    onChange={handleChange}
                                     required
                                 />
                             </div>
 
-                            {/* <div className={styles.formGroup}>
-                                <label htmlFor="phoneNumber">Phone Number<span className={styles.requiredTag}>(Required)</span></label>
-                                <input
-                                    type="text"
-                                    id="phoneNumber"
-                                    name="phoneNumber"
-                                    // value={formData.phoneNumber}
-                                    // onChange={handleChange}
-                                    pattern="[0-9]*"
-                                    inputMode="numeric"
-                                    required
-                                />
-                            </div> */}
                             <div className={styles.formGroup}>
                                 <label htmlFor="lastName">Last Name</label>
                                 <input
                                     type="text"
                                     id="lastName"
                                     name="lastName"
-                                    // value={formData.fullName}
-                                    // onChange={handleChange}
-                                    required
+                                    value={formData.lastName}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="email">Email<span className={styles.requiredTag}>(Required)</span></label>
+                            <label htmlFor="email">
+                                Email<span className={styles.requiredTag}>(Required)</span>
+                            </label>
                             <input
                                 type="email"
                                 id="email"
                                 name="email"
-                                // value={formData.email}
-                                // onChange={handleChange}
+                                value={formData.email}
+                                onChange={handleChange}
                                 required
                             />
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="phoneNumber">Phone Number<span className={styles.requiredTag}>(Required)</span></label>
-                            <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                // value={formData.phoneNumber}
-                                // onChange={handleChange}
-                                pattern="[0-9]*"
-                                inputMode="numeric"
-                                required
+                            <label htmlFor="phoneNumber">
+                                Phone Number<span className={styles.requiredTag}>(Required)</span>
+                            </label>
+                            <PhoneInput
+                                country={'in'}
+                                inputProps={{
+                                    name: 'phoneNumber',
+                                    required: true,
+                                    id: 'phoneNumber',
+                                }}
+                                value={formData.phoneNumber}
+                                onChange={handlePhoneChange}
                             />
                         </div>
-
-                        {/* <div className={styles.formGroup}>
-                            <label htmlFor="category">Select Category<span className={styles.requiredTag}>(Required)</span></label>
-                            <select
-                                id="category"
-                                name="category"
-                                className={styles.selectField}
-                                value={selectedCategory}
-                                onChange={(e) => setSelectedCategory(e.target.value)}
-                                required
-                            >
-                                <option value="">Select a Category</option>
-                                {categories.map((category, index) => (
-                                    <option key={index} value={category}>
-                                        {category}
-                                    </option>
-                                ))}
-                            </select>
-                        </div> */}
-
-                        {/* <div className={styles.formGroup}>
-                            <label htmlFor="product">Select Product</label>
-                            <select
-                                id="product"
-                                name="product"
-                                className={styles.selectField}
-                                value={selectedProduct}
-                                onChange={(e) => setSelectedProduct(e.target.value)}
-                                required
-                            >
-                                <option value="">Select a Product</option>
-                                {products
-                                    .filter((product) => product.category === selectedCategory)
-                                    .map((product) => (
-                                        <option key={product._id} value={product.productName}>
-                                            {product.productName}
-                                        </option>
-                                    ))}
-                            </select>
-                        </div> */}
 
                         <div className={styles.formGroup}>
                             <label htmlFor="message">Message</label>
@@ -155,11 +180,17 @@ const Contactus = () => {
                                 id="message"
                                 name="message"
                                 rows="5"
-                            // value={formData.message}
-                            // onChange={handleChange}
+                                value={formData.message}
+                                onChange={handleChange}
                             ></textarea>
                         </div>
-                        <button type="submit" className={styles.submitButton}>Submit Now</button>
+
+                        {error && <p style={{ color: "red" }}>{error}</p>}
+                        {success && <p style={{ color: "green" }}>{success}</p>}
+
+                        <button type="submit" className={styles.submitButton} disabled={loading}>
+                            {loading ? "Submitting..." : "Submit Now"}
+                        </button>
                     </form>
                 </div>
             </div>
