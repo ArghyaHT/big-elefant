@@ -1,0 +1,132 @@
+.container {
+  padding: 2rem;
+  max-width: 850px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d2d2d;
+  background-color: #ffffff;
+  border-bottom: 2px solid #eaeaea;
+
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+  border-left: 4px solid #007acc;
+  padding-left: 0.75rem;
+}
+
+.subheading {
+  font-size: 1.1rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.paragraph {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #3a3a3a;
+}
+
+.list {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.listItem {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+em {
+  font-style: italic;
+  color: #555;
+}
+
+strong {
+  font-weight: 600;
+}
+
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 2.2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid #007acc;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .subheading {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .listItem {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .list {
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  em {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .container {
+    padding: 1rem 0.75rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.1rem;
+  }
+
+  .paragraph,
+  .listItem {
+    font-size: 0.9rem;
+  }
+
+  .list {
+    padding-left: 1rem;
+  }
+}

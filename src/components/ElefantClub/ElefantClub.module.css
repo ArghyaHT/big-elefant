@@ -1,0 +1,26 @@
+.bannerContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  object-fit: cover;
+}
+
+/* Responsive styling */
+@media screen and (max-width: 480px) {
+  .bannerImage {
+    height: 220px;
+    object-position: center top;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .bannerImage {
+    height: 180px;
+    object-position: center top;
+  }
+}

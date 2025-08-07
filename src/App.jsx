@@ -15,6 +15,10 @@ import CheckOutPage from './Pages/CheckOutPage'
 import SignInPage from './Pages/SignInPage'
 import SignUpPage from './Pages/SignUpPage'
 import DashboardPage from './Pages/DashboardPage'
+import PrivacyPolicy from './Pages/PrivacyPolicy'
+import PrivacyPolicyPage from './Pages/PrivacyPolicy'
+import TermsContionsPage from './Pages/T&CPage'
+import ElefantsClubPage from './Pages/ElefantClubPage'
 
 function App() {
 
@@ -35,7 +39,9 @@ function App() {
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/user-dashboard" element={<DashboardPage />} />
-
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms-and-conditions" element={<TermsContionsPage />} />
+        <Route path="/elefant-club" element={<ElefantsClubPage />} />
 
 
       </Routes>

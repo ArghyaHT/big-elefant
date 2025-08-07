@@ -3,13 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css"; // Make sure you create this CSS file
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { sanityClient } from "../../utils/sanityClient";
-// const signInData = {
-//     firstName: "John",
-//     lastName: "Doe",
-//     email: "john.doe@example.com",
-//     password: "Password@123",
-//     phone: "+91 1234567890"
-// };
 
 const SignIn = () => {
 

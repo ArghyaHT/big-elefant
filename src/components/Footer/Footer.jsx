@@ -26,7 +26,7 @@ const Footer = () => {
                             <li>
                                 <Link to="/about-us" className={styles.links}>About Us</Link>
                             </li>
-                            <li><a href="/">ELEFANT’S CLUB- Coming soon</a></li>
+                            <li><Link to="/elefant-club" className={styles.links}>ELEFANT’S CLUB- Coming soon</Link></li>
                             {/* <li><a href="/">FAQ</a></li> */}
                             <li>
                                 <Link to="/faq" className={styles.links}>FAQ</Link>
@@ -34,8 +34,8 @@ const Footer = () => {
                             <li>
                                 <Link to="/contact-us" className={styles.links}>Contact Us</Link>
                             </li>
-                            <li><a href="/">Terms & Conditions</a></li>
-                            <li><a href="/">Privacy Policy</a></li>
+                            <li><Link to="/terms-and-conditions" className={styles.links}>Terms & Conditions</Link></li>
+                            <li><Link to="/privacy-policy" className={styles.links}>Privacy Policy</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ import {
     decreaseQuantity,
 } from "../../redux/cartSlice"; // Update with your actual path
 import { handleUpiPay } from "../Payments/Payments";
+import { useEffect } from "react";
 
 const products = [
     {
@@ -66,12 +67,14 @@ const products = [
 
 const CheckOut = () => {
     const dispatch = useDispatch();
-
+    const [loggedInuser, setloggedInuser] = useState(null);
     const cartItems = useSelector((state) => state.cart.items);
     const [openIndex, setOpenIndex] = useState(null);
     const [selectedApp, setSelectedApp] = useState("");
     const [discountCode, setDiscountCode] = useState("");
     const [promoCode, setPromoCode] = useState("");
+    const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+
 
 
 
@@ -109,18 +112,50 @@ const CheckOut = () => {
 
     // const filteredData = allData[selectedTab];
 
-
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
-        address: '',
+        phoneNumber: '',
+        addressLine: '',
         city: '',
         state: '',
         locality: '',
         landmark: '',
+        pin: '',
     });
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            console.log('User loaded from localStorage:', user); // This logs the user
+
+            setloggedInuser(user);
+
+
+            const firstAddress = user.addresses && Array.isArray(user.addresses) && user.addresses.length > 0
+                ? user.addresses[0]
+                : {};
+
+            setFormData({
+                // From user object
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                email: user.email || '',
+                phone: user.phone || '',
+
+                // From first address
+                addressLine: firstAddress.addressLine || '',
+                city: firstAddress.city || '',
+                state: firstAddress.state || '',
+                locality: firstAddress.locality || '',
+                landmark: firstAddress.landmark || '',
+                pin: firstAddress.pin || '',
+            });
+        }
+    }, []);
+
 
     const handleChange = (e) => {
         const { placeholder, value } = e.target;
@@ -150,6 +185,7 @@ const CheckOut = () => {
             state: '',
             locality: '',
             landmark: '',
+            pin: '',
         });
     };
 
@@ -308,6 +344,34 @@ const CheckOut = () => {
 
                     <div className={styles.inlineFields}>
                         <label>
+                            Select Address
+                            <select
+                                name="selectedAddress"
+                                value={selectedAddressIndex}
+                                onChange={(e) => {
+                                    const selectedIndex = Number(e.target.value);
+                                    setSelectedAddressIndex(selectedIndex);
+                                    const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
+                                    if (selectedAddress) {
+                                        setFormData((prev) => ({
+                                            ...prev,
+                                            ...selectedAddress,
+                                        }));
+                                    }
+                                }}
+                            >
+                                {loggedInuser?.addresses?.map((address, index) => (
+                                    <option key={index} value={index}>
+                                        {address.addressLine}, {address.city}, {address.state}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
+
+
+                    <div className={styles.inlineFields}>
+                        <label>
                             First Name
                             <input type="text" name="firstName" placeholder="Firstname" value={formData.firstName} onChange={handleChange} />
                         </label>
@@ -325,14 +389,14 @@ const CheckOut = () => {
                         </label>
                         <label>
                             Phone Number
-                            <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phone} onChange={handleChange} />
+                            <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phoneNumber} onChange={handleChange} />
                         </label>
                     </div>
 
                     {/* Address */}
                     <label className={styles.inlineFields}>
                         Address
-                        <textarea name="address" placeholder="address (Area and street)" value={formData.address} onChange={handleChange} />
+                        <textarea name="address" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} />
                     </label>
 
                     {/* City & State */}
@@ -343,7 +407,7 @@ const CheckOut = () => {
                         </label>
                         <label>
                             State
-                            <select name="state" value={formData.state} onChange={handleChange}>
+                            <select name="state" value={formData.state} className={styles.inlineFields} onChange={handleChange}>
                                 <option value="">Select state</option>
                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -385,10 +449,14 @@ const CheckOut = () => {
                             <input type="text" name="locality" placeholder="Locality" value={formData.locality} onChange={handleChange} />
                         </label>
                         <label>
-                            Landmark
-                            <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} />
+                            Pin
+                            <input type="text" name="pin" placeholder="Pin" value={formData.pin} onChange={handleChange} />
                         </label>
                     </div>
+                    <label>
+                        Landmark
+                        <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} />
+                    </label>
 
                     {/* Buttons */}
                     <div className={styles.buttonGroup}>

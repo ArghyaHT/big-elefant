@@ -79,7 +79,9 @@ const Navbar = () => {
           <li>
             <Link to="/merch" className={styles.navItem}>Merch</Link>
           </li>
-          <li className={styles.navItem}>Elefant's club</li>
+          <li className={styles.navItem}>
+             <Link to="/elefant-club" className={styles.navItem}>Elefant's club</Link>
+            </li>
           <li>
             <Link to="/about-us" className={styles.navItem}>About</Link>
           </li>
@@ -170,7 +172,7 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+                <Link to="/elefant-club" className={styles.navItem} onClick={() => setMenuOpen(false)}>
                   ELEFANT’S CLUB- Coming soon
                 </Link>
               </li>
