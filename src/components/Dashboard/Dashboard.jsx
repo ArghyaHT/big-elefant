@@ -12,6 +12,9 @@ import { useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
 import { sanityClient } from "../../utils/sanityClient";
+import { v4 as uuidv4 } from 'uuid';
+
+
 const Dashboard = () => {
     const [activeTab, setActiveTab] = useState("profile");
     const [editMode, setEditMode] = useState(false);
@@ -19,23 +22,10 @@ const Dashboard = () => {
     const [showOrderFilters, setShowOrderFilters] = useState(false);
     const [selectedStatuses, setSelectedStatuses] = useState([]);
     const [selectedDateFilters, setSelectedDateFilters] = useState([]);
+    const [addressData, setAddressData] = useState([]);
+
 
     const navigate = useNavigate();
-
-
-    const [newAddress, setNewAddress] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        addressLine: "",
-        city: "",
-        state: "",
-        locality: "",
-        landmark: "",
-        pin: "",
-    });
-
 
     const { state } = useLocation();
     const user = state?.user;
@@ -55,125 +45,210 @@ const Dashboard = () => {
     });
 
     const updateUserInSanity = async (userId, updatedFields) => {
-  try {
-    const updatedUser = await sanityClient
-      .patch(userId)
-      .set(updatedFields)
-      .commit();
+        try {
+            const updatedUser = await sanityClient
+                .patch(userId)
+                .set(updatedFields)
+                .commit();
 
-    console.log("User updated:", updatedUser);
+            console.log("User updated:", updatedUser);
 
-    // Update localStorage as well
-    localStorage.setItem("user", JSON.stringify(updatedUser));
-  } catch (error) {
-    console.error("Error updating user:", error);
-  }
-};
+            // Update localStorage as well
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+    };
 
-const toggleEdit = async (field) => {
-  if (editFields[field]) {
-    // Save mode - update user data
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const userId = storedUser?._id;
+    const toggleEdit = async (field) => {
+        if (editFields[field]) {
+            // Save mode - update user data
+            const storedUser = JSON.parse(localStorage.getItem("user"));
+            const userId = storedUser?._id;
 
-    if (!userId) {
-      console.error("No userId found in localStorage");
-      return;
-    }
+            if (!userId) {
+                console.error("No userId found in localStorage");
+                return;
+            }
 
-    const updatedFields = {};
+            const updatedFields = {};
 
-    if (field === "personalInfo") {
-      updatedFields.firstName = formData.firstName;
-      updatedFields.lastName = formData.lastName;
-    } else if (field === "phone") {
-      updatedFields.phoneNumber = formData.phone;
-    }
+            if (field === "personalInfo") {
+                updatedFields.firstName = formData.firstName;
+                updatedFields.lastName = formData.lastName;
+            } else if (field === "phone") {
+                updatedFields.phoneNumber = formData.phone;
+            }
 
-    try {
-      await updateUserInSanity(userId, updatedFields);
-      // Optionally show a success message here
-    } catch (err) {
-      console.error("Update failed:", err);
-      // Optionally show an error message here
-      return; // Don't toggle off edit mode if update fails
-    }
-  }
+            try {
+                await updateUserInSanity(userId, updatedFields);
+                // Optionally show a success message here
+            } catch (err) {
+                console.error("Update failed:", err);
+                // Optionally show an error message here
+                return; // Don't toggle off edit mode if update fails
+            }
+        }
 
-  // Toggle the edit mode for the field (on/off)
-  setEditFields((prev) => ({ ...prev, [field]: !prev[field] }));
-};
+        // Toggle the edit mode for the field (on/off)
+        setEditFields((prev) => ({ ...prev, [field]: !prev[field] }));
+    };
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const [addressData, setAddressData] = useState({
-        addresses: [
-            {
-                firstName: "John",
-                lastName: "Doe",
-                phone: "+91 9876543210",
-                addressLine: "123 Main St",
-                city: "New York",
-                state: "NY",
-                pin: "10001",
-                landmark: "Near Central Park",
-            },
-            {
-                firstName: "Jason",
-                lastName: "Smith",
-                phone: "+91 9876543210",
-                addressLine: "456 Second Ave",
-                city: "Los Angeles",
-                state: "CA",
-                pin: "90001",
-            },
-        ],
+    const [newAddress, setNewAddress] = useState({
+        firstName: "",
+        lastName: "",
+        phoneNumber: '', // update your form and handler too
+        addressLine: "",
+        city: "",
+        state: "",
+        locality: "",
+        landmark: "",
+        pin: "",
     });
+
 
     const handleAddAddress = () => {
         setShowAddressForm(true);
     };
 
-    const handleDeleteAddress = (index) => {
-        setAddressData((prev) => ({
-            ...prev,
-            addresses: prev.addresses.filter((_, i) => i !== index),
-        }));
+    const handleDeleteAddress = async (keyToDelete) => {
+        if (!user?._id) {
+            console.error("User ID not found");
+            return;
+        }
+
+        try {
+            await sanityClient
+                .patch(user._id)
+                .unset([`addresses[_key=="${keyToDelete}"]`]) // <--- delete by _key
+                .commit();
+
+            console.log("Address deleted successfully");
+
+            // Optionally, refetch or locally filter address data
+            setAddressData(prev => ({
+                addresses: prev.addresses.filter(addr => addr._key !== keyToDelete)
+            }));
+        } catch (err) {
+            console.error("Failed to delete address:", err);
+        }
     };
 
 
-    // Add this handler to update newAddress fields on input change
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewAddress((prev) => ({ ...prev, [name]: value }));
+
+    const handleInputChange = (eOrName, value) => {
+        if (typeof eOrName === 'string') {
+            // Case: from PhoneInput
+            const name = eOrName;
+            setNewAddress((prev) => ({ ...prev, [name]: value }));
+        } else {
+            const { name, value } = eOrName.target;
+            setNewAddress((prev) => ({ ...prev, [name]: value }));
+        }
     };
+
 
     // Add this handler for form submission to add new address
-    const handleSubmitNewAddress = (e) => {
+    const handleSubmitNewAddress = async (e) => {
         e.preventDefault();
 
-        setAddressData((prev) => ({
-            ...prev,
-            addresses: [...prev.addresses, newAddress],
-        }));
+        if (!user?.email) {
+            console.error("User email is missing.");
+            return;
+        }
 
-        // Clear the form
-        setNewAddress({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            address: "",
-            city: "",
-            state: "",
-            locality: "",
-            landmark: "",
-            pin: "",
-        });
+        const newAddressData = {
+            _key: uuidv4(),
+            firstName: newAddress.firstName,
+            lastName: newAddress.lastName,
+            phoneNumber: newAddress.phoneNumber,
+            addressLine: newAddress.addressLine,
+            city: newAddress.city,
+            state: newAddress.state,
+            locality: newAddress.locality,
+            landmark: newAddress.landmark,
+            pin: Number(newAddress.pin), // Convert pin to number
+        };
 
-        setShowAddressForm(false);
+        console.log('New Address', newAddress);
+
+        try {
+            // ✅ Fetch the customer using the email
+            const customer = await sanityClient.fetch(
+                `*[_type == "customer" && email == $email][0]{_id}`,
+                { email: user.email }
+            );
+
+            if (!customer?._id) {
+                console.error("Customer not found.");
+                return;
+            }
+
+            // ✅ Now patch the customer document
+            await sanityClient
+                .patch(customer._id)
+                .setIfMissing({ addresses: [] })
+                .append('addresses', [newAddressData])
+                .commit();
+
+            console.log('Address added to Sanity!');
+
+            // Update local state
+            setAddressData((prev) => ({
+                ...prev,
+                addresses: [...prev.addresses, newAddressData],
+            }));
+
+            // Clear form
+            setNewAddress({
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                addressLine: '',
+                city: '',
+                state: '',
+                locality: '',
+                landmark: '',
+                pin: '',
+            });
+
+            setShowAddressForm(false);
+        } catch (err) {
+            console.error('Failed to add address:', err.message);
+        }
     };
+
+    useEffect(() => {
+        async function fetchCustomerAddresses() {
+            if (!user?.email) return;
+
+            try {
+                const customer = await sanityClient.fetch(
+                    `*[_type == "customer" && email == $email][0]{
+          _id,
+          addresses
+        }`,
+                    { email: user.email }
+                );
+
+                if (customer) {
+                    setAddressData({ addresses: customer.addresses || [] });
+                } else {
+                    console.error("Customer not found");
+                }
+            } catch (err) {
+                console.error("Failed to fetch addresses:", err);
+            }
+        }
+
+        fetchCustomerAddresses();
+    }, [user?.email]);
+
+
+
 
     // Cancel button handler
     const handleCancelNewAddress = () => {
@@ -193,8 +268,6 @@ const toggleEdit = async (field) => {
             checked ? [...prev, value] : prev.filter((item) => item !== value)
         );
     };
-
-
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -379,13 +452,12 @@ const toggleEdit = async (field) => {
                                     {editFields.phone ? (
                                         <PhoneInput
                                             country={'in'}
-                                            value={formData.phone}
-                                            onChange={(value) =>
-                                                setFormData((prev) => ({ ...prev, phone: value }))
-                                            }
-                                            inputStyle={{ width: "100%" }}
+                                            value={newAddress.phoneNumber}
+                                            onChange={(value) => handleInputChange('phoneNumber', value)}
+                                            inputStyle={{ width: '100%' }}
                                             enableSearch
                                         />
+
                                     ) : (
                                         <p className={styles.phoneInput}>
                                             {formData.phone ? `+${formData.phone}` : "Not provided"}
@@ -415,17 +487,29 @@ const toggleEdit = async (field) => {
                                     <div className={styles.inlineFields}>
                                         <label>
                                             Email
-                                            <input type="email" name="email" placeholder="Email" value={newAddress.email} onChange={handleInputChange} />
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                value={user.email}
+                                                readOnly
+                                            />
                                         </label>
                                         <label>
                                             Phone Number
-                                            <input type="tel" name="phone" placeholder="+91 1234567890" value={newAddress.phone} onChange={handleInputChange} />
+                                            <PhoneInput
+                                                country="in"
+                                                value={newAddress.phoneNumber}
+                                                onChange={(value) => handleInputChange('phoneNumber', value)}
+                                                inputStyle={{ width: '100%' }}
+                                                enableSearch
+                                            />
                                         </label>
                                     </div>
 
                                     <label>
                                         Address
-                                        <textarea name="address" placeholder="address (Area and street)" value={newAddress.addressLine} onChange={handleInputChange} />
+                                        <textarea name="addressLine" placeholder="address (Area and street)" value={newAddress.addressLine} onChange={handleInputChange} />
                                     </label>
 
                                     <div className={styles.inlineFields}>
@@ -476,6 +560,13 @@ const toggleEdit = async (field) => {
                                             <input type="text" name="locality" placeholder="Locality" value={newAddress.locality} onChange={handleInputChange} />
                                         </label>
                                         <label>
+                                            Pin
+                                            <input type="number" name="pin" placeholder="Pin" value={newAddress.pin} onChange={handleInputChange} />
+                                        </label>
+                                    </div>
+
+                                    <div className={styles.inlineFields}>
+                                        <label>
                                             Landmark
                                             <input type="text" name="landmark" placeholder="landmark (optional)" value={newAddress.landmark} onChange={handleInputChange} />
                                         </label>
@@ -510,7 +601,7 @@ const toggleEdit = async (field) => {
                                                         <span className={styles.name}>
                                                             {item.firstName} {item.lastName}
                                                         </span>
-                                                        <span className={styles.phone}>{item.phone}</span>
+                                                        <span className={styles.phone}>+{item.phoneNumber}</span>
                                                     </div>
                                                     <div className={styles.addressLines}>
                                                         <div>
@@ -525,7 +616,7 @@ const toggleEdit = async (field) => {
                                                 </div>
                                                 <button
                                                     className={styles.deleteButton}
-                                                    onClick={() => handleDeleteAddress(index)}
+                                                    onClick={() => handleDeleteAddress(item._key)} // use _key, not index
                                                     title="Delete"
                                                 >
                                                     <FaTrash />
