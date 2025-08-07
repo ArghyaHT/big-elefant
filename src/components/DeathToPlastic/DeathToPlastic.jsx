@@ -7,21 +7,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { sanityClient } from '../../utils/sanityClient';
 
-// const deathToPlasticMedia = [
-//   {
-//     heading: "Plastic? Mostly trash. Aluminum? Recycled forever.",
-//     image: plastic1,
-//   },
-//   {
-//     heading: "If we don’t reduce plastic pollution, there will be more plastic than fish in our oceans by 2050.",
-//     image: plastic2,
-//   },
-//   {
-//     heading: "The truth about plastic recycling? It rarely happens. Landfills tell the real story.",
-//     image: plastic3,
-//   },
-// ];
-
 
 const DeathToPlastic= () => {
     const [mediaData, setMediaData] = useState([]);
