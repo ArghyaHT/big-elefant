@@ -3,24 +3,39 @@ import plastic1 from "../../assets/plastic3.png"
 import plastic2 from "../../assets/plastic2.png"
 import plastic3 from "../../assets/plastic1.png"
 import logo from "../../assets/logo.png"
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { sanityClient } from '../../utils/sanityClient';
 
-const deathToPlasticMedia = [
-  {
-    heading: "Plastic? Mostly trash. Aluminum? Recycled forever.",
-    image: plastic1,
-  },
-  {
-    heading: "If we don’t reduce plastic pollution, there will be more plastic than fish in our oceans by 2050.",
-    image: plastic2,
-  },
-  {
-    heading: "The truth about plastic recycling? It rarely happens. Landfills tell the real story.",
-    image: plastic3,
-  },
-];
+// const deathToPlasticMedia = [
+//   {
+//     heading: "Plastic? Mostly trash. Aluminum? Recycled forever.",
+//     image: plastic1,
+//   },
+//   {
+//     heading: "If we don’t reduce plastic pollution, there will be more plastic than fish in our oceans by 2050.",
+//     image: plastic2,
+//   },
+//   {
+//     heading: "The truth about plastic recycling? It rarely happens. Landfills tell the real story.",
+//     image: plastic3,
+//   },
+// ];
 
 
 const DeathToPlastic= () => {
+    const [mediaData, setMediaData] = useState([]);
+
+      useEffect(() => {
+    sanityClient
+      .fetch(`*[_type == "deathToPlastic"]{
+        title,
+        "image": image.asset->url
+      }`)
+      .then((data) => setMediaData(data))
+      .catch(console.error);
+  }, []);
+
   return (
     <>
     <div className={styles.heroSection}>
@@ -35,17 +50,11 @@ const DeathToPlastic= () => {
 
           {/* MEDIA SECTION */}
    <div className={styles.mediaSection}>
-  {deathToPlasticMedia.map((item, index) => (
+  {mediaData.map((item, index) => (
     <div key={index}>
       <div className={styles.mediaCard}>
-        <h2 className={styles.mediaHeading}>{item.heading}</h2>
-        {item.image && <img src={item.image} alt={item.heading} className={styles.mediaImage} />}
-        {item.video && (
-          <video className={styles.mediaVideo} controls>
-            <source src={item.video} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        )}
+        <h2 className={styles.mediaHeading}>{item.title}</h2>
+        {item.image && <img src={item.image} alt={item.title} className={styles.mediaImage} />}
       </div>
 
       {/* Extra section after first item */}
