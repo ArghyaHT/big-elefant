@@ -46,7 +46,7 @@
     background-color: var(--faq-background);
     padding: 20px 40px;
     border-radius: 10px;
-    height: 650px;
+    height: auto;
 }
 
 .sidebarHeading {
