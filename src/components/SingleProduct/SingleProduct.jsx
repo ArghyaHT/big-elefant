@@ -12,6 +12,8 @@ import Plastic from "../Plastic/Plastic";
 import WildMerchSection from "../Wild Merch/WildMerch";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+import { FaArrowDown } from "react-icons/fa";
+import SingleProductReview from "../SingleProductReview/SingleProductReview";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const SingleProduct = () => {
 
 
     const handleAddToCart = () => {
-        if (!selectedPackSize || (selectedPackSize !== 6 && selectedPackSize !== 12)) {
+        if (!selectedPackSize || (selectedPackSize !== 4 && selectedPackSize !== 6 && selectedPackSize !== 12)) {
             setPackSizeError("Please select a valid pack size.");
             return;
         }
@@ -46,7 +48,9 @@ const SingleProduct = () => {
 
         // Determine the correct price based on selected pack
         let packPrice = 0;
-        if (selectedPackSize === 6) {
+        if (selectedPackSize === 4) {
+            packPrice = Number(product?.pricePack4);
+        } else if (selectedPackSize === 6) {
             packPrice = Number(product?.pricePack6);
         } else if (selectedPackSize === 12) {
             packPrice = Number(product?.pricePack12);
@@ -70,8 +74,7 @@ const SingleProduct = () => {
                 {/* Left Section: Image */}
                 <div className={styles.productImageSection}>
                     <Swiper
-                        modules={[Navigation, Pagination, Autoplay]}
-                        navigation
+                        modules={[Pagination, Autoplay]}
                         pagination={{ clickable: true }}
                         autoplay={{ delay: 4000, disableOnInteraction: false }}
                         loop={true}
@@ -94,10 +97,65 @@ const SingleProduct = () => {
                 {/* Right Section: Content */}
                 <div className={styles.productContentSection}>
                     <h1 className={styles.productName}>{product?.productName}</h1>
-                    <h3 className={styles.productPrice}>
+                    <h4 className={styles.productPrice}>
                         {product?.currency}
-                        {Number(product?.pricePack6).toFixed(2)}
-                    </h3>
+                        {(
+                            selectedPackSize === 4
+                                ? product?.pricePack4
+                                : selectedPackSize === 6
+                                    ? product?.pricePack6
+                                    : selectedPackSize === 12
+                                        ? product?.pricePack12
+                                        : product?.pricePack4 // default fallback
+                        )?.toFixed(2)}
+
+                        <span className={styles.mrp}>
+                            {product?.currency}
+                            {(
+                                selectedPackSize === 4
+                                    ? product?.mrpOf4
+                                    : selectedPackSize === 6
+                                        ? product?.mrpOf6
+                                        : selectedPackSize === 12
+                                            ? product?.mrpOf12
+                                            : product?.mrpOf4
+                            )?.toFixed(2)}
+                        </span>
+
+                        {/* Discount Percentage */}
+                        <span className={styles.discount}>
+                            &nbsp;
+                            {(() => {
+                                const price =
+                                    selectedPackSize === 4
+                                        ? product?.pricePack4
+                                        : selectedPackSize === 6
+                                            ? product?.pricePack6
+                                            : selectedPackSize === 12
+                                                ? product?.pricePack12
+                                                : product?.pricePack4;
+
+                                const mrp =
+                                    selectedPackSize === 4
+                                        ? product?.mrpOf4
+                                        : selectedPackSize === 6
+                                            ? product?.mrpOf6
+                                            : selectedPackSize === 12
+                                                ? product?.mrpOf12
+                                                : product?.mrpOf4;
+
+                                if (!price || !mrp || mrp <= price) return null;
+
+                                const discountPercent = Math.round(((mrp - price) / mrp) * 100);
+                                return (
+                                    <span className={styles.discountContent}>
+                                        {/* <FaArrowDown style={{ marginRight: '4px' }} /> */}
+                                        {discountPercent}% off
+                                    </span>
+                                );
+                            })()}
+                        </span>
+                    </h4>
                     <div className={styles.tags}>
                         {product.tags.map((tag, index) => (
                             <span key={index} className={styles.tag}>
@@ -117,37 +175,53 @@ const SingleProduct = () => {
                         <h2 className={styles.sectionHeading}>Select size</h2>
 
                         <div className={styles.packOptions}>
-                            {[6, 12].map((packSize) => {
-                                // Determine price based on pack size
+                            {[4, 6, 12].map((packSize) => {
                                 const packPrice =
-                                    packSize === 6
-                                        ? product?.pricePack6
-                                        : packSize === 12
-                                            ? product?.pricePack12
-                                            : null;
+                                    packSize === 4
+                                        ? product?.pricePack4
+                                        : packSize === 6
+                                            ? product?.pricePack6
+                                            : packSize === 12
+                                                ? product?.pricePack12
+                                                : null;
+
+                                const packStock =
+                                    packSize === 4
+                                        ? product?.stockpack4
+                                        : packSize === 6
+                                            ? product?.stockpack6
+                                            : packSize === 12
+                                                ? product?.stockpack12
+                                                : 0;
+
+                                const isSelected = selectedPackSize === packSize;
+                                const isOutOfStock = packStock === 0;
+
                                 return (
                                     <div
                                         key={packSize}
-                                        className={`${styles.packOption} ${selectedPackSize === packSize ? styles.selectedPack : ""
-                                            }`}
+                                        className={`
+          ${styles.packOption}
+          ${isSelected ? styles.selectedPack : ""}
+          ${isOutOfStock ? styles.outOfStock : ""}
+        `}
                                         onClick={() => {
-                                            if (selectedPackSize === packSize) {
-                                                setSelectedPackSize(0); // Deselect if clicked again
-                                            } else {
-                                                setSelectedPackSize(packSize);
-                                            }
+                                            if (isOutOfStock) return;
+                                            setSelectedPackSize(isSelected ? 0 : packSize);
                                         }}
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: isOutOfStock ? "not-allowed" : "pointer" }}
                                     >
                                         <h4 className={styles.packLabel}>Pack of {packSize}</h4>
                                         <p className={styles.packPrice}>
-                                            {product?.currency}
-                                            {packPrice?.toFixed(2)}
+                                            {isOutOfStock
+                                                ? "Out of Stock"
+                                                : `${product?.currency}${packPrice?.toFixed(2)}`}
                                         </p>
                                     </div>
                                 );
                             })}
                         </div>
+
                     </div>
 
                     <div className={styles.buyNowWrapper}>
@@ -156,7 +230,7 @@ const SingleProduct = () => {
                     {packSizeError && <p className={styles.errorMessage}>{packSizeError}</p>}
                 </div>
             </div>
-            <Reviews />
+<SingleProductReview product={product} />
 
 
             <div className={styles.attitudeSection}>

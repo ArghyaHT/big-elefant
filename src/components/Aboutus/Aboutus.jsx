@@ -77,29 +77,39 @@ const Aboutus = () => {
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
             const query = `
-            *[_type == "beverages" && isFeatured == true]{
-              _id,
-              productName,
-              slug,
-              bannerTitle,
-              shortDescription,
-              longDescription,
-              productFeatures,
-              "productImage": productImage.asset->url,
-              "background": bannerBackground.asset->url,
-              backgroundColor,
-              calories,
-              tags,
-              currency,
-              pricePack6,
-              pricePack12,
-              "productImages": productImages[].asset->url,
-              reviews[]{
-                reviewerName,
-                rating,
-                reviewText
-              }
-            }
+ *[_type == "beverages" && isFeatured == true]{
+          _id,
+          productName,
+          slug,
+          bannerTitle,
+          shortDescription,
+          longDescription,
+          productFeatures,
+          "productImage": productImage.asset->url,
+          "background": bannerBackground.asset->url,
+          backgroundColor,
+          calories,
+          tags,
+          currency,
+          mrpOf4,
+          mrpOf6,
+          mrpOf12,
+          pricePack4,
+          pricePack6,
+          pricePack12,
+          stockpack4,
+          stockpack6,
+          stockpack12,
+          deliveryChargespack4,
+          deliveryChargespack6,
+          deliveryChargespack12,
+          "productImages": productImages[].asset->url,
+          reviews[]{
+            reviewerName,
+            rating,
+            reviewText
+          }
+        }
           `;
             try {
                 const data = await sanityClient.fetch(query);

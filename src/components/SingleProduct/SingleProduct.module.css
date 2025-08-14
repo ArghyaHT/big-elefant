@@ -36,7 +36,7 @@
 }
 
 .productPrice {
-  font-size: 56px;
+  font-size: 34px;
   font-weight: bold;
   color: var(--primary-black);
   /* A solid dark color */
@@ -44,6 +44,30 @@
   margin-bottom: 0px;
   letter-spacing: 0.5px;
 }
+
+.mrp {
+  color: var(--radial-color);
+  text-decoration: line-through;
+  font-weight: normal;
+  margin-left: 8px;
+  font-size: 25px;
+}
+
+.discount {
+  color: green;
+  font-weight: 500;
+  margin-left: 8px;
+  font-size: 25px;
+}
+
+.discountContent {
+  display: inline-flex;
+  align-items: center;
+  color: green;
+  font-weight: 500;
+  font-size: 20px
+}
+
 
 .tags {
   display: flex;
@@ -129,6 +153,14 @@
   min-width: 120px;
   gap: 2px;
 }
+
+
+.outOfStock {
+  color: var(--primary-black);
+  background-color: var(--radial-color);
+  opacity: 0.4;
+}
+
 
 .packLabel {
   font-size: 16px;
@@ -348,5 +380,20 @@
   .videoPlayer {
     max-width: 380px;
     height: 380px;
+  }
+
+    .mrp {
+    font-size: 16px;
+    margin-left: 4px;
+  }
+
+  .discount {
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
+  .discountContent {
+    font-size: 14px;
+    margin-left: 4px;
   }
 }

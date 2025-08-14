@@ -36,7 +36,7 @@ p {
 --primary-black: #000000;
 --primary-white: #ffffff;
 --radial-color: #8F8F8F;
---badge-text: #CCA14F;
+--badge-text: #d4a13b;
 --rgba-black: 0, 0, 0; 
 --button-background: #E6E6E6;
 --secondary-text-color: #666666;
@@ -44,7 +44,7 @@ p {
 --checkout-button-background: #CCCCCC;
 --primary-black-50: rgba(0, 0, 0, 0.5);
 --checkout-session-background: #fafafa;
---button-color: #CBA14F;
+--button-color: #D4A13B;
 --border-background: #DDDDDD;
 }
 

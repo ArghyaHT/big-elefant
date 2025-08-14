@@ -15,7 +15,7 @@
 }
 
 .logoImage {
-  height: 45px;
+  height: 70px;
   object-fit: contain;
 }
 
@@ -102,7 +102,7 @@
   }
 
   .logoImage {
-    height: 30px;
+    height: 40px;
   }
 
   /* Show hamburger */

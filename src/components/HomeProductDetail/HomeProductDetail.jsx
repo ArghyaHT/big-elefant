@@ -12,97 +12,69 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { sanityClient } from "../../utils/sanityClient";
-// const products = [
-//     {
-//         id: 1,
-//         productName: "still drinking water",
-//         title: "my husband AURA POINTs when you hold our can",
-//         shortDescription: "We’re delivering pure still mountain water in cans that are 100% endlessly recyclable. Environmentally friendly? Without a doubt. Sourced from pristine mountain peaks to keep you refreshed—while caring for the planet. Clean, crisp, and conscious. That’s the vibe.",
-//         description: "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable. Eco-conscious? Absolutely. Sourced from the freshest peaks, so you stay hydrated and keep the planet thriving. It’s a raging vibe.",
-//         features: "Still Drinking Water, Infinitely Recyclable Cans",
-//         writer: "Kelly",
-//         productImage: drinnkingWater,
-//         background: banner1,
-//         backgroundColor: "#5D6984",
-//         tags: ["Mountain Water", "Bold Taste", "Eco-Friendly", "Eternally Recyclable Cans"],
-//         price: 35,
-//         currency: "$",
-//         productImages: [drinnkingWater, sparklingWater],
-//         category: "Water",               // Added category here
-
-//     },
-//     {
-//         id: 2,
-//         productName: "SPARKLING water",
-//         title: "You won't believe it’s not soda.",
-//         shortDescription: "Our crisp mountain-sourced sparkling water comes in endlessly recyclable cans—because refreshment should never come at the planet’s expense. Effervescent, eco-conscious, and seriously satisfying. It’s hydration with a fizz and a mission.",
-//         description: "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable. Eco-conscious? Absolutely. Sourced from the freshest peaks, so you stay hydrated and keep the planet thriving. It’s a raging vibe.",
-//         features: "Sparkling Water, No Artificial Sweeteners",
-//         writer: "Kelly",
-//         productImage: sparklingWater,
-//         background: banner2,
-//         backgroundColor: "#5D8469",
-//         tags: ["Mountain Water", "Bold Taste", "Eco-Friendly", "Eternally Recyclable Cans"],
-//         price: 50,
-//         currency: "$",
-//         productImages: [sparklingWater, drinnkingWater],
-//         category: "Water",               // Added category here
-
-//     },
-// ];
 
 
 
 const HomeProductDetail = () => {
     const [activeIndex, setActiveIndex] = useState(0);
-         const [isMobile, setIsMobile] = useState(false);
-             const [products, setProducts] = useState([]);
-         
-        const navigate = useNavigate();
+    const [isMobile, setIsMobile] = useState(false);
+    const [products, setProducts] = useState([]);
 
-            useEffect(() => {
-                const fetchFeaturedProducts = async () => {
-                    const query = `
-                *[_type == "beverages"]{
-                  _id,
-                  productName,
-                  slug,
-                  bannerTitle,
-                  shortDescription,
-                  longDescription,
-                  productFeatures,
-                  "productImage": productImage.asset->url,
-                  "background": bannerBackground.asset->url,
-                  backgroundColor,
-                  calories,
-                  tags,
-                  currency,
-                  pricePack6,
-                  pricePack12,
-                  "productImages": productImages[].asset->url,
-                  reviews[]{
-                    reviewerName,
-                    rating,
-                    reviewText
-                  }
-                }
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchFeaturedProducts = async () => {
+            const query = `
+   *[_type == "beverages" && isFeatured == true]{
+          _id,
+          productName,
+          slug,
+          bannerTitle,
+          shortDescription,
+          longDescription,
+          productFeatures,
+          "productImage": productImage.asset->url,
+          "background": bannerBackground.asset->url,
+          backgroundColor,
+          calories,
+          tags,
+          currency,
+          mrpOf4,
+          mrpOf6,
+          mrpOf12,
+          pricePack4,
+          pricePack6,
+          pricePack12,
+          stockpack4,
+          stockpack6,
+          stockpack12,
+          deliveryChargespack4,
+          deliveryChargespack6,
+          deliveryChargespack12,
+          "productImages": productImages[].asset->url,
+          reviews[]{
+            reviewerName,
+            rating,
+            reviewText
+          }
+        }
               `;
-                    try {
-                        const data = await sanityClient.fetch(query);
-                        setProducts(data);
-                    } catch (error) {
-                        console.error("Error fetching featured products:", error);
-                    }
-                };
-        
-                fetchFeaturedProducts();
-            }, []);
+            try {
+                const data = await sanityClient.fetch(query);
+                setProducts(data);
+            } catch (error) {
+                console.error("Error fetching featured products:", error);
+            }
+        };
+
+        fetchFeaturedProducts();
+    }, []);
 
 
     //   const handleShopNow = (product) => {
     //     navigate(`/single-product-page/${product._id}`, { state: { product } });
     // };
-      const handleShopNow = (product) => {
+    const handleShopNow = (product) => {
         if (product.slug?.current) {
             navigate(`/single-product-page/${product.slug.current}`, { state: { product } });
         } else {
@@ -111,12 +83,12 @@ const HomeProductDetail = () => {
     };
 
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 480);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth <= 480);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     return (
         <Swiper
@@ -160,7 +132,7 @@ const HomeProductDetail = () => {
                                     <div className={styles.actions}>
                                         <button className={styles.primaryButton}>{product.calories} Calories</button>
                                         <button className={styles.secondaryButton}
-                                        onClick={() => handleShopNow(product)}
+                                            onClick={() => handleShopNow(product)}
                                         >Shop Now
                                         </button>
                                     </div>
