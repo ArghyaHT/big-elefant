@@ -122,7 +122,7 @@ const HomeProductDetail = () => {
                                 <div className={styles.details}>
                                     <h1 className={styles.productName}>{product.productName}</h1>
                                     <div className={styles.tags}>
-                                        {product.tags.map((tag, index) => (
+                                        {product.productFeatures.map((tag, index) => (
                                             <span key={index} className={styles.tag}>
                                                 {tag}
                                             </span>
