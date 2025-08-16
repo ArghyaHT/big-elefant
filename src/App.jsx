@@ -21,7 +21,6 @@ import TermsContionsPage from './Pages/T&CPage'
 import ElefantsClubPage from './Pages/ElefantClubPage'
 
 function App() {
-
   return (
     <BrowserRouter>
       <ScrollToTop />
