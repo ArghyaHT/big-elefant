@@ -150,19 +150,22 @@ const Aboutus = () => {
             <div className={styles.aboutContent}>
                 <h1 className={styles.aboutTitle}>About Us</h1>
                 <p className={styles.aboutText}>
-                    Big Elefant won’t crush you! But our infinitely recyclable cans of premium, low-calorie beverages will definitely murder your thirst. And we don’t stop there. After dancing on your thirst’s grave, these savage cans help destroy plastic pollution by donating a portion of proceeds.
+                    Big Elefant won’t crush you — but our infinitely recyclable cans of pure Himalayan water will obliterate your thirst. Every sip is crisp, refreshing, and zero calories — straight from the mountains, not a plastic factory.
                 </p>
                 <p className={styles.aboutText}>
-                    Why? Because for centuries, the coolest, funniest marketing was saved for junk—beer, fast food, candy. Not anymore.
+                    And we don’t stop there. Once your thirst is six feet under, our cans go to war with plastic pollution — because every drop counts, and every can helps.
                 </p>
                 <p className={styles.aboutText}>
-                    Big Elefant is here to take over the world using health and humor. One can at a time, we’ll make every drink a Big Elefant. Then, we’ll finally begin harvesting human energy to power our giant marketing bots.
+                    For too long, the funniest, loudest marketing was wasted on junk: beer, fast food, and sugar bombs. Not anymore. Big Elefant is flipping the script with health, humor, and Himalayan vibes.
+                </p>
+                <p className={styles.aboutText}>
+                    We’re here to take over the world, one can at a time — making water the most savage flex you can hold.
                 </p>
                 <p className={styles.aboutText}>
                     But enough about us.
                 </p>
                 <p className={styles.aboutText}>
-                    Let’s talk about you.
+                    Let’s talk about you. Are you thirsty, or are you ready to join the herd?
                 </p>
             </div>
             <div className={styles.ctaWrapper}>
