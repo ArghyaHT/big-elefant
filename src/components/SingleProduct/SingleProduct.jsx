@@ -253,7 +253,7 @@ const SingleProduct = () => {
                         <h3 className={styles.attitudeTagline}>
                             Chill out — it’s just water with attitude
                         </h3>
-                        <p className={styles.attitudeDesc}>Tap water in disguise? Not here. Big Elefant is born in the wild — from legit mountain springs deep in America’s fiercest ranges.</p>
+                        <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
                     </div>
 
                         <div className={styles.rightVideo}>
