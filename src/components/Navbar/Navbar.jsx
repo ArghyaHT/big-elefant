@@ -80,8 +80,8 @@ const Navbar = () => {
             <Link to="/merch" className={styles.navItem}>Merch</Link>
           </li>
           <li className={styles.navItem}>
-             <Link to="/elefant-club" className={styles.navItem}>Elefant's club</Link>
-            </li>
+            <Link to="/elefant-club" className={styles.navItem}>Elefant's club</Link>
+          </li>
           <li>
             <Link to="/about-us" className={styles.navItem}>About</Link>
           </li>
@@ -157,7 +157,10 @@ const Navbar = () => {
             <ul className={styles.mobileNavSection}>
               <li className={styles.sectionHeading}>Account</li>
               <li>
-                <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+                <Link
+                  to={loggedInUser ? "/user-dashboard" : "/sign-in"}
+                  state={loggedInUser ? { user: loggedInUser } : null}
+                  className={styles.navItem} onClick={() => setMenuOpen(false)}>
                   My Account
                 </Link>
               </li>
@@ -177,11 +180,11 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              <li>
+              {/* <li>
                 <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
                   Water Quality Report
                 </Link>
-              </li>
+              </li> */}
 
               <li>
                 <Link to="/faq" className={styles.navItem} onClick={() => setMenuOpen(false)}>
@@ -195,12 +198,12 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+                <Link to="/privacy-policy" className={styles.navItem} onClick={() => setMenuOpen(false)}>
                   privacy policy
                 </Link>
               </li>
               <li>
-                <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
+                <Link to="/terms-and-conditions" className={styles.navItem} onClick={() => setMenuOpen(false)}>
                   Terms & Conditions
                 </Link>
               </li>
@@ -215,7 +218,7 @@ const Navbar = () => {
               state={loggedInUser ? { user: loggedInUser } : null}
             >
               <button className={styles.userButton}>
-                {loggedInUser ? loggedInUser.firstName  : "Login"}
+                {loggedInUser ? loggedInUser.firstName : "Login"}
               </button>
             </Link>
           </div>
