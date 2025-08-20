@@ -84,7 +84,7 @@ const HomeProductDetail = () => {
 
 
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth <= 480);
+        const checkMobile = () => setIsMobile(window.innerWidth <= 768);
         checkMobile();
         window.addEventListener("resize", checkMobile);
         return () => window.removeEventListener("resize", checkMobile);
@@ -93,7 +93,7 @@ const HomeProductDetail = () => {
     return (
         <Swiper
             modules={[Navigation]}
-            navigation
+            navigation={!isMobile} // disable on mobile
             pagination={{ clickable: true }}
             // autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}

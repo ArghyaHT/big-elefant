@@ -102,43 +102,6 @@
         padding: 20px;
         justify-content: center;
         text-align: center;
-        margin-top: 20px;
-    }
-
-    .textContent {
-        max-width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .title {
-        font-size: 40px;
-        font-weight: bold;
-    }
-
-    .writer {
-        font-size: 18px;
-    }
-
-    .ctaButton {
-        margin: 15px auto 0;
-    }
-
-    .image {
-        width: 100%;
-        max-height: 550px;
-        object-fit: contain;
-        margin: 0 auto;
-    }
-
-}
-
-/* ========== MOBILE STYLES (480px and below) ========== */
-@media (max-width: 480px) {
-    .slideContent {
-        flex-direction: column;
-        padding: 20px;
-        justify-content: center;
-        text-align: center;
         margin-bottom: 20px;
     }
 
@@ -150,6 +113,7 @@
     .title {
         font-size: 40px;
         font-weight: bold;
+        padding: 0;
     }
 
     .writer {
@@ -185,6 +149,7 @@
     .title {
         font-size: 28px;
         font-weight: bold;
+        padding: 0;
     }
 
     .writer {

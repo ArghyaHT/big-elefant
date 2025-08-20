@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ElefantClub.module.css';
-import beveragesBanner from "../../assets/el2.png"
+import beveragesBanner from "../../assets/el2.webp"
 
 
 const ElefantClub = () => {

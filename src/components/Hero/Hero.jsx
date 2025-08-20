@@ -16,6 +16,8 @@ const Hero = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
 
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
@@ -65,6 +67,17 @@ const Hero = () => {
         fetchFeaturedProducts();
     }, []);
 
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+        };
+
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
     const handleShopNow = (product) => {
         if (product.slug?.current) {
             navigate(`/single-product-page/${product.slug.current}`, { state: { product } });
@@ -84,38 +97,38 @@ const Hero = () => {
             }}
         >
             {products.length > 0 && (
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                navigation
-                // pagination={{ clickable: true }}
-                autoplay={{ delay: 4000, disableOnInteraction: false }}
-                loop={true}
-                onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // realIndex ignores duplicated slides
-                spaceBetween={50}
-                slidesPerView={1}
-            >
-                {products.map((product) => (
-                    <SwiperSlide key={product._id}>
-                        <div className={styles.slideContent}>
-                            <div className={styles.textContent}>
-                                <h1 className={styles.title}>{product.bannerTitle}</h1>
-                                {/* <button className={styles.ctaButton}>Shop Now</button> */}
-                                <button
-                                    className={styles.ctaButton}
-                                    onClick={() => handleShopNow(product)}
-                                >
-                                    Shop Now
-                                </button>
+                <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    navigation={!isMobile} // disable on mobile
+                    // pagination={{ clickable: true }}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    loop={true}
+                    onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // realIndex ignores duplicated slides
+                    spaceBetween={50}
+                    slidesPerView={1}
+                >
+                    {products.map((product) => (
+                        <SwiperSlide key={product._id}>
+                            <div className={styles.slideContent}>
+                                <div className={styles.textContent}>
+                                    <h1 className={styles.title}>{product.bannerTitle}</h1>
+                                    {/* <button className={styles.ctaButton}>Shop Now</button> */}
+                                    <button
+                                        className={styles.ctaButton}
+                                        onClick={() => handleShopNow(product)}
+                                    >
+                                        Shop Now
+                                    </button>
+                                </div>
+                                <img
+                                    src={product.productImage}
+                                    alt={product.bannerTitle}
+                                    className={styles.image}
+                                />
                             </div>
-                            <img
-                                src={product.productImage}
-                                alt={product.bannerTitle}
-                                className={styles.image}
-                            />
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
             )}
         </div>
     );
