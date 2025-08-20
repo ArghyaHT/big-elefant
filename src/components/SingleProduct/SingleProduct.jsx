@@ -156,19 +156,29 @@ const SingleProduct = () => {
                             })()}
                         </span>
                     </h4>
-                    <div className={styles.tags}>
+                    {/* <div className={styles.tags}>
                         {product.tags.map((tag, index) => (
                             <span key={index} className={styles.tag}>
                                 {tag}
                             </span>
                         ))}
-                    </div>
+                    </div> */}
 
                     <div className={styles.productDescriptionWrapper}>
                         <p className={styles.productDescription}>
                             {product?.longDescription}
                         </p>
+
+                        {/* Features List */}
+                        {product?.tags?.length > 0 && (
+                            <ul className={styles.featureList}>
+                                {product.tags.map((feature, index) => (
+                                    <li key={index}>{feature}</li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
+
                     <button className={styles.primaryButton}>{product.calories} Calories</button>
 
                     <div className={styles.selectSizeSection}>
@@ -197,6 +207,10 @@ const SingleProduct = () => {
                                 const isSelected = selectedPackSize === packSize;
                                 const isOutOfStock = packStock === 0;
 
+                                // ✅ Add this here
+                                const unitVolume = 0.5; // e.g., 0.5L per unit
+                                const totalVolume = (packSize * unitVolume).toFixed(1); // e.g., 6 * 0.5 = 3.0L
+
                                 return (
                                     <div
                                         key={packSize}
@@ -211,7 +225,7 @@ const SingleProduct = () => {
                                         }}
                                         style={{ cursor: isOutOfStock ? "not-allowed" : "pointer" }}
                                     >
-                                        <h4 className={styles.packLabel}>Pack of {packSize}</h4>
+                                        <h4 className={styles.packLabel}>Pack of {packSize} ({totalVolume}L)</h4>
                                         <p className={styles.packPrice}>
                                             {isOutOfStock
                                                 ? "Out of Stock"
@@ -230,7 +244,7 @@ const SingleProduct = () => {
                     {packSizeError && <p className={styles.errorMessage}>{packSizeError}</p>}
                 </div>
             </div>
-<SingleProductReview product={product} />
+            <SingleProductReview product={product} />
 
 
             <div className={styles.attitudeSection}>
@@ -242,12 +256,15 @@ const SingleProduct = () => {
                         <p className={styles.attitudeDesc}>Tap water in disguise? Not here. Big Elefant is born in the wild — from legit mountain springs deep in America’s fiercest ranges.</p>
                     </div>
 
-                    <div className={styles.rightVideo}>
-                        <video
-                            src="/path-to-your-video.mp4"
-                            controls
-                            className={styles.videoPlayer}
-                        />
+                        <div className={styles.rightVideo}>
+                            <iframe
+                                className={styles.videoPlayer}
+                                src="https://www.youtube.com/embed/UEZm0U6KrfY"
+                                title="YouTube video"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
                     </div>
                 </div>
             </div>

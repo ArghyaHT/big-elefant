@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
 }
 
 .badgeText p {
@@ -64,8 +64,9 @@
 
 .badgeText p:nth-child(1) {
   font-family: 'Traditio AH', serif;
-  font-size: 25px;
-  letter-spacing: 5px;
+  font-size: 35px;
+  letter-spacing: 1px;
+  font-weight: 300;
 }
 
 .badgeText p:nth-child(2) {
@@ -75,7 +76,7 @@
 
 .badgeText p:nth-child(3) {
   font-size: 25px; 
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 
 }
@@ -138,8 +139,8 @@
   }
 
   .badgeText p:nth-child(1) {
-    font-size: 18px;
-    letter-spacing: 3px;
+    font-size: 25px;
+    letter-spacing: 1px;
   }
 
   .badgeText p:nth-child(2) {
@@ -196,8 +197,8 @@
   }
 
   .badgeText p:nth-child(1) {
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-size: 20px;
+    letter-spacing: 1px;
   }
 
   .badgeText p:nth-child(2) {

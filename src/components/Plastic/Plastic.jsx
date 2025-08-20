@@ -11,7 +11,7 @@ const Plastic = () => {
                     <div className={styles.logoBadge}>
                         <img src={badge} alt="Aura Badge" className={styles.badgeImage} />
                         <div className={styles.badgeText}>
-                            <p>Elefant</p>
+                            <p style={{ color: 'var(--primary-white)' }}>Elefant</p>
                             <p>crushes</p>
                             <p>Plastic</p>
                         </div>
