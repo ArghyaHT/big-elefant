@@ -101,7 +101,7 @@ const Hero = () => {
                     modules={[Navigation, Pagination, Autoplay]}
                     navigation={!isMobile} // disable on mobile
                     // pagination={{ clickable: true }}
-                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    // autoplay={{ delay: 4000, disableOnInteraction: false }}
                     loop={true}
                     onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // realIndex ignores duplicated slides
                     spaceBetween={50}
@@ -113,18 +113,29 @@ const Hero = () => {
                                 <div className={styles.textContent}>
                                     <h1 className={styles.title}>{product.bannerTitle}</h1>
                                     {/* <button className={styles.ctaButton}>Shop Now</button> */}
-                                    <button
-                                        className={styles.ctaButton}
-                                        onClick={() => handleShopNow(product)}
-                                    >
-                                        Shop Now
-                                    </button>
+                                    {!isMobile && (
+                                        <button
+                                            className={styles.ctaButton}
+                                            onClick={() => handleShopNow(product)}
+                                        >
+                                            Shop Now
+                                        </button>
+                                    )}
                                 </div>
                                 <img
                                     src={product.productImage}
                                     alt={product.bannerTitle}
                                     className={styles.image}
                                 />
+
+                                {isMobile && (
+                                    <button
+                                        className={styles.ctaButton}
+                                        onClick={() => handleShopNow(product)}
+                                    >
+                                        Shop Now
+                                    </button>
+                                )}
                             </div>
                         </SwiperSlide>
                     ))}
