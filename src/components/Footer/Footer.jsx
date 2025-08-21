@@ -14,7 +14,11 @@ const Footer = () => {
                 <div className={styles.logoSection}>
                     <img src={logo} alt="Logo" className={styles.logo} />
                     <p className={styles.description}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        If you experience any issues while using our website, please feel free to reach out to us at <strong>bigelefantindia@gmail.com</strong>.
+                        We are committed to ensuring a smooth and enjoyable experience for all our visitors and will be happy to assist you with any questions or concerns.
+                    </p>
+                    <p className={styles.description}>
+                        © 2025 Big Elefant. All Rights Reserved.
                     </p>
                 </div>
 

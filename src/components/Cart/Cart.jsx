@@ -127,9 +127,9 @@ const Cart = () => {
           </button>
         </div>
 
-        <div className={styles.shippingContainer}>
+        {/* <div className={styles.shippingContainer}>
           <p className={styles.shippingNote}>-- Free shipping on orders above 1200 --</p>
-        </div>
+        </div> */}
 
         {cartItems.length === 0 ? (
           <div className={styles.emptyCart}>
@@ -163,7 +163,8 @@ const Cart = () => {
                     <div className={styles.itemDetails}>
                       <div className={styles.itemName}>
                         {item.name} {item.packSize > 1 ? `/ Pack of ${item.packSize}` : ""}
-                      </div>                    <div className={styles.itemPrice}>
+                      </div>                   
+                       <div className={styles.itemPrice}>
                         {item.currency}{(item.price * item.quantity).toFixed(2)}
                       </div>
 
@@ -241,7 +242,7 @@ const Cart = () => {
         {cartItems.length > 0 && (
           <>
             <div className={styles.cartTotal}>
-              <strong>Total:</strong> ${totalPrice.toFixed(2)}
+              <strong>Total:</strong> ₹{totalPrice.toFixed(2)}
             </div>
 
             <div className={styles.checkoutButtonWrapper}>

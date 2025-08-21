@@ -29,6 +29,8 @@
   justify-content: center;
   position: relative;
   padding: 12px 16px 12px 16px;
+    border-bottom: 1px solid #ccc;
+
 }
 
 .cartHeader h2 {
@@ -159,6 +161,7 @@
   border: none;
   color: #888;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .similarProductsSection {
