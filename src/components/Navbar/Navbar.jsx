@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../Navbar/Navbar.module.css"
 import logoImage from "../../assets/Big_Elefant.png"
-import { FiHeart, FiMenu, FiShoppingBag, FiUser } from "react-icons/fi";
+import { FiHeart, FiMenu, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,19 @@ const Navbar = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden"; // 🚫 Disable background scroll
+    } else {
+      document.body.style.overflow = ""; // ✅ Restore scrolling
+    }
+
+    // Optional: Reset on unmount
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
 
   return (
     <>
@@ -40,7 +53,7 @@ const Navbar = () => {
           onClick={() => setMenuOpen((prev) => !prev)}
           aria-label="Toggle menu"
         >
-          <FiMenu />
+          {menuOpen ? <FiX /> : <FiMenu />}
         </div>
 
         {/* Left: Logo Image */}
