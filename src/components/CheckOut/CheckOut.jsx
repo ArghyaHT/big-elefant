@@ -24,6 +24,14 @@ import {
 import { handleUpiPay } from "../Payments/Payments";
 import { useEffect } from "react";
 
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'; // Don't forget the styles
+import { sanityClient } from "../../utils/sanityClient";
+import { v4 as uuidv4 } from 'uuid';
+import { refreshLoggedInUser } from "../../utils/refreshUser";
+
+
+
 const products = [
     {
         id: 1,
@@ -77,8 +85,6 @@ const CheckOut = () => {
 
 
 
-
-
     const toggleAccordion = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
@@ -87,19 +93,19 @@ const CheckOut = () => {
         (acc, item) => acc + item.price * item.quantity,
         0
     );
-    const deliveryCharges = 40;
+    const deliveryCharges = 150;
     const currency = cartItems[0]?.currency || "₹";
     const discount = promoCode.trim().toLowerCase() === "save25" ? 25 : 0;
 
-    const applyPromo = () => {
-        if (promoCode.trim().toLowerCase() === "save25") {
-            setDiscount(25);
-        } else if (promoCode.trim().toLowerCase() === "free") {
-            setDiscount(deliveryCharges);
-        } else {
-            setDiscount(0);
-        }
-    };
+    // const applyPromo = () => {
+    //     if (promoCode.trim().toLowerCase() === "save25") {
+    //         setDiscount(25);
+    //     } else if (promoCode.trim().toLowerCase() === "free") {
+    //         setDiscount(deliveryCharges);
+    //     } else {
+    //         setDiscount(0);
+    //     }
+    // };
 
     const total = subtotal + deliveryCharges - discount;
 
@@ -140,11 +146,10 @@ const CheckOut = () => {
 
             setFormData({
                 // From user object
-                firstName: user.firstName || '',
-                lastName: user.lastName || '',
+                firstName: firstAddress.firstName || '',
+                lastName: firstAddress.lastName || '',
                 email: user.email || '',
-                phone: user.phone || '',
-
+                phoneNumber: firstAddress.phoneNumber || '',
                 // From first address
                 addressLine: firstAddress.addressLine || '',
                 city: firstAddress.city || '',
@@ -165,11 +170,83 @@ const CheckOut = () => {
         });
     };
 
-    const handleAddAddress = (e) => {
+    // const handleAddAddress = (e) => {
+    //     e.preventDefault();
+
+    //     console.log('Address Details:', formData);
+    //     // You can also add form validation or API call here
+    // };
+
+    const handleAddAddress = async (e) => {
         e.preventDefault();
 
-        console.log('Address Details:', formData);
-        // You can also add form validation or API call here
+        if (!loggedInuser?.email) {
+            console.error("User email is missing.");
+            return;
+        }
+
+        // Prepare new address data from formData
+        const newAddressData = {
+            _key: uuidv4(),  // generate unique key
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            phoneNumber: formData.phoneNumber,
+            addressLine: formData.addressLine,
+            city: formData.city,
+            state: formData.state,
+            locality: formData.locality,
+            landmark: formData.landmark,
+            pin: Number(formData.pin), // make sure pin is number
+        };
+
+        try {
+            // Fetch user document by email
+            const customer = await sanityClient.fetch(
+                `*[_type == "customer" && email == $email][0]{_id}`,
+                { email: loggedInuser.email }
+            );
+
+            if (!customer?._id) {
+                console.error("Customer not found.");
+                return;
+            }
+
+            // Patch user doc by appending new address
+            await sanityClient
+                .patch(customer._id)
+                .setIfMissing({ addresses: [] })
+                .append('addresses', [newAddressData])
+                .commit();
+
+            console.log('Address added successfully!');
+
+            await refreshLoggedInUser(loggedInuser.email, setloggedInuser);
+
+
+            // // Optionally update local state to reflect new address
+            // setloggedInuser((prev) => ({
+            //     ...prev,
+            //     addresses: [...(prev.addresses || []), newAddressData],
+            // }));
+
+            // Clear form or reset as needed
+            setFormData({
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                addressLine: '',
+                city: '',
+                state: '',
+                locality: '',
+                landmark: '',
+                pin: '',
+            });
+
+            // Optionally reset selectedAddressIndex or close form
+            setSelectedAddressIndex('new');
+        } catch (error) {
+            console.error('Failed to add address:', error.message);
+        }
     };
 
     const handleCancel = (e) => {
@@ -179,7 +256,7 @@ const CheckOut = () => {
             firstName: '',
             lastName: '',
             email: '',
-            phone: '',
+            phoneNumber: '',
             address: '',
             city: '',
             state: '',
@@ -335,6 +412,17 @@ const CheckOut = () => {
         return cartCategories.includes(category) && !inCart;
     });
 
+
+    const getCountryFromPhone = (phone) => {
+        if (!phone) return 'in'; // default country when empty
+        if (phone.startsWith('+91')) return 'in';
+        if (phone.startsWith('+1')) return 'us';
+        // add more as needed
+        return 'in'; // fallback
+    };
+
+    const country = getCountryFromPhone(formData.phoneNumber);
+
     return (
         <div className={styles.checkoutContainer}>
             {/* Left Section */}
@@ -349,14 +437,33 @@ const CheckOut = () => {
                                 name="selectedAddress"
                                 value={selectedAddressIndex}
                                 onChange={(e) => {
-                                    const selectedIndex = Number(e.target.value);
-                                    setSelectedAddressIndex(selectedIndex);
-                                    const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
-                                    if (selectedAddress) {
+                                    const selectedValue = e.target.value;
+
+                                    if (selectedValue === 'new') {
+                                        // Clear form for new address entry
+                                        setSelectedAddressIndex('new');
                                         setFormData((prev) => ({
                                             ...prev,
-                                            ...selectedAddress,
+                                            firstName: '',
+                                            lastName: '',
+                                            phoneNumber: '',
+                                            addressLine: '',
+                                            city: '',
+                                            state: '',
+                                            locality: '',
+                                            landmark: '',
+                                            pin: '',
                                         }));
+                                    } else {
+                                        const selectedIndex = Number(selectedValue);
+                                        setSelectedAddressIndex(selectedIndex);
+                                        const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
+                                        if (selectedAddress) {
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                ...selectedAddress,
+                                            }));
+                                        }
                                     }
                                 }}
                             >
@@ -365,6 +472,8 @@ const CheckOut = () => {
                                         {address.addressLine}, {address.city}, {address.state}
                                     </option>
                                 ))}
+
+                                <option value="new">+ Add New Address</option>
                             </select>
                         </label>
                     </div>
@@ -387,16 +496,31 @@ const CheckOut = () => {
                             Email
                             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
                         </label>
+
                         <label>
                             Phone Number
-                            <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phoneNumber} onChange={handleChange} />
+                            {/* <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phoneNumber} onChange={handleChange} /> */}
+                            <PhoneInput
+                                country={country}
+                                value={formData.phoneNumber}
+                                onChange={(value) =>
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        phoneNumber: value,
+                                    }))
+                                }
+                                inputStyle={{ width: '100%' }}
+                                enableSearch
+                                placeholder={country === 'in' ? '+91 1234567890' : undefined}
+
+                            />
                         </label>
                     </div>
 
                     {/* Address */}
                     <label className={styles.inlineFields}>
                         Address
-                        <textarea name="address" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} />
+                        <textarea name="addressLine" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} />
                     </label>
 
                     {/* City & State */}
@@ -450,7 +574,20 @@ const CheckOut = () => {
                         </label>
                         <label>
                             Pin
-                            <input type="text" name="pin" placeholder="Pin" value={formData.pin} onChange={handleChange} />
+                            <input
+                                type="text"
+                                name="pin"
+                                placeholder="Pin"
+                                value={formData.pin}
+                                maxLength={6}        // Limit length to 6 characters
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    // Allow only digits and max 6 chars
+                                    if (/^\d{0,6}$/.test(value)) {
+                                        handleChange(e);
+                                    }
+                                }}
+                            />
                         </label>
                     </div>
                     <label>
@@ -458,21 +595,17 @@ const CheckOut = () => {
                         <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} />
                     </label>
 
-                    {/* Buttons */}
-                    <div className={styles.buttonGroup}>
-                        <button
-                            className={styles.addButton}
-                            onClick={handleAddAddress}
-                        >
-                            Add Address
-                        </button>
-                        <button
-                            className={styles.cancelButton}
-                            onClick={handleCancel}
-                        >
-                            Cancel
-                        </button>
-                    </div>
+                    {/* Conditionally show buttons only when 'new' is selected */}
+                    {selectedAddressIndex === 'new' && (
+                        <div className={styles.buttonGroup}>
+                            <button className={styles.addButton} onClick={handleAddAddress}>
+                                Add Address
+                            </button>
+                            <button className={styles.cancelButton} onClick={handleCancel}>
+                                Cancel
+                            </button>
+                        </div>
+                    )}
 
                     <h2 className={styles.paymentHeading}>Payment</h2>
 
@@ -585,7 +718,7 @@ const CheckOut = () => {
 
                         <div className={styles.summaryRow}>
                             <span>Discount</span>
-                            <span>-{currency}{discount.toFixed(2)}</span>
+                            <span>{currency}{discount.toFixed(2)}</span>
                         </div>
 
                         <hr className={styles.summaryDivider} />

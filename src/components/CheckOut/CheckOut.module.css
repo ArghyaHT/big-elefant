@@ -60,14 +60,17 @@
 }
 
 input,
-textarea::placeholder,
+textarea,
 select{
     color: #999;
     /* Change placeholder text color */
     font-size: 10px;
     /* Optional: adjust size */
-    text-transform: uppercase;
+    text-transform: capitalize;
 
+}
+input[type="email"] {
+    text-transform: none;
 }
 
 .buttonGroup {
@@ -540,7 +543,7 @@ select{
 
 @media (max-width: 480px) {
   .checkoutContainer {
-    flex-direction: column-reverse;
+    flex-direction: column;
     padding: 20px;
   }
 
@@ -574,16 +577,27 @@ select{
     text-align: center;
   }
 
+  .cartList{
+    padding: 0px 10px;
+  }
+
   .cartItem {
-    flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
 
   .itemImageWrapper {
-    width: 100%;
-    height: auto;
+    width: 60px;
+    height: 60px;
   }
+
+  .itemName {
+  font-size: 14px;
+}
+
+.itemPrice {
+  font-size: 12px;
+}
 
   .itemImage {
     width: 100%;
