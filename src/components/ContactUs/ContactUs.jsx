@@ -98,14 +98,14 @@ const Contactus = () => {
                     <h2 className={styles.contactHeading}>Contact Information</h2>
                     <p className={styles.contactDescription}>Any question or remarks? Just write us a message!</p>
                     <div className={styles.contactFlexContainer}>
-                        <div className={styles.contactItem}>
+                        {/* <div className={styles.contactItem}>
                             <FiPhone className={styles.icon} />
                             <a href="tel:+911234567890">+91 12345 67890</a>
-                        </div>
+                        </div> */}
 
                         <div className={styles.contactItem}>
                             <FiMail className={styles.icon} />
-                            <a href="mailto:info@example.com">info@example.com</a>
+                            <a href="mailto:bigelefantindia@gmail.com">bigelefantindia@gmail.com</a>
                         </div>
 
                         <div className={styles.contactItem}>

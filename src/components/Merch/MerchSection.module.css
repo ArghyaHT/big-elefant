@@ -106,7 +106,7 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   .cardContainer {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 0;
+    padding: 0px 30px;
   }
 
   .card {

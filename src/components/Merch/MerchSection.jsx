@@ -113,6 +113,7 @@ const MerchSection = () => {
         <h2 className={styles.sectionTitle}>Merch</h2>
 
         <div className={styles.cardContainer}>
+          
           {sampleMerch.map((merch) => (
             <div key={merch.id} className={styles.card}>
               <img

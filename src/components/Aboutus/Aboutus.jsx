@@ -73,6 +73,8 @@ const Aboutus = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
 
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
@@ -123,6 +125,17 @@ const Aboutus = () => {
         fetchFeaturedProducts();
     }, []);
 
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+        };
+
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
     const handleSlideChange = (swiper) => {
         setActiveIndex(swiper.activeIndex);
     };
@@ -136,7 +149,7 @@ const Aboutus = () => {
             console.warn("Missing slug for product:", product.productName);
         }
     };
-    
+
     return (
         <>
             <div className={styles.aboutherosection}>
@@ -171,7 +184,7 @@ const Aboutus = () => {
             <div className={styles.ctaWrapper}>
                 <Link to="/contact-us" className={styles.ctaButton}>
                     Contact Us
-                </Link>        
+                </Link>
             </div>
 
             {/* Partner Logos Carousel */}
@@ -219,18 +232,28 @@ const Aboutus = () => {
                                 <div className={styles.heroText}>
                                     <h1 className={styles.heroTitle}>{product.bannerTitle}</h1>
                                     {/* <button className={styles.heroButton}>Shop Now</button> */}
-                                    <button
-                                        className={styles.heroButton}
-                                        onClick={() => handleShopNow(product)}
-                                    >
-                                        Shop Now
-                                    </button>
+                                    {!isMobile && (
+                                        <button
+                                            className={styles.heroButton}
+                                            onClick={() => handleShopNow(product)}
+                                        >
+                                            Shop Now
+                                        </button>
+                                    )}
                                 </div>
                                 <img
                                     src={product.productImage}
                                     alt={product.title}
                                     className={styles.heroImage}
                                 />
+                                {isMobile && (
+                                    <button
+                                        className={styles.heroButton}
+                                        onClick={() => handleShopNow(product)}
+                                    >
+                                        Shop Now
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>

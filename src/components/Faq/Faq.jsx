@@ -17,32 +17,32 @@ const useIsMobile = (breakpoint = 480) => {
 };
 
 const Faq = () => {
-          const [faqData, setFaqData] = useState([]);
-  const [categories, setCategories] = useState([]);
+    const [faqData, setFaqData] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [openIndex, setOpenIndex] = useState(null);
     const [selectedTab, setSelectedTab] = useState(categories[0]);
     const isMobile = useIsMobile();
 
 
-  useEffect(() => {
-    const fetchFAQs = async () => {
-      try {
-        const data = await sanityClient.fetch(`*[_type == "faq"]`);
-        setFaqData(data);
+    useEffect(() => {
+        const fetchFAQs = async () => {
+            try {
+                const data = await sanityClient.fetch(`*[_type == "faq"]`);
+                setFaqData(data);
 
-        // Extract unique categories
-        const uniqueCategories = Array.from(
-          new Set(data.map(item => item.category))
-        );
-        setCategories(uniqueCategories);
-        setSelectedTab(uniqueCategories[0]); // default to first category
-      } catch (error) {
-        console.error("Error fetching FAQs:", error);
-      }
-    };
+                // Extract unique categories
+                const uniqueCategories = Array.from(
+                    new Set(data.map(item => item.category))
+                );
+                setCategories(uniqueCategories);
+                setSelectedTab(uniqueCategories[0]); // default to first category
+            } catch (error) {
+                console.error("Error fetching FAQs:", error);
+            }
+        };
 
-    fetchFAQs();
-  }, []);
+        fetchFAQs();
+    }, []);
 
 
     const toggleAccordion = (index) => {
@@ -56,14 +56,14 @@ const Faq = () => {
             <div className={styles.faqheaderSection}>
                 <h2 className={styles.faqHeading}>Questions? look here.</h2>
                 <p className={styles.faqDesc}>
-                    Can’t find an answer? call us at (+91) 12345 67890 or email demo@gmail.com!
+                    Can’t find an answer? write us at bigelefantindia@gmail.com!
                 </p>
             </div>
 
             {isMobile ? (
                 // 👉 Mobile View: Show all categories
                 categories.map(tab => {
-                    const categoryData = data.filter(item => item.category === tab);
+                    const categoryData = faqData.filter(item => item.category === tab);
                     return (
                         <div key={tab} className={styles.mobileTabSection}>
                             <h3 className={styles.mobileTabHeading}>{tab}</h3>

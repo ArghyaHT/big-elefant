@@ -309,7 +309,7 @@
 
   .heroContent {
     flex-direction: column;
-    padding: 0 16px;
+    padding: 16px 16px;
     max-width: 100%;
     box-sizing: border-box;
     align-items: center;
@@ -323,7 +323,7 @@
 
   .heroTitle {
     font-size: 32px;
-    margin-bottom: 12px;
+    margin: 0px;
   }
 
   .heroWriter {
@@ -335,7 +335,7 @@
     width: 140px;
     height: 45px;
     font-size: 14px;
-    margin-top: 16px;
+    margin: 0px;
   }
 
   .heroImage {

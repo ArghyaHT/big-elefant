@@ -18,7 +18,6 @@ const Hero = () => {
     const [products, setProducts] = useState([]);
     const [isMobile, setIsMobile] = useState(false);
 
-
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
             const query = `

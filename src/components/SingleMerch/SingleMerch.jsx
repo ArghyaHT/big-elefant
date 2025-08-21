@@ -59,8 +59,7 @@ const SingleMerch = () => {
                 <div className={styles.merchImageSection}>
                     <Swiper
                       className={styles.mySwiper}
-                        modules={[Navigation, Pagination, Autoplay]}
-                        navigation
+                        modules={[Pagination, Autoplay]}
                         pagination={{ clickable: true }}
                         autoplay={{ delay: 4000, disableOnInteraction: false }}
                         loop={true}
