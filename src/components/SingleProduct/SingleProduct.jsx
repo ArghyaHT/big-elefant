@@ -256,15 +256,15 @@ const SingleProduct = () => {
                         <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
                     </div>
 
-                        <div className={styles.rightVideo}>
-                            <iframe
-                                className={styles.videoPlayer}
-                                src="https://www.youtube.com/embed/UEZm0U6KrfY"
-                                title="YouTube video"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                    <div className={styles.rightVideo}>
+                        <iframe
+                            className={styles.videoPlayer}
+                            src="https://www.youtube.com/embed/UEZm0U6KrfY"
+                            title="YouTube video"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
             </div>

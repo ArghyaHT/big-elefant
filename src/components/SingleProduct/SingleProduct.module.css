@@ -325,14 +325,14 @@
   }
 
   .productDescription {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.4;
     text-align: start;
   }
 
   .featureList {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--primary-black);
     line-height: 1.2;
     text-align: left;
@@ -342,7 +342,7 @@
   .primaryButton,
   .buyNowSolidButton {
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .buyNowWrapper {
