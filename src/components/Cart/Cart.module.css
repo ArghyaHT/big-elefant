@@ -322,7 +322,7 @@
 
 @media (max-width: 480px) {
 .scrollableContainer{
-  height: 80vh;
+  height: 70vh;
   overflow-y: auto;
 }
 
@@ -425,7 +425,7 @@
 
 @media (max-width: 360px) {
   .scrollableContainer{
-  height: 60vh;
+  height: 70vh;
   overflow-y: auto;
 }
   .itemName {
