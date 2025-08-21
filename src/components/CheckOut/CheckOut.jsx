@@ -607,7 +607,7 @@ const CheckOut = () => {
                         </div>
                     )}
 
-                    <h2 className={styles.paymentHeading}>Payment</h2>
+                    {/* <h2 className={styles.paymentHeading}>Payment</h2>
 
                     <div className={styles.accordionContainer}>
                         {paymentOptions.map((option, index) => (
@@ -626,7 +626,7 @@ const CheckOut = () => {
                                 )}
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
                 </form>
             </div>
@@ -734,6 +734,10 @@ const CheckOut = () => {
                         <br />
                         <strong>We guarantee no additional charges on delivery.</strong>
                     </div>
+
+                    <button className={styles.payButton}>
+                        Pay {cartItems.length > 0 ? cartItems[0].currency : '₹'}{total.toFixed(2)}
+                    </button>
 
                     {/* Similar Section */}
                     {/* <div className={styles.similarProductsSection}>
