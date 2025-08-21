@@ -424,3 +424,96 @@
     margin-left: 4px;
   }
 }
+
+
+/* Extra small screens - override or fine-tune styles for below 360px */
+@media (max-width: 360px) {
+  .productContainer {
+    padding: 0 6px;
+  }
+
+  .productImageSection,
+  .productContentSection {
+    padding: 6px;
+  }
+
+  .productImage {
+    max-height: 220px;
+  }
+
+  .productName,
+  .productPrice {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .tags {
+    gap: 2px;
+  }
+
+  .tag {
+    font-size: 12px;
+  }
+
+  .productDescription {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .featureList {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+
+  .primaryButton,
+  .buyNowSolidButton {
+    font-size: 12px;
+  }
+
+  .sectionHeading {
+    font-size: 18px;
+  }
+
+  .packOptions {
+    justify-content: flex-start;
+    gap: 10px
+  }
+
+  .packOption {
+    min-width: 60px;
+    padding: 6px 8px;
+  }
+
+  .packLabel,
+  .packPrice {
+    font-size: 12px;
+  }
+
+  .attitudeSection {
+    padding: 6px;
+  }
+
+  .attitudeTagline {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .attitudeDesc {
+    font-size: 12px;
+    padding: 0 10px;
+  }
+
+  .videoPlayer {
+    max-width: 280px;
+    height: 280px;
+  }
+
+  .mrp {
+    font-size: 14px;
+  }
+
+  .discount,
+  .discountContent {
+    font-size: 12px;
+  }
+}

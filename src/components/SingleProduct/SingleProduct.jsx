@@ -11,7 +11,7 @@ import Reviews from "../Reviews/Reviews";
 import Plastic from "../Plastic/Plastic";
 import WildMerchSection from "../Wild Merch/WildMerch";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCart, toggleCart } from "../../redux/cartSlice";
 import { FaArrowDown } from "react-icons/fa";
 import SingleProductReview from "../SingleProductReview/SingleProductReview";
 
@@ -66,6 +66,9 @@ const SingleProduct = () => {
                 packSize,
             })
         );
+
+    dispatch(toggleCart());         // Open the cart screen
+
     };
 
     return (
