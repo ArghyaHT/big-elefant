@@ -124,10 +124,15 @@ const MerchSection = () => {
               <h3 className={styles.cardTitle}>{merch.name}</h3>
               <p className={styles.cardText}>
                 {Array.isArray(merch.features) ? merch.features.join(', ') : merch.features}
-              </p>                            <button
+              </p>                         
+               {/* <button
                 className={styles.cardButton}
                 onClick={() => handleShopNow(merch)}
-              >Shop Now</button>
+              >Shop Now</button> */}
+               <button
+                className={styles.comingSoon}
+                // onClick={() => handleShopNow(merch)}
+              >TBD COMING SOON</button>
             </div>
           ))}
         </div>

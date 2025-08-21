@@ -57,7 +57,7 @@ const Navbar = () => {
         {/* Shopping bag icon on right */}
         <div className={styles.cartIcon}>
           <div className={styles.cartIconWrapper}>
-            <FiHeart className={styles.icon} />
+            {/* <FiHeart className={styles.icon} /> */}
 
             <FiShoppingBag
               className={styles.icon}

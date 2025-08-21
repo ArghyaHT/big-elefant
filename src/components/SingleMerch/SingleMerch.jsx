@@ -48,6 +48,7 @@ const SingleMerch = () => {
         return acc;
     }, {});
 
+    
     // Find max count to normalize widths (optional)
     const maxCount = Math.max(...Object.values(starCounts), 1); // avoid divide by zero
 
