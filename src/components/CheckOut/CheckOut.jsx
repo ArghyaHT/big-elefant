@@ -432,14 +432,77 @@ const CheckOut = () => {
         }
     };
 
-    const handlePaymentSuccess = ({ response, order_id }) => {
-        console.log("✅ Payment successful:", response);
-        console.log("💾 Order ID:", order_id);
+    const handlePaymentSuccess = async (fullData) => {
+        console.log("✅ Payment full data:", fullData);
 
-        // Optional: Save payment details to DB or Sanity here
+        const {
+            firstName,
+            lastName,
+            email,
+            contact,
+            addressLine,
+            city,
+            state,
+            locality,
+            landmark,
+            pin,
+            payment,
+            orderId,
+        } = fullData;
 
-        alert("Payment Successful!");
+        const { razorpay_payment_id } = payment || {};
+
+        if (!razorpay_payment_id) {
+            console.warn("⚠️ Missing payment ID");
+            alert("Payment verified but no payment ID found.");
+            return;
+        }
+
+        const orderDoc = {
+            _type: 'order',
+            // Order Details
+            orderId,
+            paymentId: razorpay_payment_id,
+            status: "ordered",
+            // Shipping Details
+            name: `${firstName} ${lastName}`,
+            email,
+            contact,
+            addressLine,
+            city,
+            state,
+            locality,
+            landmark,
+            pin,
+
+            // Products
+            products: cartItems.map((item) => ({
+                _key: uuidv4(), // ✅ Required for Sanity array items
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                packSize: item.packSize,
+                currency: item.currency,
+                productImage: item.productImage,
+            })),
+
+            // Timestamp
+            submittedAt: new Date().toISOString(),
+        };
+
+        try {
+            const result = await sanityClient.create(orderDoc);
+            console.log('📦 Order saved to Sanity:', result);
+
+            alert("🎉 Payment Successful and Order Saved!");
+        } catch (error) {
+            console.error("❌ Failed to save order:", error);
+            alert("Payment succeeded, but saving order failed.");
+        }
     };
+
+
 
     const handlePaymentFailure = (message) => {
         console.error("❌ Payment failed:", message);

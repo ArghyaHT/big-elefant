@@ -4,235 +4,88 @@ import banner1 from "../../assets/banner1.png"
 import banner2 from "../../assets/banner2.png"
 import sparklingWater from "../../assets/sparkling-water.png"
 import drinnkingWater from "../../assets/drinking-water.png"
+import { sanityClient } from '../../utils/sanityClient';
+import { useEffect } from 'react';
 
-
-// Mock product list with order-specific fields
-const mockProducts = [
-    {
-        id: 1,
-        productName: "Still Drinking Water",
-        title: "my husband AURA POINTs when you hold our can",
-        shortDescription:
-            "We’re delivering pure still mountain water in cans that are 100% endlessly recyclable. Environmentally friendly? Without a doubt.",
-        description:
-            "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable.",
-        features: "Still Drinking Water, Infinitely Recyclable Cans",
-        writer: "Kelly",
-        productImage: drinnkingWater,
-        background: banner1,
-        backgroundColor: "#5D6984",
-        tags: ["Mountain Water", "Bold Taste", "Eco-Friendly"],
-        price: 35,
-        currency: "$",
-        productImages: [drinnkingWater, sparklingWater],
-        category: "Water",
-        orderStatus: "Delivered",
-        orderDate: "2024-07-01",
-        packSize: 2,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-    {
-        id: 2,
-        productName: "Sparkling Water",
-        title: "You won't believe it’s not soda.",
-        shortDescription:
-            "Our crisp mountain-sourced sparkling water comes in endlessly recyclable cans—refreshment with a mission.",
-        description:
-            "Sparkling water with no artificial sweeteners, sourced from pristine peaks.",
-        features: "Sparkling Water, No Artificial Sweeteners",
-        writer: "Kelly",
-        productImage: sparklingWater,
-        background: banner2,
-        backgroundColor: "#5D8469",
-        tags: ["Fizz", "Eco-Friendly"],
-        price: 50,
-        currency: "$",
-        productImages: [sparklingWater, drinnkingWater],
-        category: "Water",
-        orderStatus: "On the Way",
-        orderDate: "2024-07-28",
-        packSize: 6,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-
-    {
-        id: 3,
-        productName: "Still Drinking Water",
-        title: "my husband AURA POINTs when you hold our can",
-        shortDescription:
-            "We’re delivering pure still mountain water in cans that are 100% endlessly recyclable. Environmentally friendly? Without a doubt.",
-        description:
-            "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable.",
-        features: "Still Drinking Water, Infinitely Recyclable Cans",
-        writer: "Kelly",
-        productImage: drinnkingWater,
-        background: banner1,
-        backgroundColor: "#5D6984",
-        tags: ["Mountain Water", "Bold Taste", "Eco-Friendly"],
-        price: 35,
-        currency: "$",
-        productImages: [drinnkingWater, sparklingWater],
-        category: "Water",
-        orderStatus: "Delivered",
-        orderDate: "2025-07-12",
-        packSize: 4,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-    {
-        id: 4,
-        productName: "Sparkling Water",
-        title: "You won't believe it’s not soda.",
-        shortDescription:
-            "Our crisp mountain-sourced sparkling water comes in endlessly recyclable cans—refreshment with a mission.",
-        description:
-            "Sparkling water with no artificial sweeteners, sourced from pristine peaks.",
-        features: "Sparkling Water, No Artificial Sweeteners",
-        writer: "Kelly",
-        productImage: sparklingWater,
-        background: banner2,
-        backgroundColor: "#5D8469",
-        tags: ["Fizz", "Eco-Friendly"],
-        price: 50,
-        currency: "$",
-        productImages: [sparklingWater, drinnkingWater],
-        category: "Water",
-        orderStatus: "On the Way",
-        orderDate: "2025-07-28",
-        packSize: 1,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-
-    {
-        id: 5,
-        productName: "Still Drinking Water",
-        title: "my husband AURA POINTs when you hold our can",
-        shortDescription:
-            "We’re delivering pure still mountain water in cans that are 100% endlessly recyclable. Environmentally friendly? Without a doubt.",
-        description:
-            "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable.",
-        features: "Still Drinking Water, Infinitely Recyclable Cans",
-        writer: "Kelly",
-        productImage: drinnkingWater,
-        background: banner1,
-        backgroundColor: "#5D6984",
-        tags: ["Mountain Water", "Bold Taste", "Eco-Friendly"],
-        price: 35,
-        currency: "$",
-        productImages: [drinnkingWater, sparklingWater],
-        category: "Water",
-        orderStatus: "Delivered",
-        orderDate: "2025-07-12",
-        packSize: 4,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-    {
-        id: 6,
-        productName: "Sparkling Water",
-        title: "You won't believe it’s not soda.",
-        shortDescription:
-            "Our crisp mountain-sourced sparkling water comes in endlessly recyclable cans—refreshment with a mission.",
-        description:
-            "Sparkling water with no artificial sweeteners, sourced from pristine peaks.",
-        features: "Sparkling Water, No Artificial Sweeteners",
-        writer: "Kelly",
-        productImage: sparklingWater,
-        background: banner2,
-        backgroundColor: "#5D8469",
-        tags: ["Fizz", "Eco-Friendly"],
-        price: 50,
-        currency: "$",
-        productImages: [sparklingWater, drinnkingWater],
-        category: "Water",
-        orderStatus: "On the Way",
-        orderDate: "2025-07-28",
-        packSize: 1,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-
-    {
-        id: 7,
-        productName: "Still Drinking Water",
-        title: "my husband AURA POINTs when you hold our can",
-        shortDescription:
-            "We’re delivering pure still mountain water in cans that are 100% endlessly recyclable. Environmentally friendly? Without a doubt.",
-        description:
-            "Level up your hydration game. We’re serving up pure mountain water in cans that are legit forever recyclable.",
-        features: "Still Drinking Water, Infinitely Recyclable Cans",
-        writer: "Kelly",
-        productImage: drinnkingWater,
-        background: banner1,
-        backgroundColor: "#5D6984",
-        tags: ["Mountain Water", "Bold Taste", "Eco-Friendly"],
-        price: 35,
-        currency: "$",
-        productImages: [drinnkingWater, sparklingWater],
-        category: "Water",
-        orderStatus: "Delivered",
-        orderDate: "2025-07-12",
-        packSize: 4,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-    {
-        id: 8,
-        productName: "Sparkling Water",
-        title: "You won't believe it’s not soda.",
-        shortDescription:
-            "Our crisp mountain-sourced sparkling water comes in endlessly recyclable cans—refreshment with a mission.",
-        description:
-            "Sparkling water with no artificial sweeteners, sourced from pristine peaks.",
-        features: "Sparkling Water, No Artificial Sweeteners",
-        writer: "Kelly",
-        productImage: sparklingWater,
-        background: banner2,
-        backgroundColor: "#5D8469",
-        tags: ["Fizz", "Eco-Friendly"],
-        price: 50,
-        currency: "$",
-        productImages: [sparklingWater, drinnkingWater],
-        category: "Water",
-        orderStatus: "On the Way",
-        orderDate: "2025-07-28",
-        packSize: 1,
-        customerName: "John Doe",
-        phoneNumber: "+91 1234567890"
-    },
-];
-
-const OrderProductList = ({ products = mockProducts, user, filters }) => {
+const OrderProductList = ({ user, filters }) => {
     const [searchTerm, setSearchTerm] = useState("");
+    const [orders, setOrders] = useState([]);
 
-    // Filtered and searched products
+    useEffect(() => {
+        if (!user?.email) return;
+
+        const fetchOrders = async () => {
+            try {
+                const query = `*[_type == "order" && email == "${user.email}"]{
+                    orderId,
+                    paymentId,
+                    status,
+                    submittedAt,
+                    name,
+                    products[]{
+                        id,
+                        name,
+                        price,
+                        quantity,
+                        packSize,
+                        currency,
+                      productImage
+                    }
+                }`;
+
+                const result = await sanityClient.fetch(query);
+
+                console.log("Orders", result)
+
+                // Flatten products with order metadata
+                const flattened = result.flatMap(order =>
+                    order.products.map(product => ({
+                        ...product,
+                        orderId: order.orderId,
+                        orderDate: order.submittedAt,
+                        customerName: order.name,
+                        productImage: product.productImage || '',
+                        orderStatus: order.status // You can replace this with dynamic status if you have one
+                    }))
+                );
+
+                setOrders(flattened);
+            } catch (error) {
+                console.error('❌ Failed to fetch orders:', error);
+            }
+        };
+
+        fetchOrders();
+    }, [user]);
+    
     const filteredProducts = useMemo(() => {
-        return products.filter((product) => {
-            const matchesSearch = product.productName.toLowerCase().includes(searchTerm.toLowerCase());
+        return orders.filter(product => {
+            const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-            const matchesStatus = filters?.status.length
+            const matchesStatus = filters?.status?.length
                 ? filters.status.includes(product.orderStatus)
                 : true;
 
-            const matchesDate = filters?.date.length
+            const matchesDate = filters?.date?.length
                 ? filters.date.some(dateFilter => {
-                    const productYear = new Date(product.orderDate).getFullYear();
+                    const productDate = new Date(product.orderDate);
+                    const now = new Date();
+
                     if (dateFilter === "Last 30 Days") {
-                        const thirtyDaysAgo = new Date();
-                        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-                        return new Date(product.orderDate) >= thirtyDaysAgo;
+                        const thirtyDaysAgo = new Date(now);
+                        thirtyDaysAgo.setDate(now.getDate() - 30);
+                        return productDate >= thirtyDaysAgo;
                     }
-                    if (dateFilter === "Older") return productYear < 2023;
-                    return productYear === parseInt(dateFilter);
+
+                    if (dateFilter === "Older") return productDate.getFullYear() < now.getFullYear();
+
+                    return productDate.getFullYear() === parseInt(dateFilter);
                 })
                 : true;
 
             return matchesSearch && matchesStatus && matchesDate;
         });
-    }, [searchTerm, products, filters]);
+    }, [searchTerm, orders, filters]);
 
     return (
         <div className={styles.orderProductListContainer}>
@@ -253,8 +106,8 @@ const OrderProductList = ({ products = mockProducts, user, filters }) => {
             </div>
 
             <div className={styles.productList}>
-                {filteredProducts.map((product) => (
-                    <div key={product.id} className={styles.productListItem}>
+                {filteredProducts.map((product, index) => (
+                    <div key={`${product.id}-${index}`} className={styles.productListItem}>
                         <div
                             className={styles.imageWrapper}
                             style={{ backgroundColor: product.backgroundColor }}
@@ -268,7 +121,7 @@ const OrderProductList = ({ products = mockProducts, user, filters }) => {
 
                         <div className={styles.productContent}>
                             <div className={styles.productTopRow}>
-                                <span className={styles.customerName}>{product.customerName}</span>
+                                <span className={styles.customerName}>{product.name}</span>
                                 <span className={styles.productPrice}>
                                     {product.currency}
                                     {product.price}

@@ -314,8 +314,8 @@ const Dashboard = () => {
                                     {["Ordered", "On the Way", "Delivered", "Cancelled", "Returned"].map((status) => (
                                         <label key={status} className={styles.checkboxLabel}>
                                             <input type="checkbox" className={styles.statusCheckbox}
-                                                value={status}
-                                                checked={selectedStatuses.includes(status)}
+                                                value={status.toLowerCase()}
+                                                checked={selectedStatuses.map(s => s.toLowerCase()).includes(status.toLowerCase())}
                                                 onChange={handleStatusChange} />
                                             <span>{status}</span>
                                         </label>
