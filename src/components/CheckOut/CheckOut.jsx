@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./CheckOut.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronDown } from "react-icons/fa";
@@ -29,6 +29,7 @@ import 'react-phone-input-2/lib/style.css'; // Don't forget the styles
 import { sanityClient } from "../../utils/sanityClient";
 import { v4 as uuidv4 } from 'uuid';
 import { refreshLoggedInUser } from "../../utils/refreshUser";
+import RazorpayPayment from "../RazorPay/RazorPay";
 
 
 
@@ -423,6 +424,28 @@ const CheckOut = () => {
 
     const country = getCountryFromPhone(formData.phoneNumber);
 
+    const razorpayRef = useRef();
+
+    const handlePayment = () => {
+        if (razorpayRef.current) {
+            razorpayRef.current.initiatePayment();
+        }
+    };
+
+    const handlePaymentSuccess = ({ response, order_id }) => {
+        console.log("✅ Payment successful:", response);
+        console.log("💾 Order ID:", order_id);
+
+        // Optional: Save payment details to DB or Sanity here
+
+        alert("Payment Successful!");
+    };
+
+    const handlePaymentFailure = (message) => {
+        console.error("❌ Payment failed:", message);
+        alert(message);
+    };
+
     return (
         <div className={styles.checkoutContainer}>
             {/* Left Section */}
@@ -735,9 +758,31 @@ const CheckOut = () => {
                         <strong>We guarantee no additional charges on delivery.</strong>
                     </div>
 
-                    <button className={styles.payButton}>
+                    <button className={styles.payButton} onClick={handlePayment}>
                         Pay {cartItems.length > 0 ? cartItems[0].currency : '₹'}{total.toFixed(2)}
                     </button>
+
+                    {/* 🧾 Razorpay Payment Component */}
+                    <RazorpayPayment
+                        ref={razorpayRef}
+                        amount={total}
+                        onSuccess={handlePaymentSuccess}
+                        onFailure={handlePaymentFailure}
+                        customerData={{
+                            firstName: formData.firstName,
+                            lastName: formData.lastName,
+                            email: loggedInuser?.email,
+                            contact: formData.phoneNumber.startsWith('91')
+                                ? formData.phoneNumber.slice(2)
+                                : formData.phoneNumber,
+                            addressLine: formData.addressLine,
+                            city: formData.city,
+                            state: formData.state,
+                            locality: formData.locality,
+                            landmark: formData.landmark,
+                            pin: formData.pin
+                        }}
+                    />
 
                     {/* Similar Section */}
                     {/* <div className={styles.similarProductsSection}>
