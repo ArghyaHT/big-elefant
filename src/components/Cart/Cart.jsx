@@ -162,8 +162,13 @@ const Cart = () => {
 
                     <div className={styles.itemDetails}>
                       <div className={styles.itemName}>
-                        {item.name} {item.packSize > 1 ? `/ Pack of ${item.packSize}` : ""}
-                      </div>                   
+                        {item.name} 
+                      </div>  
+
+                          <div className={styles.itemPrice}>
+                        {item.packSize > 1 ? ` Pack of ${item.packSize}` : ""}
+                      </div>
+
                        <div className={styles.itemPrice}>
                         {item.currency}{(item.price * item.quantity).toFixed(2)}
                       </div>

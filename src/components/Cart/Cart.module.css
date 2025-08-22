@@ -101,7 +101,7 @@
 
 .itemImageWrapper {
   width: 80px;
-  height: 80px;
+  height: 105px;
   flex-shrink: 0;
 }
 
@@ -344,7 +344,7 @@
 
   .itemImageWrapper {
     width: 60px;
-    height: 60px;
+    height: 95px;
   }
 
   .itemName {

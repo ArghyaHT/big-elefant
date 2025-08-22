@@ -20,6 +20,7 @@ import {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
 } from "../../redux/cartSlice"; // Update with your actual path
 import { handleUpiPay } from "../Payments/Payments";
 import { useEffect } from "react";
@@ -83,7 +84,6 @@ const CheckOut = () => {
     const [discountCode, setDiscountCode] = useState("");
     const [promoCode, setPromoCode] = useState("");
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
-
 
 
     const toggleAccordion = (index) => {
@@ -496,6 +496,9 @@ const CheckOut = () => {
             console.log('📦 Order saved to Sanity:', result);
 
             alert("🎉 Payment Successful and Order Saved!");
+
+              // ✅ Clear the cart after successful order
+        dispatch(clearCart());
         } catch (error) {
             console.error("❌ Failed to save order:", error);
             alert("Payment succeeded, but saving order failed.");
@@ -732,10 +735,17 @@ const CheckOut = () => {
                                         alt={item.productName}
                                         className={styles.itemImage}
                                     />
+
+                                      <span className={styles.quantityBadge}>{item.quantity}</span>
+
                                 </div>
                                 <div className={styles.itemDetails}>
                                     <div className={styles.itemName}>
-                                        {item.name} {item.packSize > 1 ? `/ Pack of ${item.packSize}` : ""}
+                                        {item.name}
+                                    </div>
+
+                                       <div className={styles.itemPrice}>
+                                        {item.packSize > 1 ? ` Pack of ${item.packSize}` : ""}
                                     </div>
 
                                     <div className={styles.itemPrice}>
@@ -743,7 +753,7 @@ const CheckOut = () => {
                                         {(item.price * item.quantity).toFixed(2)}
                                     </div>
 
-                                    <div className={styles.itemControls}>
+                                    {/* <div className={styles.itemControls}>
                                         <div className={styles.quantityControls}>
                                             <button
                                                 onClick={() => dispatch(decreaseQuantity(item.id))}
@@ -769,7 +779,7 @@ const CheckOut = () => {
                                         >
                                             <FiTrash2 size={18} />
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </li>
                         ))}
