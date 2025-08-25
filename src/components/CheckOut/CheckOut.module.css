@@ -67,8 +67,17 @@ select{
     font-size: 10px;
     /* Optional: adjust size */
     text-transform: capitalize;
-
 }
+
+/* Style placeholder text */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: #999;         /* Matches input text color */
+    font-size: 10px;     /* Optional: match input font size */
+    text-transform: capitalize;
+}
+
 input[type="email"] {
     text-transform: none;
 }
@@ -561,6 +570,32 @@ input[type="email"] {
   text-transform: uppercase;
 }
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1); /* Slight white tint with transparency */
+  backdrop-filter: blur(8px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+.modalContent {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+
 @media (max-width: 480px) {
   .checkoutContainer {
     flex-direction: column;
@@ -649,6 +684,12 @@ input[type="email"] {
   .totalRow {
     font-size: 16px;
   }
+
+    .modalContent {
+    width: 95%;
+    padding: 20px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -676,6 +717,12 @@ input[type="email"] {
   .promoInput button {
     padding: 6px;
     font-size: 14px;
+  }
+
+   .modalContent {
+    width: 98%;
+    padding: 15px;
+    font-size: 13px;
   }
 }
 

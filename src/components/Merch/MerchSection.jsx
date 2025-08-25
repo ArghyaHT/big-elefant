@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MerchSection.module.css";
-import beveragesBanner from "../../assets/beveragesBanner.png"
+import beveragesBanner from "../../assets/merch.webp"
 import { useNavigate } from "react-router-dom";
 import WildMerchImage from "../../assets/WildMerch.png"
 import merchBottle from "../../assets/merchBottle.png"

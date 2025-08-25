@@ -172,7 +172,36 @@
   }
 }
 
-@media (max-width: 390px) {
+/* Devices with max width 375px (iPhone X, SE 2nd gen) */
+@media (max-width: 375px) {
+  .logoBadge {
+    width: 100px;
+    height: 100px;
+  }
+
+  .badgeText p:nth-child(1) {
+    font-size: 20px;
+  }
+
+  .badgeText p:nth-child(2) {
+    font-size: 11px;
+  }
+
+  .badgeText p:nth-child(3) {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .ctaButton {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 360px) {
   .wrapper {
     height: 50vh;
     background-position: center;

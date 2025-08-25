@@ -4,7 +4,7 @@ import styles from "./BeveragesSection.module.css";
 import limitedOffer from "../../assets/limitedOffer.png"
 import sparklingWater from "../../assets/sparkling-water.png"
 import drinnkingWater from "../../assets/drinking-water.png"
-import beveragesBanner from "../../assets/beveragesBanner.png"
+import beveragesBanner from "../../assets/beverages.webp"
 import { useNavigate } from "react-router-dom";
 import { sanityClient } from "../../utils/sanityClient";
 // // Dummy product data

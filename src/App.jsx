@@ -19,6 +19,7 @@ import PrivacyPolicy from './Pages/PrivacyPolicy'
 import PrivacyPolicyPage from './Pages/PrivacyPolicy'
 import TermsContionsPage from './Pages/T&CPage'
 import ElefantsClubPage from './Pages/ElefantClubPage'
+import ForgetPasswordPage from './Pages/ForgetPasswordpage'
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/terms-and-conditions" element={<TermsContionsPage />} />
         <Route path="/elefant-club" element={<ElefantsClubPage />} />
+        <Route path="/forget-password" element={<ForgetPasswordPage />} />
+
 
 
       </Routes>

@@ -19,6 +19,11 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     text-transform: capitalize;
+    
+}
+
+.searchInput::placeholder {
+  margin-top:0px;
 }
 
 .searchButton {
@@ -56,22 +61,29 @@
 }
 
 .imageWrapper {
-    flex-shrink: 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
+  flex-shrink: 0;
+  width: auto;
+  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: start;
+  justify-content: flex-start;
+  margin-right: 8px; 
+  gap: 5px;
+  background-color: var(--batch-background);
+
 }
 
 .productImage {
-    width: 100%;
-    height: 100px;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Use 'contain' or 'cover' based on preference */
+  display: block;
+  border-radius: 10px;
+
 }
+
 
 .productContent {
     flex: 1;
@@ -80,26 +92,18 @@
     justify-content: center;
 }
 
-.productTopRow {
-    display: flex;
-    justify-content: space-between;
-    /* spread items */
-    align-items: center;
-    /* vertical align */
-    margin-bottom: 4px;
-    gap: 8px;
-    flex-wrap: nowrap;
-    /* no wrapping */
+.productRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-
-.productBottomRow {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 4px;
-    gap: 8px;
-    flex-wrap: wrap;
+.leftColumn,
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .customerName {
@@ -109,6 +113,11 @@
 .productPrice {
     font-weight: 600;
     color: var(--primary-black);
+}
+
+.moreItems {
+  font-size: 14px;
+color: var(--primary-black-50);
 }
 
 .orderDate,
@@ -156,6 +165,10 @@
         padding: 12px;
         gap: 8px;
         align-items: flex-start;
+    }
+
+    .productRow{
+        gap: 0px;
     }
 
     .imageWrapper {

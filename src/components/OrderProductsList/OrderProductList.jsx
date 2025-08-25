@@ -10,6 +10,20 @@ import { useEffect } from 'react';
 const OrderProductList = ({ user, filters }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [orders, setOrders] = useState([]);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsMobile(window.innerWidth < 768); // Adjust breakpoint as needed
+        };
+
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
+
+
 
     useEffect(() => {
         if (!user?.email) return;
@@ -57,7 +71,7 @@ const OrderProductList = ({ user, filters }) => {
 
         fetchOrders();
     }, [user]);
-    
+
     const filteredProducts = useMemo(() => {
         return orders.filter(product => {
             const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -87,6 +101,27 @@ const OrderProductList = ({ user, filters }) => {
         });
     }, [searchTerm, orders, filters]);
 
+    // Group filtered products by orderId
+    const groupedOrders = useMemo(() => {
+        const orderMap = new Map();
+
+        filteredProducts.forEach(product => {
+            const { orderId } = product;
+            if (!orderMap.has(orderId)) {
+                orderMap.set(orderId, {
+                    orderId,
+                    orderDate: product.orderDate,
+                    customerName: product.customerName,
+                    orderStatus: product.orderStatus,
+                    products: []
+                });
+            }
+            orderMap.get(orderId).products.push(product);
+        });
+
+        return Array.from(orderMap.values()).sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
+    }, [filteredProducts]);
+
     return (
         <div className={styles.orderProductListContainer}>
             <div className={styles.searchContainer}>
@@ -105,42 +140,50 @@ const OrderProductList = ({ user, filters }) => {
                 </button>
             </div>
 
+
             <div className={styles.productList}>
-                {filteredProducts.map((product, index) => (
-                    <div key={`${product.id}-${index}`} className={styles.productListItem}>
-                        <div
-                            className={styles.imageWrapper}
-                            style={{ backgroundColor: product.backgroundColor }}
-                        >
-                            <img
-                                src={product.productImage}
-                                alt={product.productName}
-                                className={styles.productImage}
-                            />
+
+                {groupedOrders.map((orderGroup, index) => (
+                    <div key={`${orderGroup.orderId}-${index}`} className={styles.productListItem}>
+
+                        <div className={styles.imageWrapper}>
+                            {orderGroup.products.slice(0, isMobile ? 1 : 2).map((product, i) => (
+                                <img
+                                    key={i}
+                                    src={product.productImage}
+                                    alt={product.name}
+                                    className={styles.productImage}
+                                />
+                            ))}
                         </div>
 
                         <div className={styles.productContent}>
-                            <div className={styles.productTopRow}>
-                                <span className={styles.customerName}>{product.name}</span>
-                                <span className={styles.productPrice}>
-                                    {product.currency}
-                                    {product.price}
-                                </span>
-                                <span className={styles.orderDate}>
-                                    Ordered on: {new Date(product.orderDate).toLocaleDateString()}
-                                </span>
-                            </div>
+                            <div className={styles.productRow}>
+                                <div className={styles.leftColumn}>
+                                    <span className={styles.customerName}>{orderGroup.customerName}</span>
+                                    {orderGroup.products.length > (isMobile ? 1 : 2) && (
+                                        <div className={styles.moreItems}>
+                                            + {orderGroup.products.length - (isMobile ? 1 : 2)} more item
+                                            {orderGroup.products.length - (isMobile ? 1 : 2) > 1 ? 's' : ''}
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div className={styles.productBottomRow}>
-                                <span className={styles.packSize}>Size: {product.packSize} pack</span>
-                                <span className={styles.orderStatus}>
-                                    Status: {product.orderStatus}
-                                </span>
+                                <div className={styles.rightColumn}>
+                                    <span className={styles.orderDate}>
+                                        Ordered on: {new Date(orderGroup.orderDate).toLocaleDateString()}
+                                    </span>
+                                    <span className={styles.orderStatus}>
+                                        Status: {orderGroup.orderStatus}
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 ))}
-                {filteredProducts.length === 0 && (
+
+                {groupedOrders.length === 0 && (
                     <p className={styles.noResults}>No orders found.</p>
                 )}
             </div>

@@ -5,7 +5,7 @@ const BrandMessage = () => {
     return (
         <section className={styles.wrapper}>
                 <h3 className={styles.brandMessage}>
-                    Crush the plastic. Drink water with rage
+                    Don’t just follow trends. Hold them.
                 </h3>
         </section>
     );

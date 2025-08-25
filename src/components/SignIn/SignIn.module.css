@@ -135,6 +135,12 @@
     text-align: center;
 }
 
+.errorMessage {
+  color: red;
+  font-size: 14px;
+  padding: 0px 45px;
+}
+
 
 @media (max-width: 480px) {
   .container {
@@ -185,6 +191,9 @@
     font-size: 16px;
     top: 8px;
   }
+  .errorMessage{
+    padding: 0px;
+  }
 }
 
 @media (max-width: 390px) {
@@ -215,5 +224,8 @@
     font-size: 15px;
     right: 10px;
     top: 8px;
+  }
+  .errorMessage{
+    padding: 0px;
   }
 }

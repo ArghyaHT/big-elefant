@@ -12,36 +12,36 @@ const SignIn = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
 
-    try {
-      // ✅ 1. Fetch user by email
-      const user = await sanityClient.fetch(
-        `*[_type == "customer" && email == $email][0]`,
-        { email }
-      );
+        try {
+            // ✅ 1. Fetch user by email
+            const user = await sanityClient.fetch(
+                `*[_type == "customer" && email == $email][0]`,
+                { email }
+            );
 
-      if (!user) {
-        setError("User not found.");
-        return;
-      }
+            if (!user) {
+                setError("User not found.");
+                return;
+            }
 
-      // ✅ 2. Check password
-      if (user.password !== password) {
-        setError("Incorrect password.");
-        return;
-      }
+            // ✅ 2. Check password
+            if (user.password !== password) {
+                setError("Incorrect password.");
+                return;
+            }
 
-      // ✅ 3. Store in localStorage and redirect
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/user-dashboard", { state: { user: user } });
-    } catch (err) {
-      console.error("Login error:", err);
-      setError("Something went wrong. Please try again.");
-    }
-  };
+            // ✅ 3. Store in localStorage and redirect
+            localStorage.setItem("user", JSON.stringify(user));
+            navigate("/user-dashboard", { state: { user: user } });
+        } catch (err) {
+            console.error("Login error:", err);
+            setError("Something went wrong. Please try again.");
+        }
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -54,7 +54,7 @@ const SignIn = () => {
                         <label>Email</label>
                         <input type="email"
                             placeholder="email"
-                            required 
+                            required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -80,8 +80,13 @@ const SignIn = () => {
                     </div>
 
                     <div className={styles.forgotPassword}>
-                        <Link to="/forgot-password">Forgot Password?</Link>
+                        <Link to="/forget-password">Forgot Password?</Link>
                     </div>
+
+
+                    {/* ✅ Show error here */}
+                    {error && <p className={styles.errorMessage}>{error}</p>}
+
 
                     <div className={styles.buttonGroup}>
                         <button type="submit" className={styles.loginButton}>Sign In</button>

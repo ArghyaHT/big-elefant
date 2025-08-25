@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import aboutImage from "../../assets/aboutImage.png"
+import aboutImage from "../../assets/about.webp"
 import styles from "../Aboutus/Aboutus.module.css"
 
 import partner1 from "../../assets/partner1.png"

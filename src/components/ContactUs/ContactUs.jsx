@@ -84,13 +84,13 @@ const Contactus = () => {
     return (
         <div className={styles.contactWrapper}>
             {/* Banner */}
-            <div className={styles.banner}>
+            {/* <div className={styles.banner}>
                 <img
                     src={contactusimage} // change to your actual image path
                     alt="Contact Us Banner"
                     className={styles.bannerImage}
                 />
-            </div>
+            </div> */}
 
             <div className={styles.contactContent}>
                 {/* Left: Image */}
@@ -108,10 +108,10 @@ const Contactus = () => {
                             <a href="mailto:bigelefantindia@gmail.com">bigelefantindia@gmail.com</a>
                         </div>
 
-                        <div className={styles.contactItem}>
+                        {/* <div className={styles.contactItem}>
                             <FiMapPin className={styles.icon} />
                             <span>123, Main Street, Your City, India</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -169,6 +169,7 @@ const Contactus = () => {
                                     required: true,
                                     id: 'phoneNumber',
                                 }}
+                                inputStyle={{ width: "100%" }}
                                 value={formData.phoneNumber}
                                 onChange={handlePhoneChange}
                             />

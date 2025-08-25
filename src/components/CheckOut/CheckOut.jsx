@@ -32,6 +32,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { refreshLoggedInUser } from "../../utils/refreshUser";
 import RazorpayPayment from "../RazorPay/RazorPay";
 
+import { useNavigate } from 'react-router-dom';
+
 
 
 const products = [
@@ -84,6 +86,9 @@ const CheckOut = () => {
     const [discountCode, setDiscountCode] = useState("");
     const [promoCode, setPromoCode] = useState("");
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const toggleAccordion = (index) => {
@@ -473,7 +478,8 @@ const CheckOut = () => {
             state,
             locality,
             landmark,
-            pin,
+            pin: Number(pin),
+            totalPrice: Number(total),
 
             // Products
             products: cartItems.map((item) => ({
@@ -495,10 +501,13 @@ const CheckOut = () => {
             const result = await sanityClient.create(orderDoc);
             console.log('📦 Order saved to Sanity:', result);
 
-            alert("🎉 Payment Successful and Order Saved!");
+            // alert("🎉 Payment Successful and Order Saved!");
 
-              // ✅ Clear the cart after successful order
-        dispatch(clearCart());
+            setShowSuccessModal(true);
+
+
+            // ✅ Clear the cart after successful order
+            dispatch(clearCart());
         } catch (error) {
             console.error("❌ Failed to save order:", error);
             alert("Payment succeeded, but saving order failed.");
@@ -510,6 +519,56 @@ const CheckOut = () => {
     const handlePaymentFailure = (message) => {
         console.error("❌ Payment failed:", message);
         alert(message);
+    };
+
+
+    const validateForm = () => {
+        const {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            addressLine,
+            city,
+            state,
+            locality,
+            pin
+        } = formData;
+
+        // Basic presence checks
+        if (
+            !firstName?.trim() ||
+            !lastName?.trim() ||
+            !email?.trim() ||
+            !phoneNumber?.trim() ||
+            !addressLine?.trim() ||
+            !city?.trim() ||
+            !state?.trim() ||
+            !locality?.trim()
+        ) {
+            alert("Please fill in all shipping details fields.");
+            return false;
+        }
+
+        // Validate pin
+        if (!/^\d{6}$/.test(pin)) {
+            alert("Pin must be exactly 6 digits.");
+            return false;
+        }
+
+        // (Optional) validate email pattern
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        // (Optional) validate phone length (basic)
+        if (phoneNumber.length < 10) {
+            alert("Please enter a valid phone number.");
+            return false;
+        }
+
+        return true;
     };
 
     return (
@@ -571,11 +630,11 @@ const CheckOut = () => {
                     <div className={styles.inlineFields}>
                         <label>
                             First Name
-                            <input type="text" name="firstName" placeholder="Firstname" value={formData.firstName} onChange={handleChange} />
+                            <input type="text" name="firstName" placeholder="Firstname" value={formData.firstName} onChange={handleChange} required />
                         </label>
                         <label>
                             Last Name
-                            <input type="text" name="lastName" placeholder="Lastname" value={formData.lastName} onChange={handleChange} />
+                            <input type="text" name="lastName" placeholder="Lastname" value={formData.lastName} onChange={handleChange} required />
                         </label>
                     </div>
 
@@ -583,7 +642,7 @@ const CheckOut = () => {
                     <div className={styles.inlineFields}>
                         <label>
                             Email
-                            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+                            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
                         </label>
 
                         <label>
@@ -598,9 +657,10 @@ const CheckOut = () => {
                                         phoneNumber: value,
                                     }))
                                 }
-                                inputStyle={{ width: '100%' }}
+                                inputStyle={{ width: '100%', height: '100%' }}
                                 enableSearch
                                 placeholder={country === 'in' ? '+91 1234567890' : undefined}
+                                required
 
                             />
                         </label>
@@ -609,18 +669,18 @@ const CheckOut = () => {
                     {/* Address */}
                     <label className={styles.inlineFields}>
                         Address
-                        <textarea name="addressLine" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} />
+                        <textarea name="addressLine" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} required />
                     </label>
 
                     {/* City & State */}
                     <div className={styles.inlineFields}>
                         <label>
                             City / Town
-                            <input type="text" name="city" placeholder="City/district/town" value={formData.city} onChange={handleChange} />
+                            <input type="text" name="city" placeholder="City/district/town" value={formData.city} onChange={handleChange} required />
                         </label>
                         <label>
                             State
-                            <select name="state" value={formData.state} className={styles.inlineFields} onChange={handleChange}>
+                            <select name="state" value={formData.state} className={styles.inlineFields} onChange={handleChange} required>
                                 <option value="">Select state</option>
                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -659,7 +719,7 @@ const CheckOut = () => {
                     <div className={styles.inlineFields}>
                         <label>
                             Locality
-                            <input type="text" name="locality" placeholder="Locality" value={formData.locality} onChange={handleChange} />
+                            <input type="text" name="locality" placeholder="Locality" value={formData.locality} onChange={handleChange} required />
                         </label>
                         <label>
                             Pin
@@ -676,12 +736,13 @@ const CheckOut = () => {
                                         handleChange(e);
                                     }
                                 }}
+                                required
                             />
                         </label>
                     </div>
                     <label>
                         Landmark
-                        <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} />
+                        <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} required />
                     </label>
 
                     {/* Conditionally show buttons only when 'new' is selected */}
@@ -736,7 +797,7 @@ const CheckOut = () => {
                                         className={styles.itemImage}
                                     />
 
-                                      <span className={styles.quantityBadge}>{item.quantity}</span>
+                                    <span className={styles.quantityBadge}>{item.quantity}</span>
 
                                 </div>
                                 <div className={styles.itemDetails}>
@@ -744,7 +805,7 @@ const CheckOut = () => {
                                         {item.name}
                                     </div>
 
-                                       <div className={styles.itemPrice}>
+                                    <div className={styles.itemPrice}>
                                         {item.packSize > 1 ? ` Pack of ${item.packSize}` : ""}
                                     </div>
 
@@ -831,8 +892,15 @@ const CheckOut = () => {
                         <strong>We guarantee no additional charges on delivery.</strong>
                     </div>
 
-                    <button className={styles.payButton} onClick={handlePayment}>
-                        Pay {cartItems.length > 0 ? cartItems[0].currency : '₹'}{total.toFixed(2)}
+                    <button className={styles.payButton}
+                        onClick={() => {
+                            if (validateForm()) {
+                                handlePayment(); // only runs if form is valid
+                            }
+                        }}
+                    >
+                        Pay
+                        {cartItems.length > 0 ? cartItems[0].currency : '₹'}{total.toFixed(2)}
                     </button>
 
                     {/* 🧾 Razorpay Payment Component */}
@@ -856,6 +924,23 @@ const CheckOut = () => {
                             pin: formData.pin
                         }}
                     />
+
+                    {showSuccessModal && (
+                        <div className={styles.modalOverlay}>
+                            <div className={styles.modalContent}>
+                                <h2>🎉 Payment Successful</h2>
+                                <p>Your order has been saved successfully!</p>
+                                <button
+                                    onClick={() => {
+                                        setShowSuccessModal(false);
+                                        navigate('/'); // 👈 navigate to home
+                                    }}
+                                >
+                                    Close</button>
+                            </div>
+                        </div>
+                    )}
+
 
                     {/* Similar Section */}
                     {/* <div className={styles.similarProductsSection}>
