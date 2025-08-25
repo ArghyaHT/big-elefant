@@ -11,7 +11,6 @@ const CheckOutPage = () => {
     <div>
         <Navbar />
         <CheckOut />
-        <Footer />
     </div>
   );
 };
