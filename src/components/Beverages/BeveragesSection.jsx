@@ -117,7 +117,7 @@ const BeveragesSection = () => {
 
                 <div className={styles.cardContainer}>
                     {products.map((product) => (
-                        <div key={product._id} className={styles.card}>
+                        <div key={product._id} className={styles.card} onClick={() => handleShopNow(product)}>
                             <img
                                 src={product.productImage}
                                 alt={product.productName}

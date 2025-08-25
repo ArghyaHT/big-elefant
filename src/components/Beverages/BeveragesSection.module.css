@@ -90,9 +90,8 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 
 .bannerImage {
   width: 100%;
-  max-width: 300px;
-  height: 200px;
-  object-fit: contain; /* ensures image fits inside bounds without cropping */
+  height: 300px;
+  object-fit: inherit; /* ensures image fits inside bounds without cropping */
 }
 
   .sectionTitle {
