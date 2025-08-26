@@ -33,6 +33,7 @@ import { refreshLoggedInUser } from "../../utils/refreshUser";
 import RazorpayPayment from "../RazorPay/RazorPay";
 
 import { useNavigate } from 'react-router-dom';
+import { nanoid } from "@reduxjs/toolkit";
 
 
 
@@ -87,6 +88,8 @@ const CheckOut = () => {
     const [promoCode, setPromoCode] = useState("");
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState('payNow'); // default selection
+
 
     const navigate = useNavigate();
 
@@ -478,9 +481,12 @@ const CheckOut = () => {
             state,
             locality,
             landmark,
+            subtotalPrice: Number(subtotal),
+            deliveryCharges: Number(deliveryCharges),
+            discountCharges: Number(discount),
             pin: Number(pin),
             totalPrice: Number(total),
-
+            paymentMode: "payment online",
             // Products
             products: cartItems.map((item) => ({
                 _key: uuidv4(), // ✅ Required for Sanity array items
@@ -513,6 +519,66 @@ const CheckOut = () => {
             alert("Payment succeeded, but saving order failed.");
         }
     };
+
+    const handleCOD = async () => {
+    const {
+        firstName,
+        lastName,
+        phoneNumber,
+        addressLine,
+        city,
+        state,
+        locality,
+        landmark,
+        pin,
+    } = formData;
+
+    const orderId = `order_${nanoid(14)}`; // e.g., order_R9rY8kCABvgZY3
+
+
+    const orderDoc = {
+        _type: 'order',
+        orderId: orderId,
+        paymentId: "COD",
+        status: "ordered",
+        name: `${firstName} ${lastName}`,
+        email: loggedInuser?.email,
+        contact: phoneNumber.startsWith('91') ? phoneNumber.slice(2) : phoneNumber,
+        addressLine,
+        city,
+        state,
+        locality,
+        landmark,
+        pin: Number(pin),
+        subtotalPrice: Number(subtotal),
+        deliveryCharges: Number(deliveryCharges),
+        discountCharges: Number(discount),
+        totalPrice: Number(total),
+        paymentMode: "cash on delivery",
+        products: cartItems.map((item) => ({
+            _key: uuidv4(),
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            packSize: item.packSize,
+            currency: item.currency,
+            productImage: item.productImage,
+        })),
+        submittedAt: new Date().toISOString(),
+    };
+
+    try {
+        const result = await sanityClient.create(orderDoc);
+        console.log('📦 COD Order saved to Sanity:', result);
+
+        setShowSuccessModal(true); // or redirect to confirmation page
+        dispatch(clearCart()); // clear the cart
+    } catch (error) {
+        console.error("❌ Failed to save COD order:", error);
+        alert("Failed to place COD order.");
+    }
+};
 
 
 
@@ -757,9 +823,9 @@ const CheckOut = () => {
                         </div>
                     )}
 
-                    {/* <h2 className={styles.paymentHeading}>Payment</h2>
+                    {/* <h2 className={styles.paymentHeading}>Payment</h2> */}
 
-                    <div className={styles.accordionContainer}>
+                    {/* <div className={styles.accordionContainer}>
                         {paymentOptions.map((option, index) => (
                             <div key={index} className={styles.accordionItem}>
                                 <div
@@ -892,16 +958,64 @@ const CheckOut = () => {
                         <strong>We guarantee no additional charges on delivery.</strong>
                     </div>
 
-                    <button className={styles.payButton}
-                        onClick={() => {
-                            if (validateForm()) {
-                                handlePayment(); // only runs if form is valid
-                            }
-                        }}
-                    >
-                        Pay
-                        {cartItems.length > 0 ? cartItems[0].currency : '₹'}{total.toFixed(2)}
-                    </button>
+                    <div className={styles.radioOption}>
+                        <h3 className={styles.sectionHeading}>Payment Options</h3>
+
+                        <div className={styles.radioContent}>
+                            <div className={styles.inlineContent}>
+                                <input
+                                    type="radio"
+                                    id="payNow"
+                                    name="paymentMethod"
+                                    value="payNow"
+                                    checked={paymentMethod === "payNow"}
+                                    onChange={() => setPaymentMethod("payNow")}
+                                />
+                                <label htmlFor="payNow">Pay Now</label>
+                            </div>
+                        </div>
+
+                        <div className={styles.radioContent}>
+                            <div className={styles.inlineContent}>
+                                <input
+                                    type="radio"
+                                    id="cod"
+                                    name="paymentMethod"
+                                    value="cod"
+                                    checked={paymentMethod === "cod"}
+                                    onChange={(e) => setPaymentMethod(e.target.value)}
+                                />
+                                <label htmlFor="cod">Cash on delivery(COD)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {paymentMethod === 'payNow' && (
+                        <button
+                            className={styles.payButton}
+                            onClick={() => {
+                                if (validateForm()) {
+                                    handlePayment(); // only runs if form is valid
+                                }
+                            }}
+                        >
+                            Pay {cartItems.length > 0 ? cartItems[0].currency : '₹'}
+                            {total.toFixed(2)}
+                        </button>
+                    )}
+                    {paymentMethod === 'cod' && (
+                        <button
+                            className={styles.payButton}
+                            onClick={() => {
+                                if (validateForm()) {
+                                    handleCOD(); // you need to define this
+                                }
+                            }}
+                        >
+                            Confirm Order ({cartItems.length > 0 ? cartItems[0].currency : '₹'}
+                            {total.toFixed(2)})
+                        </button>
+                    )}
 
                     {/* 🧾 Razorpay Payment Component */}
                     <RazorpayPayment
