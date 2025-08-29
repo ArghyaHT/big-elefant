@@ -3,6 +3,7 @@
   text-align: center;
   padding: 20px 20px;
 
+
 }
 
 .heading {
@@ -15,6 +16,7 @@
 
 .cardWrapper {
   box-sizing: border-box;
+  
 }
 
 .swiperSlide {
@@ -24,6 +26,7 @@
   padding: 10px 0;
   /* vertical padding to prevent clipping */
   box-sizing: border-box;
+  
 }
 
 .card {
@@ -38,6 +41,7 @@
   flex-direction: column;
   justify-content: space-between;
   /* margin: 10px 20px; */
+  background-color: #e3e4e4;
 
   box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
 }

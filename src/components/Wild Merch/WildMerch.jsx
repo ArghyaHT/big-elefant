@@ -7,9 +7,15 @@ import "swiper/css/pagination";
 
 import { Autoplay, Navigation } from "swiper/modules";
 import styles from "./WildMerch.module.css";
-import WildMerchImage from "../../assets/WildMerch.png"
-import merchBottle from "../../assets/merchBottle.png"
-import merchProduct from "../../assets/merchProduct.png"
+import WildMerchImage from "../../assets/12.png"
+import merchBottle from "../../assets/5.png"
+import merchProduct from "../../assets/14.png"
+import hoddy from "../../assets/16.png"
+import bag from "../../assets/8.png"
+import mug from "../../assets/6.png"
+
+
+
 
 // Dummy product data
 const sampleMerch = [
@@ -24,28 +30,28 @@ const sampleMerch = [
     id: 2,
     name: "Crush Mug",
     price: "$14.99",
-    image: merchBottle,
+    image: mug,
     features: "Recycled Ceramic, Dishwasher Safe, 11oz Capacity",
   },
   {
     id: 3,
-    name: "Plastic Slayer Hat",
+    name: "Wild Hoddy",
     price: "$24.99",
-    image: WildMerchImage,
+    image: hoddy,
     features: "Made from Recycled Polyester, Adjustable Fit, Sun Protection",
   },
   {
     id: 4,
-    name: "Wild Bottle",
+    name: "Wild Bag",
     price: "$19.99",
-    image: merchBottle,
+    image: bag,
     features: "BPA-Free Stainless Steel, 750ml Capacity, Keeps Drinks Cold 12h",
   },
   {
     id: 5,
-    name: "Wild Craft",
+    name: "Wild Bottle",
     price: "$19.99",
-    image: merchProduct,
+    image: merchBottle,
     features: "Handmade, Recycled Materials, Artisan Support",
   },
 ];

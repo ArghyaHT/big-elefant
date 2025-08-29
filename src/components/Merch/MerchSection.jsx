@@ -2,9 +2,12 @@ import React from "react";
 import styles from "./MerchSection.module.css";
 import beveragesBanner from "../../assets/merch.webp"
 import { useNavigate } from "react-router-dom";
-import WildMerchImage from "../../assets/WildMerch.png"
-import merchBottle from "../../assets/merchBottle.png"
-import merchProduct from "../../assets/merchProduct.png"
+import WildMerchImage from "../../assets/12.png"
+import merchBottle from "../../assets/5.png"
+import merchProduct from "../../assets/14.png"
+import hoddy from "../../assets/16.png"
+import bag from "../../assets/8.png"
+import mug from "../../assets/6.png"
 
 
 
@@ -27,7 +30,7 @@ const sampleMerch = [
     name: "Crush Mug",
     price: "14.99",
     currency: "$",
-    image: merchBottle,
+    image: mug,
     features: ["Recycled Ceramic", "Dishwasher Safe", "11oz Capacity"],
     description:
       "Start your day right with this eco mug. Made from recycled ceramic for a sturdy feel. Holds 11oz of your favorite drink. Dishwasher-safe and perfect for daily use.",
@@ -36,10 +39,10 @@ const sampleMerch = [
   },
   {
     id: 3,
-    name: "Plastic Slayer Hat",
+    name: "Wild Hoddy",
     price: "24.99",
     currency: "$",
-    image: WildMerchImage,
+    image: hoddy,
     features: ["Made from Recycled Polyester", "Adjustable Fit", "Sun Protection"],
     description:
       "Stylish sun protection with purpose. Crafted from recycled plastic bottles. Adjustable strap for a perfect fit. Show your stance against plastic pollution.",
@@ -48,10 +51,10 @@ const sampleMerch = [
   },
   {
     id: 4,
-    name: "Wild Bottle",
+    name: "Wild Bag",
     price: "19.99",
     currency: "$",
-    image: merchBottle,
+    image: bag,
     features: ["BPA-Free", "Stainless Steel", "750ml Capacity", "Keeps Drinks Cold 12h"],
     description:
       "Stay hydrated while saving the planet. BPA-free and made with durable stainless steel. Keeps drinks cold for up to 12 hours. Ideal for hiking, gym, or travel.",
@@ -60,10 +63,10 @@ const sampleMerch = [
   },
   {
     id: 5,
-    name: "Wild Craft",
+    name: "Wild Bottle",
     price: "19.99",
     currency: "$",
-    image: merchProduct,
+    image:merchBottle,
     features: ["Handmade", "Recycled Materials", "Artisan Support"],
     description:
       "Handcrafted with love from recycled goods. Every piece supports skilled artisans. A blend of tradition, style, and impact. Perfect for gifting or personal use.",
