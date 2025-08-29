@@ -50,9 +50,13 @@ const Footer = () => {
                     <h4 className={styles.socialHeading}>where can you find us</h4>
                     <div className={styles.socialIcons}>
                         <div className={styles.socialItem}>
-                            <div className={styles.socialLink}>
+                            <div
+                                className={styles.socialLink}
+                                onClick={() => window.open("https://www.instagram.com/bigelefantindia/", "_blank")}
+                                style={{ cursor: "pointer" }}
+                            >
                                 <FaInstagram className={styles.icon} />
-                                <span className={styles.followerCount}>Coming Soon</span>
+                                <span className={styles.followerCount}>@bigelefantIndia</span>
                             </div>
                             {/* <div className={styles.socialHandle}>@tba</div> */}
                         </div>

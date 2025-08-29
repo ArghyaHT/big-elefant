@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
       <h2 className={styles.sectionTitle}>1. Applicability</h2>
       <p className={styles.paragraph}>This Privacy Policy applies to all users in India who interact with our brand through:</p>
       <ul className={styles.list}>
-        <li className={styles.listItem}>Our website: <em>[Insert website URL]</em></li>
+        <li className={styles.listItem}>Our website: <em>www.bigelefant.in</em></li>
         <li className={styles.listItem}>Online orders</li>
         <li className={styles.listItem}>Customer support</li>
         <li className={styles.listItem}>Promotional activities</li>
@@ -89,22 +89,16 @@ const PrivacyPolicy = () => {
       </ul>
       <p className={styles.paragraph}>You can disable cookies in your browser settings.</p>
 
-      <h2 className={styles.sectionTitle}>9. Children’s Data</h2>
-      <p className={styles.paragraph}>
-        Our products are not intended for users under 18 years of age. We do not knowingly collect personal data from minors.
-        If you are a guardian and believe we have collected such data, please contact us for immediate removal.
-      </p>
-
-      <h2 className={styles.sectionTitle}>10. Changes to This Privacy Policy</h2>
+      <h2 className={styles.sectionTitle}>9. Changes to This Privacy Policy</h2>
       <p className={styles.paragraph}>
         We may update this policy to reflect legal or operational changes.
         The updated version will be posted on our website with the revised date.
       </p>
 
-      <h2 className={styles.sectionTitle}>11. Contact Us</h2>
+      <h2 className={styles.sectionTitle}>10. Contact Us</h2>
       <p className={styles.paragraph}>For any questions, concerns, or data requests, contact:</p>
       <ul className={styles.list}>
-        <li className={styles.listItem}>📧 Email: <em>www.bigelefant.in</em></li>
+        <li className={styles.listItem}>📧 Email: <em>bigelefantindia@gmail.com</em></li>
         {/* <li className={styles.listItem}>📞 Phone: <em>[Insert phone number]</em></li> */}
         {/* <li className={styles.listItem}>🏢 Address: <em>[Insert company address]</em></li> */}
         <li className={styles.listItem}>🌐 Website: <em>www.bigelefant.in</em></li>

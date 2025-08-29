@@ -4,7 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black; /* optional */
+  background-color: black;
+  /* optional */
 }
 
 .bannerImage {
@@ -16,7 +17,8 @@
 .cardSection {
   padding: 32px;
   background-color: #f9f9f9;
-  border-bottom: 1px solid var(--primary-black); /* light gray underline */
+  border-bottom: 1px solid var(--primary-black);
+  /* light gray underline */
 }
 
 .sectionTitle {
@@ -33,15 +35,16 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 80px;
-  padding:30px;
+  padding: 30px;
 }
 
 .card {
   height: auto;
   background-color: #e3e4e4;
   border-radius: 16px;
-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
+  position: relative;
 }
 
 .cardImage {
@@ -50,6 +53,25 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   object-fit: contain;
   margin-bottom: 0px;
   padding-top: 20px;
+  filter: blur(3px);
+}
+
+.overlayText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--primary-white);
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  z-index: 2;
+  text-transform: uppercase;
+  padding: 5px 8px;
+  /* Optional: space between text and border */
+  border-radius: 5px;
+  /* Optional: rounded corners */
+  background-color: var(--primary-black-50);
 }
 
 .cardTitle {
@@ -75,7 +97,7 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   border: none;
   cursor: pointer;
   font-weight: bold;
-  border-radius: 0 0 16px 16px; 
+  border-radius: 0 0 16px 16px;
   font-size: 25px;
   font-weight: bold;
   text-transform: uppercase;
@@ -94,7 +116,7 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   /* darker text for contrast */
   letter-spacing: 1px;
   margin-top: 1.5px;
-    border: none;
+  border: none;
 
 }
 
@@ -127,6 +149,7 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 
   .card {
     border-radius: 12px;
+    margin-top: 20px;
   }
 
   .cardImage {
@@ -151,10 +174,14 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 12px 12px;
   }
 
-   .comingSoon {
+  .comingSoon {
     font-size: 13px;
     border-radius: 0 0 10px 10px;
     margin-bottom: 0px;
+  }
+
+  .overlayText {
+    font-size: 18px;
   }
 }
 
@@ -215,5 +242,8 @@ box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     border-radius: 0 0 8px 8px;
     margin-bottom: 0;
   }
-}
 
+  .overlayText {
+    font-size: 15px;
+  }
+}

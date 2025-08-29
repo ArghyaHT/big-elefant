@@ -63,21 +63,24 @@ const WildMerchSection = () => {
 
       <div className={styles.cardWrapper}>
         <Swiper
-          modules={[Navigation,Autoplay ]}
+          modules={[Navigation, Autoplay]}
           spaceBetween={10}
           slidesPerView={2}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           loop={true}
           breakpoints={{
-            0: { slidesPerView: 2 },      
-            480: { slidesPerView: 2 },    
-            768: { slidesPerView: 3 }, 
+            0: { slidesPerView: 2 },
+            480: { slidesPerView: 2 },
+            768: { slidesPerView: 3 },
           }}
         >
           {sampleMerch.map((product) => (
             <SwiperSlide key={product.id} className={styles.swiperSlide}>
               <div className={styles.card}>
                 <img src={product.image} alt={product.name} className={styles.image} />
+                <div className={styles.overlayText}>
+                  Coming Soon
+                </div>
                 <h3 className={styles.name}>{product.name}</h3>
                 <p className={styles.price}>{product.price}</p>
                 <p className={styles.comingSoon}>TBD COMING SOON</p>

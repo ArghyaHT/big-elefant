@@ -16,7 +16,7 @@
 
 .cardWrapper {
   box-sizing: border-box;
-  
+
 }
 
 .swiperSlide {
@@ -26,7 +26,7 @@
   padding: 10px 0;
   /* vertical padding to prevent clipping */
   box-sizing: border-box;
-  
+
 }
 
 .card {
@@ -51,6 +51,24 @@
   height: 280px;
   object-fit: contain;
   margin-top: 10px;
+  filter: blur(3px);
+
+}
+
+.overlayText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--primary-white);
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  z-index: 2;
+  text-transform: uppercase;
+  padding: 5px 8px; /* Optional: space between text and border */
+  border-radius: 5px; /* Optional: rounded corners */
+  background-color: var(--primary-black-50);
 }
 
 .name {
@@ -125,6 +143,9 @@
     border-radius: 0 0 10px 10px;
     margin-bottom: 0px;
   }
+  .overlayText{
+    font-size: 10px;
+  }
 }
 
 
@@ -174,4 +195,9 @@
     border-radius: 0 0 8px 8px;
     margin-bottom: 0;
   }
+
+    .overlayText{
+    font-size: 8px;
+  }
+
 }

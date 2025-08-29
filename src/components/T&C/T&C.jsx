@@ -45,13 +45,13 @@ const TermsAndConditions = () => {
         <li className={styles.listItem}>Prices may change based on the market, supply chains, or just because elephants adjusted them.</li>
       </ul>
 
-      <h2 className={styles.sectionTitle}>5. Cancellations, Returns & Refunds</h2>
+      <h2 className={styles.sectionTitle}>5. Cancellations & Refunds</h2>
       <ul className={styles.list}>
         <li className={styles.listItem}>Cancellations: Allowed only before shipment.</li>
-        <li className={styles.listItem}>Returns: Accepted for damaged/defective/wrong items within 48 hours of delivery.</li>
+        {/* <li className={styles.listItem}>Returns: Accepted for damaged/defective/wrong items within 48 hours of delivery.</li> */}
         <li className={styles.listItem}>Refunds: Processed within 7–10 working days after verification.</li>
       </ul>
-      <p className={styles.paragraph}>No returns on used, opened, or mood-based change-of-mind situations. We're hydration activists, not heartbreak healers.</p>
+      {/* <p className={styles.paragraph}>No returns on used, opened, or mood-based change-of-mind situations. We're hydration activists, not heartbreak healers.</p> */}
 
       <h2 className={styles.sectionTitle}>6. Safety Disclaimer</h2>
       <ul className={styles.list}>
@@ -84,7 +84,7 @@ const TermsAndConditions = () => {
 
       <h2 className={styles.sectionTitle}>11. Contact Us</h2>
       <ul className={styles.list}>
-        <li className={styles.listItem}>📧 Email: <em>www.bigelefant.in</em></li>
+        <li className={styles.listItem}>📧 Email: <em>bigelefantindia@gmail.com</em></li>
         {/* <li className={styles.listItem}>📞 Phone: <em>[Insert customer support number]</em></li> */}
         <li className={styles.listItem}>🌐 Website: <em>www.bigelefant.in</em></li>
       </ul>

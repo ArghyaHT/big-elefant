@@ -23,7 +23,7 @@ const sampleMerch = [
     description:
       "A soft and breathable tee made from organic cotton. Features a bold elephant print to show your wild side. Eco-friendly inks that don't harm the planet. Comfortable unisex fit for everyday wear.",
     merchImages: [WildMerchImage, merchProduct],
-    reviews: [5, 4, 5, 2, 1, 3, 4,4, 3, 1, 2, 2, 2, 1,2,2,2,2,2,2,2,2,2,2,2],
+    reviews: [5, 4, 5, 2, 1, 3, 4, 4, 3, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
   },
   {
     id: 2,
@@ -66,7 +66,7 @@ const sampleMerch = [
     name: "Wild Bottle",
     price: "19.99",
     currency: "$",
-    image:merchBottle,
+    image: merchBottle,
     features: ["Handmade", "Recycled Materials", "Artisan Support"],
     description:
       "Handcrafted with love from recycled goods. Every piece supports skilled artisans. A blend of tradition, style, and impact. Perfect for gifting or personal use.",
@@ -116,7 +116,7 @@ const MerchSection = () => {
         <h2 className={styles.sectionTitle}>Merch</h2>
 
         <div className={styles.cardContainer}>
-          
+
           {sampleMerch.map((merch) => (
             <div key={merch.id} className={styles.card}>
               <img
@@ -124,17 +124,20 @@ const MerchSection = () => {
                 alt={merch.name}
                 className={styles.cardImage}
               />
+              <div className={styles.overlayText}>
+                Coming Soon
+              </div>
               <h3 className={styles.cardTitle}>{merch.name}</h3>
               <p className={styles.cardText}>
                 {Array.isArray(merch.features) ? merch.features.join(', ') : merch.features}
-              </p>                         
-               {/* <button
+              </p>
+              {/* <button
                 className={styles.cardButton}
                 onClick={() => handleShopNow(merch)}
               >Shop Now</button> */}
-               <button
+              <button
                 className={styles.comingSoon}
-                // onClick={() => handleShopNow(merch)}
+              // onClick={() => handleShopNow(merch)}
               >TBD COMING SOON</button>
             </div>
           ))}
