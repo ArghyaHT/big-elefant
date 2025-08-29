@@ -66,8 +66,10 @@
   text-align: center;
   z-index: 2;
   text-transform: uppercase;
-  padding: 5px 8px; /* Optional: space between text and border */
-  border-radius: 5px; /* Optional: rounded corners */
+  padding: 5px 8px;
+  /* Optional: space between text and border */
+  border-radius: 5px;
+  /* Optional: rounded corners */
   background-color: var(--primary-black-50);
 }
 
@@ -143,7 +145,9 @@
     border-radius: 0 0 10px 10px;
     margin-bottom: 0px;
   }
-  .overlayText{
+
+  .overlayText {
+        padding: 5px 6px;
     font-size: 10px;
   }
 }
@@ -196,8 +200,10 @@
     margin-bottom: 0;
   }
 
-    .overlayText{
-    font-size: 8px;
+  .overlayText {
+    padding: 5px 4px;
+    /* Optional: space between text and border */
+    font-size: 10px;
   }
 
 }
