@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.clubLink{
+  text-decoration: none;
+}
+
 .centerLogo {
   display: flex;
   justify-content: center;
