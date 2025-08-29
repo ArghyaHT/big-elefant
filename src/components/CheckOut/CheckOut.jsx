@@ -1042,7 +1042,7 @@ const CheckOut = () => {
                     {showSuccessModal && (
                         <div className={styles.modalOverlay}>
                             <div className={styles.modalContent}>
-                                <h2>🎉 Payment Successful</h2>
+                                <h2>🎉 Order Confirmed</h2>
                                 <p>Your order has been saved successfully!</p>
                                 <button
                                     onClick={() => {
