@@ -251,7 +251,7 @@ const SingleProduct = () => {
 
 
             <div className={styles.attitudeSection}>
-                <div className={styles.twoColumnSection}>
+                {/* <div className={styles.twoColumnSection}> */}
                     <div className={styles.leftContent}>
                         <h3 className={styles.attitudeTagline}>
                             Chill out — it’s just water with attitude
@@ -259,7 +259,7 @@ const SingleProduct = () => {
                         <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
                     </div>
 
-                    <div className={styles.rightVideo}>
+                    {/* <div className={styles.rightVideo}>
                         <iframe
                             className={styles.videoPlayer}
                             src="https://www.youtube.com/embed/UEZm0U6KrfY"
@@ -268,8 +268,8 @@ const SingleProduct = () => {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                         ></iframe>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
             </div>
 
             <Plastic />

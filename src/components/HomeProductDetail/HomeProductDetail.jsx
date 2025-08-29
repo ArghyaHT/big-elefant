@@ -97,7 +97,7 @@ const HomeProductDetail = () => {
             pagination={{ clickable: true }}
             // autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
-            spaceBetween={50}
+            spaceBetween={0}
             slidesPerView={1}
             onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
@@ -110,7 +110,6 @@ const HomeProductDetail = () => {
 
                         }}
                     >
-                        <div className={styles.overlay}>
                             <div className={styles.container}>
                                 <div className={styles.imageWrapper}>
                                     <img
@@ -138,7 +137,6 @@ const HomeProductDetail = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </section>
                 </SwiperSlide>
             ))}

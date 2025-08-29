@@ -113,7 +113,7 @@ const BeveragesSection = () => {
             </div>
 
             <div className={styles.cardSection}>
-                <h2 className={styles.sectionTitle}>Bigele Beverages</h2>
+                <h2 className={styles.sectionTitle}>Beverages</h2>
 
                 <div className={styles.cardContainer}>
                     {products.map((product) => (

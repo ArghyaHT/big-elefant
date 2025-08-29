@@ -13,6 +13,7 @@ const Footer = () => {
                 {/* Column 1: Logo & Description */}
                 <div className={styles.logoSection}>
                     <img src={logo} alt="Logo" className={styles.logo} />
+                    <p className={styles.description}><strong>BIG ELEFANT FOODS AND BEVERAGES </strong></p>
                     <p className={styles.description}>
                         If you experience any issues while using our website, please feel free to reach out to us at <strong>bigelefantindia@gmail.com</strong>.
                         We are committed to ensuring a smooth and enjoyable experience for all our visitors and will be happy to assist you with any questions or concerns.
@@ -51,16 +52,16 @@ const Footer = () => {
                         <div className={styles.socialItem}>
                             <div className={styles.socialLink}>
                                 <FaInstagram className={styles.icon} />
-                                <span className={styles.followerCount}>6.1M</span>
+                                <span className={styles.followerCount}>Coming Soon</span>
                             </div>
-                            <div className={styles.socialHandle}>@tba</div>
+                            {/* <div className={styles.socialHandle}>@tba</div> */}
                         </div>
                         <div className={styles.socialItem}>
                             <div className={styles.socialLink}>
                                 <FaXTwitter className={styles.icon} />
-                                <span className={styles.followerCount}>120K</span>
+                                <span className={styles.followerCount}>Coming Soon</span>
                             </div>
-                            <div className={styles.socialHandle}>@tba</div>
+                            {/* <div className={styles.socialHandle}>@tba</div> */}
                         </div>
                     </div>
 

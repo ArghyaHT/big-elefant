@@ -16,7 +16,6 @@ const TermsAndConditions = () => {
 
       <h2 className={styles.sectionTitle}>1. Who Can Buy</h2>
       <ul className={styles.list}>
-        <li className={styles.listItem}>Be at least 18 years old, or have permission from a legal guardian.</li>
         <li className={styles.listItem}>Be in India (yes, we only deliver within India for now).</li>
         <li className={styles.listItem}>Not be part of any anti-elephant conspiracy (we're joking... sort of).</li>
       </ul>
@@ -85,9 +84,9 @@ const TermsAndConditions = () => {
 
       <h2 className={styles.sectionTitle}>11. Contact Us</h2>
       <ul className={styles.list}>
-        <li className={styles.listItem}>📧 Email: <em>[Insert support email]</em></li>
-        <li className={styles.listItem}>📞 Phone: <em>[Insert customer support number]</em></li>
-        <li className={styles.listItem}>🌐 Website: <em>[Insert website URL]</em></li>
+        <li className={styles.listItem}>📧 Email: <em>www.bigelefant.in</em></li>
+        {/* <li className={styles.listItem}>📞 Phone: <em>[Insert customer support number]</em></li> */}
+        <li className={styles.listItem}>🌐 Website: <em>www.bigelefant.in</em></li>
       </ul>
 
       <p className={styles.paragraph}><strong>Big Elefant</strong><br />

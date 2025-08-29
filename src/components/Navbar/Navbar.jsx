@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "../Navbar/Navbar.module.css"
 import logoImage from "../../assets/Big_Elefant.png"
 import { FiHeart, FiMenu, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleCart } from "../../redux/cartSlice";
@@ -13,12 +13,22 @@ const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false); // <-- cart state
   const [loggedInUser, setLoggedInUser] = useState(null);
 
+    const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   // Use useSelector here inside the component function
   const totalQuantity = useSelector((state) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
+
+ const handleLogout = () => {
+  localStorage.removeItem("user");
+  setLoggedInUser(null); // update state
+  setMenuOpen(false);    // close mobile menu if open
+  // optional: redirect to home page
+  navigate("/");
+};
 
 
   useEffect(() => {
@@ -179,7 +189,7 @@ const Navbar = () => {
               </li>
             </ul>
 
-            <ul className={styles.mobileNavSection}>
+            {/* <ul className={styles.mobileNavSection}>
               <li className={styles.sectionHeading}>Information</li>
               <li>
                 <Link to="/about-us" className={styles.navItem} onClick={() => setMenuOpen(false)}>
@@ -192,12 +202,6 @@ const Navbar = () => {
                   ELEFANT’S CLUB- Coming soon
                 </Link>
               </li>
-
-              {/* <li>
-                <Link to="/" className={styles.navItem} onClick={() => setMenuOpen(false)}>
-                  Water Quality Report
-                </Link>
-              </li> */}
 
               <li>
                 <Link to="/faq" className={styles.navItem} onClick={() => setMenuOpen(false)}>
@@ -220,18 +224,21 @@ const Navbar = () => {
                   Terms & Conditions
                 </Link>
               </li>
-              {/*               
-              <li className={styles.navItem} onClick={() => setMenuOpen(false)}>
-                Country Club
-              </li> */}
-            </ul>
+            </ul> */}
 
             <Link
-              to={loggedInUser ? "/user-dashboard" : "/sign-in"}
-              state={loggedInUser ? { user: loggedInUser } : null}
+              to={loggedInUser ? "#" : "/sign-in"} // "#" for logout since we handle it
+              className={styles.userButtonLink}
+              onClick={() => {
+                if (loggedInUser) {
+                  handleLogout(); // logout
+                } else {
+                  setMenuOpen(false); // close menu if login
+                }
+              }}
             >
               <button className={styles.userButton}>
-                {loggedInUser ? loggedInUser.firstName : "Login"}
+                {loggedInUser ? "Logout" : "Login"}
               </button>
             </Link>
           </div>

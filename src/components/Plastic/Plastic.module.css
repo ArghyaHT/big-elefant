@@ -115,7 +115,7 @@
 
 @media (max-width: 480px) {
   .wrapper {
-    height: 35vh;
+    height: 50vh;
     padding: 24px 16px;
     background-position: center;
     background-size: cover;

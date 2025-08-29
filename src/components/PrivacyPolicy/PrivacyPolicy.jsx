@@ -104,10 +104,10 @@ const PrivacyPolicy = () => {
       <h2 className={styles.sectionTitle}>11. Contact Us</h2>
       <p className={styles.paragraph}>For any questions, concerns, or data requests, contact:</p>
       <ul className={styles.list}>
-        <li className={styles.listItem}>📧 Email: <em>[Insert support email]</em></li>
-        <li className={styles.listItem}>📞 Phone: <em>[Insert phone number]</em></li>
-        <li className={styles.listItem}>🏢 Address: <em>[Insert company address]</em></li>
-        <li className={styles.listItem}>🌐 Website: <em>[Insert URL]</em></li>
+        <li className={styles.listItem}>📧 Email: <em>www.bigelefant.in</em></li>
+        {/* <li className={styles.listItem}>📞 Phone: <em>[Insert phone number]</em></li> */}
+        {/* <li className={styles.listItem}>🏢 Address: <em>[Insert company address]</em></li> */}
+        <li className={styles.listItem}>🌐 Website: <em>www.bigelefant.in</em></li>
       </ul>
 
       <p className={styles.paragraph}><strong>Big Elefant</strong><br />
