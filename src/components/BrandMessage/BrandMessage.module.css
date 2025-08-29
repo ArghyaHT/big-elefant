@@ -24,14 +24,20 @@
 @media (max-width: 480px) {
   .wrapper {
     height: auto;
-    padding: 8px 12px;
+    padding: 10px 12px;
   }
 
   .brandMessage {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 22px;
     text-align: center;
     white-space: normal;
     letter-spacing: 0.5px;
+  }
+}
+
+@media (max-width: 375px) {
+  .brandMessage {
+    font-size: 16px;
   }
 }

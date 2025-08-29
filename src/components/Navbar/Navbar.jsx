@@ -189,7 +189,7 @@ const Navbar = () => {
               </li>
             </ul>
 
-            {/* <ul className={styles.mobileNavSection}>
+            <ul className={styles.mobileNavSection}>
               <li className={styles.sectionHeading}>Information</li>
               <li>
                 <Link to="/about-us" className={styles.navItem} onClick={() => setMenuOpen(false)}>
@@ -224,7 +224,7 @@ const Navbar = () => {
                   Terms & Conditions
                 </Link>
               </li>
-            </ul> */}
+            </ul>
 
             <Link
               to={loggedInUser ? "#" : "/sign-in"} // "#" for logout since we handle it
