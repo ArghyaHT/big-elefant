@@ -17,6 +17,8 @@ const Hero = () => {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [isMobile, setIsMobile] = useState(false);
+      const [loading, setLoading] = useState(true); // 👈 loader state
+
 
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
