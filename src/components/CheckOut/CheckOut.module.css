@@ -1,158 +1,160 @@
 .checkoutContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 40px;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: #fff;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
 }
 
 .leftSection {
-    flex: 2;
+  flex: 2;
 }
 
 .rightSection {
-    flex: 1.5;
-    background: var(--checkout-session-background);
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    height: 100%;
-    padding: 10px 20px 20px 20px;
+  flex: 1.5;
+  background: var(--checkout-session-background);
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  padding: 10px 20px 20px 20px;
 }
 
-.rightSection h2{
-    margin: 0;
+.rightSection h2 {
+  margin: 0;
 }
 
 .checkoutForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .checkoutForm label {
-    font-weight: 500;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .inlineFields {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 14px;
 }
 
 .inlineFields label {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkoutForm input,
 .checkoutForm textarea,
-.checkoutForm select
- {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 0px;
+.checkoutForm select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 0px;
 }
 
 input,
 textarea,
-select{
-    color: #999;
-    /* Change placeholder text color */
-    font-size: 10px;
-    /* Optional: adjust size */
-    text-transform: capitalize;
+select {
+  color: #999;
+  /* Change placeholder text color */
+  font-size: 15px;
+  /* Optional: adjust size */
+  text-transform: capitalize;
 }
 
 /* Style placeholder text */
 input::placeholder,
 textarea::placeholder,
 select::placeholder {
-    color: #999;         /* Matches input text color */
-    font-size: 10px;     /* Optional: match input font size */
-    text-transform: capitalize;
+  color: #999;
+  /* Matches input text color */
+  font-size: 15px;
+  /* Optional: match input font size */
+  text-transform: capitalize;
 }
 
 input[type="email"] {
-    text-transform: none;
+  text-transform: none;
 }
 
 .buttonGroup {
-    display: flex;
-    gap: 16px;
-    margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .addButton {
-    width: 180px;
-    height: 50px;
-    background-color: var(--primary-black);
-    /* Blue */
-    color: var(--primary-white);
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 180px;
+  height: 50px;
+  background-color: var(--primary-black);
+  /* Blue */
+  color: var(--primary-white);
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .cancelButton {
-    width: 180px;
-    height: 50px;
-    background-color: transparent;
-    color: var(--primary-black);
-    /* Red */
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  width: 180px;
+  height: 50px;
+  background-color: transparent;
+  color: var(--primary-black);
+  /* Red */
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .paymentHeading {
-    margin-top: 2rem;
-    font-size: 24px;
-    font-weight: bold;
+  margin-top: 2rem;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .paymentSection {
-    border: 1px solid #ccc;
-    padding: 1rem;
-    border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .accordionLabel {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    margin-top: 1rem;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  cursor: pointer;
 }
 
 .paymentDetails {
-    margin-left: 1.5rem;
-    margin-top: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .inputField {
-    padding: 0.5rem;
-    font-size: 0.95rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 
 .paymentHeading {
-    font-size: 24px;
-    margin-top: 40px;
-    margin-bottom: 0px;
-    font-weight: 600;
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 0px;
+  font-weight: 600;
 }
 
 /* .accordionContainer {
@@ -160,78 +162,78 @@ input[type="email"] {
 } */
 
 .accordionItem {
-    border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 /* Remove top border for the first item */
 .accordionItem:first-child {
-    border-top: none;
+  border-top: none;
 }
 
 .accordionTitle {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0px;
-    cursor: pointer;
-    font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0px;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .accordionContent {
-    background-color: none;
+  background-color: none;
 }
 
 
 .cardPaymentContent input[type="text"] {
-    display: block;
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: border-color 0.2s ease;
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
 }
 
 .cardPaymentContent input[type="text"]:focus {
-    border-color: var(--primary-black);
-    outline: none;
+  border-color: var(--primary-black);
+  outline: none;
 }
 
 /* Row with two inputs side by side */
 .row {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .row input[type="text"] {
-    flex: 1;
+  flex: 1;
 }
 
 /* Pay button and total amount container */
 .paySection {
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .payButton {
-    width: 100%;
-    /* 👈 Makes the button full width */
-    background-color: var(--primary-black);
-    color: var(--primary-white);
-    border: none;
-    padding: 12px 0;
-    /* Adjusted vertical padding */
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    font-size: 18px;
+  width: 100%;
+  /* 👈 Makes the button full width */
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  border: none;
+  padding: 12px 0;
+  /* Adjusted vertical padding */
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
 }
 
 
 .totalAmount {
-    font-weight: 700;
-    font-size: 16px;
-    color: #333;
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
 }
 
 .upiSection {
@@ -245,17 +247,17 @@ input[type="email"] {
   padding: 0px 16px;
 }
 
-.radioContent{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
+.radioContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .inlineContent {
-   display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 10px;
 }
@@ -270,15 +272,18 @@ input[type="email"] {
 
 .radioOption input[type="radio"] {
   margin: 0;
-  width: 20px;   /* or smaller, e.g., 14px */
+  width: 20px;
+  /* or smaller, e.g., 14px */
   height: 20px;
   padding: 0;
-  vertical-align: middle; /* align better with text */
+  vertical-align: middle;
+  /* align better with text */
   cursor: pointer;
 }
 
 .radioOption label {
-  margin-left: 6px; /* smaller gap */
+  margin-left: 6px;
+  /* smaller gap */
   cursor: pointer;
   user-select: none;
   font-size: 16px;
@@ -292,16 +297,17 @@ input[type="email"] {
 }
 
 .icon {
-    transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .rotate {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 
 .scrollableContainer {
-  max-height: 100%; /* Adjust based on your layout */
+  max-height: 100%;
+  /* Adjust based on your layout */
   /* overflow-y: auto; */
 }
 
@@ -309,6 +315,7 @@ input[type="email"] {
 .scrollableContainer::-webkit-scrollbar {
   width: 6px;
 }
+
 .scrollableContainer::-webkit-scrollbar-thumb {
   background-color: #ccc;
   border-radius: 3px;
@@ -335,7 +342,7 @@ input[type="email"] {
   width: 80px;
   height: 80px;
   flex-shrink: 0;
-    position: relative;
+  position: relative;
 
 }
 
@@ -430,8 +437,8 @@ input[type="email"] {
   border-radius: 6px;
 }
 
-.discountInput::placeholder{
-    text-transform: capitalize;
+.discountInput::placeholder {
+  text-transform: capitalize;
 }
 
 .applyButton {
@@ -574,9 +581,12 @@ input[type="email"] {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1); /* Slight white tint with transparency */
-  backdrop-filter: blur(8px); /* Apply blur effect */
-  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  background: rgba(255, 255, 255, 0.1);
+  /* Slight white tint with transparency */
+  backdrop-filter: blur(8px);
+  /* Apply blur effect */
+  -webkit-backdrop-filter: blur(8px);
+  /* Safari support */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -596,7 +606,8 @@ input[type="email"] {
 .paymentOptions {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* space between each option */
+  gap: 16px;
+  /* space between each option */
   margin-top: 16px;
 }
 
@@ -606,6 +617,7 @@ input[type="email"] {
   font-size: 16px;
   cursor: pointer;
 }
+
 .paymentOption input[type="radio"] {
   margin-right: 8px;
   cursor: pointer;
@@ -651,7 +663,7 @@ input[type="email"] {
     text-align: center;
   }
 
-  .cartList{
+  .cartList {
     padding: 0px 10px;
   }
 
@@ -666,12 +678,12 @@ input[type="email"] {
   }
 
   .itemName {
-  font-size: 14px;
-}
+    font-size: 14px;
+  }
 
-.itemPrice {
-  font-size: 12px;
-}
+  .itemPrice {
+    font-size: 12px;
+  }
 
   .itemImage {
     width: 100%;
@@ -704,7 +716,7 @@ input[type="email"] {
     font-size: 16px;
   }
 
-    .modalContent {
+  .modalContent {
     width: 95%;
     padding: 20px;
     font-size: 14px;
@@ -738,10 +750,9 @@ input[type="email"] {
     font-size: 14px;
   }
 
-   .modalContent {
+  .modalContent {
     width: 98%;
     padding: 15px;
     font-size: 13px;
   }
 }
-

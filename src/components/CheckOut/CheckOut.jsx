@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import styles from "./CheckOut.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaChevronDown } from "react-icons/fa";
 
@@ -13,6 +12,9 @@ import drinnkingWater from "../../assets/drinking-water.png"
 
 import banner1 from "../../assets/banner1.png"
 import banner2 from "../../assets/banner2.png"
+
+import styles from "./CheckOut.module.css";
+
 
 import {
     addToCart,
@@ -521,64 +523,64 @@ const CheckOut = () => {
     };
 
     const handleCOD = async () => {
-    const {
-        firstName,
-        lastName,
-        phoneNumber,
-        addressLine,
-        city,
-        state,
-        locality,
-        landmark,
-        pin,
-    } = formData;
+        const {
+            firstName,
+            lastName,
+            phoneNumber,
+            addressLine,
+            city,
+            state,
+            locality,
+            landmark,
+            pin,
+        } = formData;
 
-    const orderId = `order_${nanoid(14)}`; // e.g., order_R9rY8kCABvgZY3
+        const orderId = `order_${nanoid(14)}`; // e.g., order_R9rY8kCABvgZY3
 
 
-    const orderDoc = {
-        _type: 'order',
-        orderId: orderId,
-        paymentId: "COD",
-        status: "ordered",
-        name: `${firstName} ${lastName}`,
-        email: loggedInuser?.email,
-        contact: phoneNumber.startsWith('91') ? phoneNumber.slice(2) : phoneNumber,
-        addressLine,
-        city,
-        state,
-        locality,
-        landmark,
-        pin: Number(pin),
-        subtotalPrice: Number(subtotal),
-        deliveryCharges: Number(deliveryCharges),
-        discountCharges: Number(discount),
-        totalPrice: Number(total),
-        paymentMode: "cash on delivery",
-        products: cartItems.map((item) => ({
-            _key: uuidv4(),
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            quantity: item.quantity,
-            packSize: item.packSize,
-            currency: item.currency,
-            productImage: item.productImage,
-        })),
-        submittedAt: new Date().toISOString(),
+        const orderDoc = {
+            _type: 'order',
+            orderId: orderId,
+            paymentId: "COD",
+            status: "ordered",
+            name: `${firstName} ${lastName}`,
+            email: loggedInuser?.email,
+            contact: phoneNumber.startsWith('91') ? phoneNumber.slice(2) : phoneNumber,
+            addressLine,
+            city,
+            state,
+            locality,
+            landmark,
+            pin: Number(pin),
+            subtotalPrice: Number(subtotal),
+            deliveryCharges: Number(deliveryCharges),
+            discountCharges: Number(discount),
+            totalPrice: Number(total),
+            paymentMode: "cash on delivery",
+            products: cartItems.map((item) => ({
+                _key: uuidv4(),
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                quantity: item.quantity,
+                packSize: item.packSize,
+                currency: item.currency,
+                productImage: item.productImage,
+            })),
+            submittedAt: new Date().toISOString(),
+        };
+
+        try {
+            const result = await sanityClient.create(orderDoc);
+            console.log('📦 COD Order saved to Sanity:', result);
+
+            setShowSuccessModal(true); // or redirect to confirmation page
+            dispatch(clearCart()); // clear the cart
+        } catch (error) {
+            console.error("❌ Failed to save COD order:", error);
+            alert("Failed to place COD order.");
+        }
     };
-
-    try {
-        const result = await sanityClient.create(orderDoc);
-        console.log('📦 COD Order saved to Sanity:', result);
-
-        setShowSuccessModal(true); // or redirect to confirmation page
-        dispatch(clearCart()); // clear the cart
-    } catch (error) {
-        console.error("❌ Failed to save COD order:", error);
-        alert("Failed to place COD order.");
-    }
-};
 
 
 
@@ -644,53 +646,54 @@ const CheckOut = () => {
                 <h2>Shipping Details</h2>
                 <form className={styles.checkoutForm}>
 
-                    <div className={styles.inlineFields}>
-                        <label>
-                            Select Address
-                            <select
-                                name="selectedAddress"
-                                value={selectedAddressIndex}
-                                onChange={(e) => {
-                                    const selectedValue = e.target.value;
+{loggedInuser && loggedInuser.addresses?.length > 0 && (
+  <div className={styles.inlineFields}>
+    <label>
+      Select Address
+      <select
+        name="selectedAddress"
+        value={selectedAddressIndex}
+        onChange={(e) => {
+          const selectedValue = e.target.value;
 
-                                    if (selectedValue === 'new') {
-                                        // Clear form for new address entry
-                                        setSelectedAddressIndex('new');
-                                        setFormData((prev) => ({
-                                            ...prev,
-                                            firstName: '',
-                                            lastName: '',
-                                            phoneNumber: '',
-                                            addressLine: '',
-                                            city: '',
-                                            state: '',
-                                            locality: '',
-                                            landmark: '',
-                                            pin: '',
-                                        }));
-                                    } else {
-                                        const selectedIndex = Number(selectedValue);
-                                        setSelectedAddressIndex(selectedIndex);
-                                        const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
-                                        if (selectedAddress) {
-                                            setFormData((prev) => ({
-                                                ...prev,
-                                                ...selectedAddress,
-                                            }));
-                                        }
-                                    }
-                                }}
-                            >
-                                {loggedInuser?.addresses?.map((address, index) => (
-                                    <option key={index} value={index}>
-                                        {address.addressLine}, {address.city}, {address.state}
-                                    </option>
-                                ))}
-
-                                <option value="new">+ Add New Address</option>
-                            </select>
-                        </label>
-                    </div>
+          if (selectedValue === 'new') {
+            // Clear form for new address entry
+            setSelectedAddressIndex('new');
+            setFormData((prev) => ({
+              ...prev,
+              firstName: '',
+              lastName: '',
+              phoneNumber: '',
+              addressLine: '',
+              city: '',
+              state: '',
+              locality: '',
+              landmark: '',
+              pin: '',
+            }));
+          } else {
+            const selectedIndex = Number(selectedValue);
+            setSelectedAddressIndex(selectedIndex);
+            const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
+            if (selectedAddress) {
+              setFormData((prev) => ({
+                ...prev,
+                ...selectedAddress,
+              }));
+            }
+          }
+        }}
+      >
+        {loggedInuser?.addresses?.map((address, index) => (
+          <option key={index} value={index}>
+            {address.addressLine}, {address.city}, {address.state}
+          </option>
+        ))}
+        <option value="new">+ Add New Address</option>
+      </select>
+    </label>
+  </div>
+)}
 
 
                     <div className={styles.inlineFields}>
@@ -716,6 +719,7 @@ const CheckOut = () => {
                             {/* <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phoneNumber} onChange={handleChange} /> */}
                             <PhoneInput
                                 country={country}
+
                                 value={formData.phoneNumber}
                                 onChange={(value) =>
                                     setFormData((prev) => ({
@@ -723,8 +727,14 @@ const CheckOut = () => {
                                         phoneNumber: value,
                                     }))
                                 }
-                                inputStyle={{ width: '100%', height: '100%' }}
-                                enableSearch
+                                inputStyle={{
+                                    borderRadius: "0px",
+                                    width: "100%",
+                                    height: "100%",
+                                    fontSize: "15px",
+                                    textTransform: "capitalize",
+                                    paddingLeft: "45px"
+                                }} enableSearch
                                 placeholder={country === 'in' ? '+91 1234567890' : undefined}
                                 required
 
@@ -733,10 +743,12 @@ const CheckOut = () => {
                     </div>
 
                     {/* Address */}
-                    <label className={styles.inlineFields}>
+                    <div className={styles.inlineFields}>
+                    <label>
                         Address
                         <textarea name="addressLine" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} required />
                     </label>
+                    </div>
 
                     {/* City & State */}
                     <div className={styles.inlineFields}>
@@ -806,10 +818,12 @@ const CheckOut = () => {
                             />
                         </label>
                     </div>
+                    <div className={styles.inlineFields}>
                     <label>
                         Landmark
                         <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} required />
                     </label>
+                    </div>
 
                     {/* Conditionally show buttons only when 'new' is selected */}
                     {selectedAddressIndex === 'new' && (
