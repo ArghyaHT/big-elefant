@@ -100,7 +100,7 @@ const Hero = () => {
                     modules={[Navigation, Pagination, Autoplay]}
                     navigation={!isMobile} // disable on mobile
                     // pagination={{ clickable: true }}
-                    // autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
                     loop={true}
                     onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // realIndex ignores duplicated slides
                     spaceBetween={50}
