@@ -74,7 +74,7 @@ const TermsAndConditions = () => {
 
       <h2 className={styles.sectionTitle}>9. Governing Law & Jurisdiction</h2>
       <p className={styles.paragraph}>
-        These Terms are governed by Indian law. Disputes will be resolved in the courts of <em>[Insert City]</em>.
+        These Terms are governed by Indian law.
       </p>
 
       <h2 className={styles.sectionTitle}>10. Updates to Terms</h2>
