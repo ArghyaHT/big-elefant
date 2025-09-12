@@ -18,7 +18,6 @@ import styles from "./CheckOut.module.css";
 
 import {
     addToCart,
-    toggleCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
@@ -83,7 +82,6 @@ const products = [
 const CheckOut = () => {
     const dispatch = useDispatch();
     const [loggedInuser, setloggedInuser] = useState(null);
-    const cartItems = useSelector((state) => state.cart.items);
     const [openIndex, setOpenIndex] = useState(null);
     const [selectedApp, setSelectedApp] = useState("");
     const [discountCode, setDiscountCode] = useState("");
@@ -91,6 +89,12 @@ const CheckOut = () => {
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('payNow'); // default selection
+
+    const beverageCartItems = useSelector((state) => state.cart.items);
+const merchCartItems = useSelector((state) => state.merchCart.items);
+
+const cartItems = [...beverageCartItems, ...merchCartItems];
+
 
 
     const navigate = useNavigate();

@@ -12,6 +12,10 @@ import Plastic from "../Plastic/Plastic";
 import WildMerchSection from "../Wild Merch/WildMerch";
 import { FaHeart, FaRegHeart, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addMerchToCart } from "../../redux/merchCartSlice";
+import { toggleCart } from "../../redux/uiSlice";
+
 
 const sizes = ["S", "M", "L", "XL", "2XL", "3XL"];
 
@@ -25,10 +29,11 @@ const colors = {
 
 
 const SingleMerch = () => {
+    const dispatch = useDispatch();
     const [activeIndex, setActiveIndex] = useState(0);
     const [rating, setRating] = useState(0);
     const [isFavorited, setIsFavorited] = useState(false);
-
+    const [selectedColor, setSelectedColor] = useState("");
     const [selectedSize, setSelectedSize] = useState("");
 
     const location = useLocation();
@@ -40,7 +45,32 @@ const SingleMerch = () => {
         setIsFavorited(prev => !prev);
     };
 
-    // console.log("Received product:", merch);
+    const handleAddToCart = () => {
+        if (!selectedSize) {
+            alert("Please select a size");
+            return;
+        }
+        if (!selectedColor) {
+            alert("Please select a color");
+            return;
+        }
+        const cartItem = {
+            id: merch.id,
+            name: merch.name,
+            price: merch.price,
+            currency: merch.currency,
+            productImage: merch.merchImages?.[0],
+            size: selectedSize,
+            color: selectedColor,
+        };
+
+        console.log("Adding to cart:", cartItem); // ✅ log the item
+
+        dispatch(addMerchToCart(cartItem));
+        dispatch(toggleCart());         // Open the cart screen
+
+
+    };
 
     // Calculate counts of each star rating in merch.reviews
     const starCounts = [5, 4, 3, 2, 1].reduce((acc, star) => {
@@ -48,7 +78,7 @@ const SingleMerch = () => {
         return acc;
     }, {});
 
-    
+
     // Find max count to normalize widths (optional)
     const maxCount = Math.max(...Object.values(starCounts), 1); // avoid divide by zero
 
@@ -59,7 +89,7 @@ const SingleMerch = () => {
                 {/* Left Section: Image */}
                 <div className={styles.merchImageSection}>
                     <Swiper
-                      className={styles.mySwiper}
+                        className={styles.mySwiper}
                         modules={[Pagination, Autoplay]}
                         pagination={{ clickable: true }}
                         autoplay={{ delay: 4000, disableOnInteraction: false }}
@@ -111,11 +141,10 @@ const SingleMerch = () => {
                             {sizes.map((size) => (
                                 <button
                                     key={size}
-                                    className={`${styles.sizeButton} ${selectedSize === size ? styles.selectedSize : ""
+                                    className={`${styles.sizeButton} ${selectedSize === size ? styles.selectedSize : styles.normalSize
                                         }`}
                                     onClick={() => {
                                         setSelectedSize(size);
-                                        console.log("Selected Size:", size);
                                     }}
                                 >
                                     {size}
@@ -124,24 +153,25 @@ const SingleMerch = () => {
                         </div>
                     </div>
 
-                    {/* Colors section */}
-                    <div className={styles.colorsSection}>
-                        <h2 className={styles.sectionHeading}>Select Colour</h2>
+                    <div className={styles.colorsWrapper}>
+                        <h4>Select Color</h4>
                         <div className={styles.colorOptions}>
-                            {/* Replace with actual color options */}
-                            <span className={styles.colorDot} style={{ backgroundColor: 'black' }}></span>
-                            <span className={styles.colorDot} style={{ backgroundColor: 'red' }}></span>
-                            <span className={styles.colorDot} style={{ backgroundColor: 'green' }}></span>
-                            <span className={styles.colorDot} style={{ backgroundColor: 'blue' }}></span>
-                            <span className={styles.colorDot} style={{ backgroundColor: 'yellow' }}></span>
-                            <span className={styles.colorDot} style={{ backgroundColor: 'pink' }}></span>
+                            {["black", "red", "green", "blue", "yellow", "pink"].map((color) => (
+                                <span
+                                    key={color}
+                                    className={`${styles.colorDot} ${selectedColor === color ? styles.selectedColor : ""
+                                        }`}
+                                    style={{ backgroundColor: color }}
+                                    onClick={() => setSelectedColor(color)}
+                                />
+                            ))}
                         </div>
                     </div>
 
                     <div className={styles.buyNowWrapper}>
-                        <button className={styles.buyNowSolidButton}>Buy Now</button>
+                        <button className={styles.buyNowSolidButton} onClick={handleAddToCart}>Add To Cart</button>
                         <button className={styles.favIconButton} onClick={toggleFavorite}>
-                            {isFavorited ? <FaHeart color="red" /> : <FaRegHeart />}
+                            {isFavorited ? <FaHeart color="red" /> : <FaRegHeart color="black" />}
                         </button>
                     </div>
 
@@ -217,7 +247,7 @@ const SingleMerch = () => {
 
                                 </span>
                                 <div className={styles.starBarContainer}
-                                  style={{ width: `${(starCounts[star] / maxCount) * 100}%` }}>
+                                    style={{ width: `${(starCounts[star] / maxCount) * 100}%` }}>
                                     <div
                                         className={styles.starBar}
                                         style={{
@@ -226,7 +256,7 @@ const SingleMerch = () => {
                                         }}
                                     />
                                 </div>
-                                  <span className={styles.starCount}>{starCounts[star]}</span>
+                                <span className={styles.starCount}>{starCounts[star]}</span>
 
                             </div>
                         ))}

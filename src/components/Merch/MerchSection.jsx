@@ -16,7 +16,7 @@ const sampleMerch = [
   {
     id: 1,
     name: "Elephant Tee",
-    price: "29.99",
+    price: "2999",
     currency: "₹",
     image: WildMerchImage,
     features: ["100% Organic Cotton", "Eco-Friendly Print", "Unisex Fit"],
@@ -28,7 +28,7 @@ const sampleMerch = [
   {
     id: 2,
     name: "Crush Mug",
-    price: "14.99",
+    price: "1499",
     currency: "₹",
     image: mug,
     features: ["Recycled Ceramic", "Dishwasher Safe", "11oz Capacity"],
@@ -40,7 +40,7 @@ const sampleMerch = [
   {
     id: 3,
     name: "Wild Hoddy",
-    price: "24.99",
+    price: "2499",
     currency: "₹",
     image: hoddy,
     features: ["Made from Recycled Polyester", "Adjustable Fit", "Sun Protection"],
@@ -52,7 +52,7 @@ const sampleMerch = [
   {
     id: 4,
     name: "Wild Bag",
-    price: "19.99",
+    price: "1999",
     currency: "₹",
     image: bag,
     features: ["BPA-Free", "Stainless Steel", "750ml Capacity", "Keeps Drinks Cold 12h"],
@@ -64,7 +64,7 @@ const sampleMerch = [
   {
     id: 5,
     name: "Wild Bottle",
-    price: "19.99",
+    price: "1999",
     currency: "₹",
     image: merchBottle,
     features: ["Handmade", "Recycled Materials", "Artisan Support"],

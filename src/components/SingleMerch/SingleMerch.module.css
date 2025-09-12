@@ -81,6 +81,10 @@
   transition: all 0.2s;
 }
 
+.normalSize {
+  color: #000;
+}
+
 .selectedSize {
   background: #000;
   color: white;

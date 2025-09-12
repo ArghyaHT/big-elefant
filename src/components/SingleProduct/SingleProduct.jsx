@@ -11,9 +11,10 @@ import Reviews from "../Reviews/Reviews";
 import Plastic from "../Plastic/Plastic";
 import WildMerchSection from "../Wild Merch/WildMerch";
 import { useDispatch } from "react-redux";
-import { addToCart, toggleCart } from "../../redux/cartSlice";
+import { addToCart } from "../../redux/cartSlice";
 import { FaArrowDown } from "react-icons/fa";
 import SingleProductReview from "../SingleProductReview/SingleProductReview";
+import { toggleCart } from "../../redux/uiSlice";
 
 const SingleProduct = () => {
     const dispatch = useDispatch();

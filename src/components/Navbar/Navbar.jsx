@@ -5,8 +5,8 @@ import { FiHeart, FiMenu, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "../../redux/cartSlice";
 import { useEffect } from "react";
+import { toggleCart } from "../../redux/uiSlice";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,9 +18,13 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   // Use useSelector here inside the component function
-  const totalQuantity = useSelector((state) =>
-    state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
-  );
+const beverageCartItems = useSelector((state) => state.cart.items);
+const merchCartItems = useSelector((state) => state.merchCart.items);
+
+const totalQuantity = [...beverageCartItems, ...merchCartItems].reduce(
+  (sum, item) => sum + item.quantity,
+  0
+);
 
  const handleLogout = () => {
   localStorage.removeItem("user");

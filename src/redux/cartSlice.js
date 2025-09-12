@@ -11,9 +11,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    toggleCart: (state) => {
-      state.isOpen = !state.isOpen;
-    },
+    // toggleCart: (state) => {
+    //   state.isOpen = !state.isOpen;
+    // },
 
     addToCart: (state, action) => {
       const product = action.payload;
@@ -31,6 +31,7 @@ const cartSlice = createSlice({
           productImage: product.productImage,
           currency: product.currency,
           packSize: product.packSize,
+          type: "beverage"
         });
       }
       localStorage.setItem('cartItems', JSON.stringify(state.items));
@@ -69,7 +70,7 @@ const cartSlice = createSlice({
 });
 
 export const {
-  toggleCart,
+  // toggleCart,
   addToCart,
   removeFromCart,
   decreaseQuantity,

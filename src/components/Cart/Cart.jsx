@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToCart,
-  toggleCart,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
@@ -17,6 +16,8 @@ import drinnkingWater from "../../assets/drinking-water.png"
 import banner1 from "../../assets/banner1.png"
 import banner2 from "../../assets/banner2.png"
 import { useNavigate } from "react-router-dom";
+import { decreaseMerchQuantity, increaseMerchQuantity, removeMerchFromCart } from "../../redux/merchCartSlice";
+import { toggleCart } from "../../redux/uiSlice";
 
 
 const products = [
@@ -65,8 +66,11 @@ const Cart = () => {
 
 
   // Get cart open state and items from Redux store
-  const isOpen = useSelector((state) => state.cart.isOpen);
-  const cartItems = useSelector((state) => state.cart.items);
+const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
+  const beverageCartItems = useSelector((state) => state.cart.items);
+  const merchCartItems = useSelector((state) => state.merchCart.items);
+  const cartItems = [...beverageCartItems, ...merchCartItems];
+
   console.log("Cart Items in Cart component:", cartItems);
 
   useEffect(() => {
@@ -151,7 +155,7 @@ const Cart = () => {
 
               <ul className={styles.cartList}>
                 {cartItems.map((item) => (
-                  <li key={item.id} className={styles.cartItem}>
+                  <li key={`${item.type}-${item.id}`} className={styles.cartItem}>
                     <div className={styles.itemImageWrapper}>
                       <img
                         src={item.productImage}
@@ -162,22 +166,25 @@ const Cart = () => {
 
                     <div className={styles.itemDetails}>
                       <div className={styles.itemName}>
-                        {item.name} 
-                      </div>  
+                        {item.name}
+                      </div>
 
-                          <div className={styles.itemPrice}>
+                      <div className={styles.itemPrice}>
                         {item.packSize > 1 ? ` Pack of ${item.packSize}` : ""}
                       </div>
 
-                       <div className={styles.itemPrice}>
+                      <div className={styles.itemPrice}>
                         {item.currency}{(item.price * item.quantity).toFixed(2)}
                       </div>
 
                       <div className={styles.itemControls}>
                         <div className={styles.quantityControls}>
                           <button
-                            onClick={() => dispatch(decreaseQuantity(item.id))}
-                            className={styles.quantityBtn}
+                            onClick={() =>
+                              item.type === "beverage"
+                                ? dispatch(decreaseQuantity(item.id))
+                                : dispatch(decreaseMerchQuantity(item.id))
+                            } className={styles.quantityBtn}
                             disabled={item.quantity === 1}  // disable when quantity is 1
 
                           >
@@ -185,7 +192,11 @@ const Cart = () => {
                           </button>
                           <span>{item.quantity}</span>
                           <button
-                            onClick={() => dispatch(increaseQuantity(item.id))}
+                            onClick={() =>
+                              item.type === "beverage"
+                                ? dispatch(increaseQuantity(item.id))
+                                : dispatch(increaseMerchQuantity(item.id))
+                            }
                             className={styles.quantityBtn}
                           >
                             +
@@ -193,7 +204,11 @@ const Cart = () => {
                         </div>
 
                         <button
-                          onClick={() => dispatch(removeFromCart(item.id))}
+                          onClick={() =>
+                            item.type === "beverage"
+                              ? dispatch(removeFromCart(item.id))
+                              : dispatch(removeMerchFromCart(item.id))
+                          }
                           className={styles.removeIcon}
                           aria-label="Remove item"
                         >
