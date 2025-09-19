@@ -472,6 +472,12 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             return;
         }
 
+          if (!razorpay_payment_id) {
+            console.warn("⚠️ Missing payment ID");
+            alert("Payment verified but no payment ID found.");
+            return;
+        }
+
         const orderDoc = {
             _type: 'order',
             // Order Details
