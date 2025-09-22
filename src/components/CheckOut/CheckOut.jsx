@@ -810,11 +810,11 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                             <input type="text" name="locality" placeholder="Locality" value={formData.locality} onChange={handleChange} required />
                         </label>
                         <label>
-                            Pin
+                            Pin Code
                             <input
                                 type="text"
                                 name="pin"
-                                placeholder="Pin"
+                                placeholder="Pin Code"
                                 value={formData.pin}
                                 maxLength={6}        // Limit length to 6 characters
                                 onChange={(e) => {
