@@ -4,18 +4,18 @@ import styles from "./SignUp.module.css"; // Create this CSS file
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css'; // This includes default styles
 import { sanityClient } from "../../utils/sanityClient";
-const SignUp = () => {
-    const navigate = useNavigate();
+const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
+  const navigate = useNavigate();
 
   const [phone, setPhone] = useState("");
-   const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
 
-   const [error, setError] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handlePhoneChange = (value, country, e, formattedValue) => {
@@ -27,11 +27,11 @@ const SignUp = () => {
     }
   };
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -61,13 +61,19 @@ const SignUp = () => {
 
       const createdUser = await sanityClient.create(newUser);
 
-         // Store user in localStorage (you can customize what to store)
+      // Store user in localStorage (you can customize what to store)
       localStorage.setItem("user", JSON.stringify(createdUser));
 
-      // Redirect to home page
-      navigate("/");
 
+    if (isModal && onSignUpSuccess) {
+      // ✅ If opened in modal (checkout flow)
+      onSignUpSuccess(createdUser);
+    } else {
+      // ✅ Normal signup page flow
+      navigate("/");
       alert("User registered successfully!");
+    }
+
       setFormData({ firstName: "", lastName: "", email: "", password: "" });
       setPhone("");
     } catch (err) {
@@ -79,7 +85,7 @@ const SignUp = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
+      <div className={isModal? styles.containerModal: styles.container}>
         <h2 className={styles.title}>Create your account</h2>
 
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -149,9 +155,19 @@ const SignUp = () => {
             <button type="submit" className={styles.createButton} disabled={loading}>
               {loading ? "Creating..." : "Create Account"}
             </button>
-            <Link to="/sign-in" className={styles.signinButton}>
-              Already have an account? Sign In
-            </Link>
+            {isModal ? (
+              <button
+                type="button"
+                className={styles.signinButton}
+                onClick={onSwitchToSignIn}
+              >
+                Already have an account? Sign In
+              </button>
+            ) : (
+              <Link to="/sign-in" className={styles.signinButton}>
+                Already have an account? Sign In
+              </Link>
+            )}
           </div>
         </form>
       </div>

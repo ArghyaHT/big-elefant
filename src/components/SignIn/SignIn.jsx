@@ -4,7 +4,7 @@ import styles from "./SignIn.module.css"; // Make sure you create this CSS file
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { sanityClient } from "../../utils/sanityClient";
 
-const SignIn = ({ onLoginSuccess, redirectTo = "/user-dashboard", isModal = false }) => {
+const SignIn = ({ onLoginSuccess, redirectTo = "/user-dashboard", isModal = false, onSwitchToSignUp }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -51,7 +51,7 @@ const SignIn = ({ onLoginSuccess, redirectTo = "/user-dashboard", isModal = fals
             <div className={isModal ? styles.containerModal : styles.container}>
                 <h2 className={isModal ? styles.modalTitle : styles.title}>
                     Sign Into your account
-                    </h2>
+                </h2>
 
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.inputGroup}>
@@ -92,9 +92,17 @@ const SignIn = ({ onLoginSuccess, redirectTo = "/user-dashboard", isModal = fals
 
                     <div className={styles.buttonGroup}>
                         <button type="submit" className={styles.loginButton}>Sign In</button>
-                        <Link to="/sign-up" className={styles.signupButton}>
-                            Create Account
-                        </Link>
+                        {isModal ? (
+                            <button
+                                type="button"
+                                className={styles.signupButton}
+                                onClick={onSwitchToSignUp} // 👈 call parent toggle
+                            >
+                                Create Account
+                            </button>
+                        ) : (
+                            <Link to="/sign-up" className={styles.signupButton}>Create Account</Link>
+                        )}
                     </div>
                 </form>
             </div>

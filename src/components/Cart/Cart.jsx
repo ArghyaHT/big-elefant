@@ -20,6 +20,7 @@ import { decreaseMerchQuantity, increaseMerchQuantity, removeMerchFromCart } fro
 import { toggleCart } from "../../redux/uiSlice";
 import { useState } from "react";
 import SignIn from "../SignIn/SignIn";
+import SignUp from "../SignUp/SignUp";
 
 
 const products = [
@@ -67,6 +68,8 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const [showLoginModal, setShowLoginModal] = useState(false);  // ⬅️ modal state
+  const [loginFormType, setLoginFormType] = useState("signin"); // "signin" or "signup"
+
 
 
 
@@ -129,6 +132,7 @@ const Cart = () => {
     if (!user) {
       // ⬅️ If not logged in, show modal instead
       setShowLoginModal(true);
+      setLoginFormType("signin")
     } else {
       dispatch(toggleCart());
       navigate("/check-out", { state: { cartItems } });
@@ -316,19 +320,31 @@ const Cart = () => {
               <IoClose size={24} />
             </button>
 
-            {/* Pass callback so modal closes & redirect to checkout */}
-            <SignIn
-              redirectTo="/check-out"
-              isModal={true}
-              onLoginSuccess={(user) => {
-                setShowLoginModal(false);
-                dispatch(toggleCart());
-                navigate("/check-out", { state: { cartItems, user } });
-              }}
-            />
-          </div>
-        </div>
+            {loginFormType === "signin" ? (
+        <SignIn
+          redirectTo="/check-out"
+          isModal={true}
+          onLoginSuccess={(user) => {
+            setShowLoginModal(false);
+            dispatch(toggleCart());
+            navigate("/check-out", { state: { cartItems, user } });
+          }}
+          onSwitchToSignUp={() => setLoginFormType("signup")} // switch form
+        />
+      ) : (
+        <SignUp
+          isModal={true}
+          onSignUpSuccess={(user) => {
+            setShowLoginModal(false);
+            dispatch(toggleCart());
+            navigate("/check-out", { state: { cartItems, user } });
+          }}
+          onSwitchToSignIn={() => setLoginFormType("signin")} // switch form
+        />
       )}
+    </div>
+  </div>
+)}
     </>
   );
 };

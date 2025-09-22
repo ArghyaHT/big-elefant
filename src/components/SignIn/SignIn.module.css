@@ -11,7 +11,7 @@
 }
 
 .containerModal {
-    width: 600px;
+    width: 500px;
     padding: 40px;
     
 }
@@ -166,7 +166,7 @@
   }
 
   .containerModal {
-        margin: 40px auto;
+    margin: 40px auto;
     width: 300px;
     padding: 40px;
     
@@ -222,6 +222,11 @@
 }
 
 @media (max-width: 390px) {
+   .containerModal {
+    width: 300px;
+    padding: 40px;
+    
+}
   .title {
     font-size: 24px;
   }

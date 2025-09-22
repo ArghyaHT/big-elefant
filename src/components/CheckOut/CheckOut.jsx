@@ -146,35 +146,38 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
         pin: '',
     });
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            const user = JSON.parse(storedUser);
-            console.log('User loaded from localStorage:', user); // This logs the user
+ useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+        const user = JSON.parse(storedUser);
+        setloggedInuser(user);
 
-            setloggedInuser(user);
-
-
-            const firstAddress = user.addresses && Array.isArray(user.addresses) && user.addresses.length > 0
-                ? user.addresses[0]
-                : {};
-
+        if (user.addresses?.length > 0) {
+            // User has at least one address
+            setSelectedAddressIndex(0); // select first address
             setFormData({
-                // From user object
-                firstName: firstAddress.firstName || '',
-                lastName: firstAddress.lastName || '',
+                ...user.addresses[0],
+                email: user.email || ''
+            });
+        } else {
+            // User has no addresses
+            setSelectedAddressIndex('new'); // mark as new
+            setFormData({
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
                 email: user.email || '',
-                phoneNumber: firstAddress.phoneNumber || '',
-                // From first address
-                addressLine: firstAddress.addressLine || '',
-                city: firstAddress.city || '',
-                state: firstAddress.state || '',
-                locality: firstAddress.locality || '',
-                landmark: firstAddress.landmark || '',
-                pin: firstAddress.pin || '',
+                addressLine: '',
+                city: '',
+                state: '',
+                locality: '',
+                landmark: '',
+                pin: '',
             });
         }
-    }, []);
+    }
+}, []);
+
 
 
     const handleChange = (e) => {
@@ -743,23 +746,21 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
           }
         }}
       >
-        {loggedInuser?.addresses?.length > 0 ? (
+        {/* Map existing addresses if any */}
+        {loggedInuser?.addresses?.length > 0 &&
           loggedInuser.addresses.map((address, index) => (
             <option key={index} value={index}>
               {address.addressLine}, {address.city}, {address.state}
             </option>
-          ))
-        ) : (
-          <option value="new">+ Add New Address</option>
-        )}
+          ))}
+
         {/* Always include Add New Address option */}
-        {loggedInuser?.addresses?.length > 0 && (
-          <option value="new">+ Add New Address</option>
-        )}
+        <option key="new">+ Add New Address</option>
       </select>
     </label>
   </div>
 )}
+
 
 
 

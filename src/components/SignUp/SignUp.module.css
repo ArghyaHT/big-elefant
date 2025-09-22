@@ -9,8 +9,14 @@
   padding: 40px;
 }
 
+.containerModal {
+  width: 600px;
+  padding: 40px;
+
+}
+
 .title {
-  text-align: start ;
+  text-align: start;
   margin-bottom: 30px;
   font-size: 32px;
   color: var(--primary-black);
@@ -89,6 +95,12 @@
     padding: 20px;
   }
 
+  .containerModal {
+    margin: 30px auto;
+    width: 300px;
+    padding: 40px;
+  }
+
   .title {
     font-size: 26px;
     margin-bottom: 24px;
@@ -117,6 +129,7 @@
     font-size: 14px;
     padding: 10px;
   }
+
 }
 
 /* Responsive styles for screen width ≤ 360px */
@@ -149,4 +162,3 @@
     padding: 9px;
   }
 }
-
