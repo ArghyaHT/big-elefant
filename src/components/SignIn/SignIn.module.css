@@ -10,6 +10,12 @@
     
 }
 
+.containerModal {
+    max-width: 600px;
+    padding: 40px;
+    
+}
+
 .title {
     text-align: center;
     margin-bottom: 30px;
@@ -17,6 +23,17 @@
     color: var(--primary-black);
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: bold;
+
+}
+
+.modalTitle {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 30px;
+    color: var(--primary-black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-weight: bold;
 
 }

@@ -18,6 +18,8 @@ import banner2 from "../../assets/banner2.png"
 import { useNavigate } from "react-router-dom";
 import { decreaseMerchQuantity, increaseMerchQuantity, removeMerchFromCart } from "../../redux/merchCartSlice";
 import { toggleCart } from "../../redux/uiSlice";
+import { useState } from "react";
+import SignIn from "../SignIn/SignIn";
 
 
 const products = [
@@ -64,12 +66,16 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
+  const [showLoginModal, setShowLoginModal] = useState(false);  // ⬅️ modal state
+
+
 
   // Get cart open state and items from Redux store
-const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
+  const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
   const beverageCartItems = useSelector((state) => state.cart.items);
   const merchCartItems = useSelector((state) => state.merchCart.items);
   const cartItems = [...beverageCartItems, ...merchCartItems];
+
 
   console.log("Cart Items in Cart component:", cartItems);
 
@@ -115,6 +121,19 @@ const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
     const inCart = cartItems.some((item) => getBaseId(item.id) === String(prod.id));
     return cartCategories.includes(category) && !inCart;
   });
+
+
+  const handleCheckout = () => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      // ⬅️ If not logged in, show modal instead
+      setShowLoginModal(true);
+    } else {
+      dispatch(toggleCart());
+      navigate("/check-out", { state: { cartItems } });
+    }
+  };
 
 
   return (
@@ -277,10 +296,8 @@ const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
               </button>
               <button
                 className={styles.checkoutBtn}
-                onClick={() => {
-                  dispatch(toggleCart());
-                  navigate("/check-out", { state: { cartItems } });
-                }}
+                onClick={handleCheckout}   // ⬅️ use new handler
+
               >
                 Proceed to Checkout
               </button>
@@ -291,6 +308,27 @@ const isOpen = useSelector((state) => state.ui.isCartOpen); // <- updated
       </div>
 
       {isOpen && <div className={styles.overlay} onClick={() => dispatch(toggleCart())}></div>}
+
+      {showLoginModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <button className={styles.closeModal} onClick={() => setShowLoginModal(false)}>
+              <IoClose size={24} />
+            </button>
+
+            {/* Pass callback so modal closes & redirect to checkout */}
+            <SignIn
+              redirectTo="/check-out"
+              isModal={true}
+              onLoginSuccess={(user) => {
+                setShowLoginModal(false);
+                dispatch(toggleCart());
+                navigate("/check-out", { state: { cartItems, user } });
+              }}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };

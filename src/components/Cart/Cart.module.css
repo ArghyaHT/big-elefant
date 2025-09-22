@@ -320,6 +320,46 @@
   background-color: #222;
 }
 
+/* Modal overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Modal content */
+.modalContent {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  width: 400px; /* smaller width */
+  max-height: 90vh; /* avoid taking full height */
+  overflow-y: auto; /* scroll if content is tall */
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+/* Close button */
+.closeModal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+}
+
+
 
 @media (max-width: 480px) {
 .scrollableContainer{
