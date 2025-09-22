@@ -656,7 +656,7 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                 <h2>Shipping Details</h2>
                 <form className={styles.checkoutForm}>
 
-{loggedInuser && loggedInuser.addresses?.length > 0 && (
+{/* {loggedInuser && loggedInuser.addresses?.length > 0 && (
   <div className={styles.inlineFields}>
     <label>
       Select Address
@@ -703,7 +703,65 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
       </select>
     </label>
   </div>
+)} */}
+
+{loggedInuser && (
+  <div className={styles.inlineFields}>
+    <label>
+      Select Address
+      <select
+        name="selectedAddress"
+        value={selectedAddressIndex}
+        onChange={(e) => {
+          const selectedValue = e.target.value;
+
+          if (selectedValue === 'new') {
+            // Clear form for new address entry
+            setSelectedAddressIndex('new');
+            setFormData((prev) => ({
+              ...prev,
+              firstName: '',
+              lastName: '',
+              phoneNumber: '',
+              addressLine: '',
+              city: '',
+              state: '',
+              locality: '',
+              landmark: '',
+              pin: '',
+            }));
+          } else {
+            const selectedIndex = Number(selectedValue);
+            setSelectedAddressIndex(selectedIndex);
+            const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
+            if (selectedAddress) {
+              setFormData((prev) => ({
+                ...prev,
+                ...selectedAddress,
+              }));
+            }
+          }
+        }}
+      >
+        {loggedInuser?.addresses?.length > 0 ? (
+          loggedInuser.addresses.map((address, index) => (
+            <option key={index} value={index}>
+              {address.addressLine}, {address.city}, {address.state}
+            </option>
+          ))
+        ) : (
+          <option value="new">+ Add New Address</option>
+        )}
+        {/* Always include Add New Address option */}
+        {loggedInuser?.addresses?.length > 0 && (
+          <option value="new">+ Add New Address</option>
+        )}
+      </select>
+    </label>
+  </div>
 )}
+
+
 
 
                     <div className={styles.inlineFields}>
