@@ -16,7 +16,7 @@ const RazorpayPayment = forwardRef(
         const { id: order_id, amount: razorAmount } = data;
 
         const options = {
-          key: 'rzp_test_R7ucy9bfW3v6nk',
+          key: 'rzp_live_RKcjPS2NKbLe7O',
           amount: razorAmount.toString(),
           currency: 'INR',
           name: 'Big Elefant',
