@@ -449,7 +449,7 @@ font-weight: 400;
 .addressForm textarea,
 .addressForm select {
     padding: 10px 12px;
-    font-size: 12px;
+    font-size: 16px;
     border: 1px solid #ccc;
     margin-top: 6px;
     outline: none;
@@ -480,10 +480,13 @@ font-weight: 400;
     flex: 1 1 48%;
 }
 
+
 .addressForm .buttonGroup {
     margin-top: 24px;
     flex-wrap: nowrap; /* prevent wrapping */
 }
+
+
 
 .addButton{
     margin-right: 30px;
@@ -592,7 +595,7 @@ font-weight: 400;
   .nameRow input,
   .emailInput,
   .phoneInput {
-    font-size: 14px;
+    font-size: 16px;
     padding: 8px;
   }
 

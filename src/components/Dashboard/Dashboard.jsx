@@ -101,7 +101,8 @@ const Dashboard = () => {
         firstName: "",
         lastName: "",
         phoneNumber: '', // update your form and handler too
-        addressLine: "",
+        addressLine1: "",
+        addressLine2: "",
         city: "",
         state: "",
         locality: "",
@@ -165,7 +166,8 @@ const Dashboard = () => {
             firstName: newAddress.firstName,
             lastName: newAddress.lastName,
             phoneNumber: newAddress.phoneNumber,
-            addressLine: newAddress.addressLine,
+            addressLine1: newAddress.addressLine1,
+            addressLine2: newAddress.addressLine2,
             city: newAddress.city,
             state: newAddress.state,
             locality: newAddress.locality,
@@ -207,7 +209,8 @@ const Dashboard = () => {
                 firstName: '',
                 lastName: '',
                 phoneNumber: '',
-                addressLine: '',
+                addressLine1: '',
+                addressLine2: '',
                 city: '',
                 state: '',
                 locality: '',
@@ -501,25 +504,41 @@ const Dashboard = () => {
                                                 country="in"
                                                 value={newAddress.phoneNumber}
                                                 onChange={(value) => handleInputChange('phoneNumber', value)}
-                                                inputStyle={{ width: '100%' }}
-                                                enableSearch
+                                                containerStyle={{
+                                                    marginTop: "6px",   // 👈 this will actually add top margin
+                                                    width: "100%"
+                                                }}
+                                                inputStyle={{
+                                                    borderRadius: "0px",
+                                                    width: "100%",
+                                                    height: "100%",
+                                                    fontSize: "15px",
+                                                    textTransform: "capitalize",
+                                                    paddingLeft: "45px",
+
+                                                }} enableSearch
                                             />
                                         </label>
                                     </div>
 
                                     <label>
-                                        Address
-                                        <textarea name="addressLine" placeholder="address (Area and street)" value={newAddress.addressLine} onChange={handleInputChange} />
+                                        Address 1
+                                        <textarea name="addressLine1" placeholder="Address 1" value={newAddress.addressLine1} onChange={handleInputChange} />
+                                    </label>
+
+                                    <label>
+                                        Address 2
+                                        <textarea name="addressLine2" placeholder="Address 2" value={newAddress.addressLine2} onChange={handleInputChange} />
                                     </label>
 
                                     <div className={styles.inlineFields}>
                                         <label>
                                             City / Town
-                                            <input type="text" name="city" placeholder="City/district/town" value={newAddress.city} onChange={handleInputChange} />
+                                            <input type="text" name="city" placeholder="City/town" value={newAddress.city} onChange={handleInputChange} />
                                         </label>
                                         <label>
                                             State
-                                            <select name="state" value={newAddress.state} onChange={handleInputChange}>
+                                            <select name="state" value={newAddress.state} className={styles.inlineFields} onChange={handleInputChange}>
                                                 <option value="">Select state</option>
                                                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -556,8 +575,8 @@ const Dashboard = () => {
 
                                     <div className={styles.inlineFields}>
                                         <label>
-                                            Locality
-                                            <input type="text" name="locality" placeholder="Locality" value={newAddress.locality} onChange={handleInputChange} />
+                                            Flat No/Locality
+                                            <input type="text" name="locality" placeholder="Flat No/Locality" value={newAddress.locality} onChange={handleInputChange} />
                                         </label>
                                         <label>
                                             Pin
@@ -605,7 +624,7 @@ const Dashboard = () => {
                                                     </div>
                                                     <div className={styles.addressLines}>
                                                         <div>
-                                                            {item.addressLine}, {item.city}, {item.state} {item.pin}
+                                                            {item.addressLine1}, {item.addressLine2}, {item.city}, {item.state} {item.pin}
                                                         </div>
                                                         {item.landmark?.trim() && (
                                                             <div className={styles.landmark}>

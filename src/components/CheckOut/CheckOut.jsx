@@ -91,9 +91,9 @@ const CheckOut = () => {
     const [paymentMethod, setPaymentMethod] = useState('payNow'); // default selection
 
     const beverageCartItems = useSelector((state) => state.cart.items);
-const merchCartItems = useSelector((state) => state.merchCart.items);
+    const merchCartItems = useSelector((state) => state.merchCart.items);
 
-const cartItems = [...beverageCartItems, ...merchCartItems];
+    const cartItems = [...beverageCartItems, ...merchCartItems];
 
 
 
@@ -138,7 +138,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
         lastName: '',
         email: '',
         phoneNumber: '',
-        addressLine: '',
+        addressLine1: '',
+        addressLine2: '',
         city: '',
         state: '',
         locality: '',
@@ -146,37 +147,38 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
         pin: '',
     });
 
- useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-        const user = JSON.parse(storedUser);
-        setloggedInuser(user);
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            setloggedInuser(user);
 
-        if (user.addresses?.length > 0) {
-            // User has at least one address
-            setSelectedAddressIndex(0); // select first address
-            setFormData({
-                ...user.addresses[0],
-                email: user.email || ''
-            });
-        } else {
-            // User has no addresses
-            setSelectedAddressIndex('new'); // mark as new
-            setFormData({
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
-                email: user.email || '',
-                addressLine: '',
-                city: '',
-                state: '',
-                locality: '',
-                landmark: '',
-                pin: '',
-            });
+            if (user.addresses?.length > 0) {
+                // User has at least one address
+                setSelectedAddressIndex(0); // select first address
+                setFormData({
+                    ...user.addresses[0],
+                    email: user.email || ''
+                });
+            } else {
+                // User has no addresses
+                setSelectedAddressIndex('new'); // mark as new
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    phoneNumber: '',
+                    email: user.email || '',
+                    addressLine1: '',
+                    addressLine2: '',
+                    city: '',
+                    state: '',
+                    locality: '',
+                    landmark: '',
+                    pin: '',
+                });
+            }
         }
-    }
-}, []);
+    }, []);
 
 
 
@@ -209,7 +211,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             firstName: formData.firstName,
             lastName: formData.lastName,
             phoneNumber: formData.phoneNumber,
-            addressLine: formData.addressLine,
+            addressLine1: formData.addressLine1,
+            addressLine2: formData.addressLine2,
             city: formData.city,
             state: formData.state,
             locality: formData.locality,
@@ -252,7 +255,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                 firstName: '',
                 lastName: '',
                 phoneNumber: '',
-                addressLine: '',
+                addressLine1: '',
+                addressLine2: '',
                 city: '',
                 state: '',
                 locality: '',
@@ -457,7 +461,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             lastName,
             email,
             contact,
-            addressLine,
+            addressLine1,
+            addressLine2,
             city,
             state,
             locality,
@@ -475,7 +480,7 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             return;
         }
 
-          if (!razorpay_payment_id) {
+        if (!razorpay_payment_id) {
             console.warn("⚠️ Missing payment ID");
             alert("Payment verified but no payment ID found.");
             return;
@@ -491,7 +496,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             name: `${firstName} ${lastName}`,
             email,
             contact,
-            addressLine,
+            addressLine1,
+            addressLine2,
             city,
             state,
             locality,
@@ -540,7 +546,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             firstName,
             lastName,
             phoneNumber,
-            addressLine,
+            addressLine1,
+            addressLine2,
             city,
             state,
             locality,
@@ -559,7 +566,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             name: `${firstName} ${lastName}`,
             email: loggedInuser?.email,
             contact: phoneNumber.startsWith('91') ? phoneNumber.slice(2) : phoneNumber,
-            addressLine,
+            addressLine1,
+            addressLine2,
             city,
             state,
             locality,
@@ -609,7 +617,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             lastName,
             email,
             phoneNumber,
-            addressLine,
+            addressLine1,
+            addressLine2,
             city,
             state,
             locality,
@@ -622,7 +631,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
             !lastName?.trim() ||
             !email?.trim() ||
             !phoneNumber?.trim() ||
-            !addressLine?.trim() ||
+            !addressLine1?.trim() ||
+            !addressLine2?.trim() ||
             !city?.trim() ||
             !state?.trim() ||
             !locality?.trim()
@@ -659,7 +669,7 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                 <h2>Shipping Details</h2>
                 <form className={styles.checkoutForm}>
 
-{/* {loggedInuser && loggedInuser.addresses?.length > 0 && (
+                    {/* {loggedInuser && loggedInuser.addresses?.length > 0 && (
   <div className={styles.inlineFields}>
     <label>
       Select Address
@@ -708,62 +718,59 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
   </div>
 )} */}
 
-{loggedInuser && (
-  <div className={styles.inlineFields}>
-    <label>
-      Select Address
-      <select
-        name="selectedAddress"
-        value={selectedAddressIndex}
-        onChange={(e) => {
-          const selectedValue = e.target.value;
+                    {loggedInuser && (
+                        <div className={styles.inlineFields}>
+                            <label>
+                                Select Address
+                                <select
+                                    name="selectedAddress"
+                                    value={selectedAddressIndex}
+                                    onChange={(e) => {
+                                        const selectedValue = e.target.value;
 
-          if (selectedValue === 'new') {
-            // Clear form for new address entry
-            setSelectedAddressIndex('new');
-            setFormData((prev) => ({
-              ...prev,
-              firstName: '',
-              lastName: '',
-              phoneNumber: '',
-              addressLine: '',
-              city: '',
-              state: '',
-              locality: '',
-              landmark: '',
-              pin: '',
-            }));
-          } else {
-            const selectedIndex = Number(selectedValue);
-            setSelectedAddressIndex(selectedIndex);
-            const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
-            if (selectedAddress) {
-              setFormData((prev) => ({
-                ...prev,
-                ...selectedAddress,
-              }));
-            }
-          }
-        }}
-      >
-        {/* Map existing addresses if any */}
-        {loggedInuser?.addresses?.length > 0 &&
-          loggedInuser.addresses.map((address, index) => (
-            <option key={index} value={index}>
-              {address.addressLine}, {address.city}, {address.state}
-            </option>
-          ))}
+                                        if (selectedValue === 'new') {
+                                            // Clear form for new address entry
+                                            setSelectedAddressIndex('new');
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                firstName: '',
+                                                lastName: '',
+                                                phoneNumber: '',
+                                                addressLine1: '',
+                                                addressLine2: '',
+                                                city: '',
+                                                state: '',
+                                                locality: '',
+                                                landmark: '',
+                                                pin: '',
+                                            }));
+                                        } else {
+                                            const selectedIndex = Number(selectedValue);
+                                            setSelectedAddressIndex(selectedIndex);
+                                            const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
+                                            if (selectedAddress) {
+                                                setFormData((prev) => ({
+                                                    ...prev,
+                                                    ...selectedAddress,
+                                                }));
+                                            }
+                                        }
+                                    }}
+                                >
+                                    {/* Map existing addresses if any */}
+                                    {loggedInuser?.addresses?.length > 0 &&
+                                        loggedInuser.addresses.map((address, index) => (
+                                            <option key={index} value={index}>
+                                                {address.addressLine1}, {address.addressLine2}, {address.city}, {address.state}
+                                            </option>
+                                        ))}
 
-        {/* Always include Add New Address option */}
-        <option key="new">+ Add New Address</option>
-      </select>
-    </label>
-  </div>
-)}
-
-
-
-
+                                    {/* Always include Add New Address option */}
+                                    <option key="new">+ Add New Address</option>
+                                </select>
+                            </label>
+                        </div>
+                    )}
 
                     <div className={styles.inlineFields}>
                         <label>
@@ -813,17 +820,24 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
 
                     {/* Address */}
                     <div className={styles.inlineFields}>
-                    <label>
-                        Address
-                        <textarea name="addressLine" placeholder="address (Area and street)" value={formData.addressLine} onChange={handleChange} required />
-                    </label>
+                        <label>
+                            Address 1
+                            <textarea name="addressLine1" placeholder="address (Area and street)" value={formData.addressLine1} onChange={handleChange} required />
+                        </label>
+                    </div>
+
+                    <div className={styles.inlineFields}>
+                        <label>
+                            Address 2
+                            <textarea name="addressLine2" placeholder="address (Area and street)" value={formData.addressLine2} onChange={handleChange} required />
+                        </label>
                     </div>
 
                     {/* City & State */}
                     <div className={styles.inlineFields}>
                         <label>
                             City / Town
-                            <input type="text" name="city" placeholder="City/district/town" value={formData.city} onChange={handleChange} required />
+                            <input type="text" name="city" placeholder="City/town" value={formData.city} onChange={handleChange} required />
                         </label>
                         <label>
                             State
@@ -865,8 +879,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                     {/* Locality & Landmark */}
                     <div className={styles.inlineFields}>
                         <label>
-                            Locality
-                            <input type="text" name="locality" placeholder="Locality" value={formData.locality} onChange={handleChange} required />
+                            Flat No/Locality
+                            <input type="text" name="locality" placeholder="Flat No/Locality" value={formData.locality} onChange={handleChange} required />
                         </label>
                         <label>
                             Pin Code
@@ -888,10 +902,10 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                         </label>
                     </div>
                     <div className={styles.inlineFields}>
-                    <label>
-                        Landmark
-                        <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} required />
-                    </label>
+                        <label>
+                            Landmark (Optional)
+                            <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} required />
+                        </label>
                     </div>
 
                     {/* Conditionally show buttons only when 'new' is selected */}
@@ -1113,7 +1127,8 @@ const cartItems = [...beverageCartItems, ...merchCartItems];
                             contact: formData.phoneNumber.startsWith('91')
                                 ? formData.phoneNumber.slice(2)
                                 : formData.phoneNumber,
-                            addressLine: formData.addressLine,
+                            addressLine1: formData.addressLine1,
+                            addressLine2: formData.addressLine2,
                             city: formData.city,
                             state: formData.state,
                             locality: formData.locality,
