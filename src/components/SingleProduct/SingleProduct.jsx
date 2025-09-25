@@ -68,7 +68,7 @@ const SingleProduct = () => {
             })
         );
 
-    dispatch(toggleCart());         // Open the cart screen
+        dispatch(toggleCart());         // Open the cart screen
 
     };
 
@@ -159,6 +159,20 @@ const SingleProduct = () => {
                                 );
                             })()}
                         </span>
+
+
+                        <span className={styles.productPack}>
+                            Pack of {
+                                selectedPackSize === 4
+                                    ? 4
+                                    : selectedPackSize === 6
+                                        ? 6
+                                        : selectedPackSize === 12
+                                            ? 12
+                                            : 4 // fallback
+                            }
+                        </span>
+
                     </h4>
                     {/* <div className={styles.tags}>
                         {product.tags.map((tag, index) => (
@@ -253,14 +267,14 @@ const SingleProduct = () => {
 
             <div className={styles.attitudeSection}>
                 {/* <div className={styles.twoColumnSection}> */}
-                    <div className={styles.leftContent}>
-                        <h3 className={styles.attitudeTagline}>
-                            Chill out — it’s just water with attitude
-                        </h3>
-                        <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
-                    </div>
+                <div className={styles.leftContent}>
+                    <h3 className={styles.attitudeTagline}>
+                        Chill out — it’s just water with attitude
+                    </h3>
+                    <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
+                </div>
 
-                    {/* <div className={styles.rightVideo}>
+                {/* <div className={styles.rightVideo}>
                         <iframe
                             className={styles.videoPlayer}
                             src="https://www.youtube.com/embed/UEZm0U6KrfY"

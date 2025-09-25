@@ -57,7 +57,6 @@
   color: green;
   font-weight: 500;
   margin-left: 8px;
-  font-size: 25px;
 }
 
 .discountContent {
@@ -66,6 +65,11 @@
   color: green;
   font-weight: 500;
   font-size: 20px
+}
+
+.productPack{
+    margin-left: 8px;
+    font-size: 20px
 }
 
 
@@ -426,6 +430,10 @@
     font-size: 14px;
     margin-left: 4px;
   }
+  .productPack{
+     font-size: 14px;
+    margin-left: 6px;
+  }
 }
 
 
@@ -519,5 +527,9 @@
   .discount,
   .discountContent {
     font-size: 12px;
+  }
+
+  .productPack{
+     font-size: 12px;
   }
 }
