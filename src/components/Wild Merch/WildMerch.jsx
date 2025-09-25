@@ -35,7 +35,7 @@ const sampleMerch = [
   },
   {
     id: 3,
-    name: "Wild Hoddy",
+    name: "Elefant Hoddy",
     price: "₹2999",
     image: hoddy,
     features: "Made from Recycled Polyester, Adjustable Fit, Sun Protection",

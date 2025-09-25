@@ -162,7 +162,7 @@ const SingleProduct = () => {
 
 
                         <span className={styles.productPack}>
-                            Pack of {
+                            (Pack of {
                                 selectedPackSize === 4
                                     ? 4
                                     : selectedPackSize === 6
@@ -170,7 +170,7 @@ const SingleProduct = () => {
                                         : selectedPackSize === 12
                                             ? 12
                                             : 4 // fallback
-                            }
+                            })
                         </span>
 
                     </h4>
