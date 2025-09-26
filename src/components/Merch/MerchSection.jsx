@@ -110,14 +110,14 @@ const MerchSection = () => {
               {/* <p className={styles.cardText}>
                 {merch.currency} {merch.price}
               </p> */}
-              <button
+              {/* <button
                 className={styles.cardButton}
                 onClick={() => handleShopNow(merch)}
-              >Shop Now</button>
-              {/* <button
+              >Shop Now</button> */}
+              <button
                 className={styles.comingSoon}
               // onClick={() => handleShopNow(merch)}
-              >TBD COMING SOON</button> */}
+              >TBD COMING SOON</button>
             </div>
           ))}
         </div>

@@ -16,17 +16,7 @@ import { useDispatch } from "react-redux";
 import { addMerchToCart } from "../../redux/merchCartSlice";
 import { toggleCart } from "../../redux/uiSlice";
 import { useEffect } from "react";
-
-
-const sizes = ["S", "M", "L", "XL", "2XL", "3XL"];
-
-// const colors = {
-//     5: "#8EDD7E", // green
-//     4: "#E3AA2F", // light green
-//     3: "#44EBCA", // amber
-//     2: "#3A3DDB", // orange
-//     1: "#D52828", // red
-// };
+import SingleProductReview from "../SingleProductReview/SingleProductReview";
 
 
 const SingleMerch = () => {
@@ -323,13 +313,11 @@ const SingleMerch = () => {
                 </div>
             </div>
 
-            <WildMerchSection />
-
-            <div className={styles.reviewSectionWrapper}>
+            {/* <div className={styles.reviewSectionWrapper}>
                 <h2 className={styles.reviewSectionHeading}>Reviews</h2>
 
-                <div className={styles.reviewSection}>
-                    {/* <div className={styles.reviewLeft}>
+                <div className={styles.reviewSection}> */}
+            {/* <div className={styles.reviewLeft}>
                         <h2 className={styles.subHeading}>Total Reviews</h2>
                         <h3 className={styles.reviewCount}>
                             {merch.reviews.length >= 1000
@@ -338,7 +326,7 @@ const SingleMerch = () => {
                         </h3>
                     </div> */}
 
-                    {/* <div className={styles.reviewMiddle}>
+            {/* <div className={styles.reviewMiddle}>
                         <h2 className={styles.subHeading}>Average Rating</h2>
                         <div className={styles.ratingRow}>
                             <h3 className={styles.averageRating}>
@@ -367,7 +355,7 @@ const SingleMerch = () => {
                         </div>
                     </div> */}
 
-                    {/* <div className={styles.reviewRight}>
+            {/* <div className={styles.reviewRight}>
                         {[5, 4, 3, 2, 1].map((star) => (
                             <div className={styles.starRow} key={star}>
                                 <span className={styles.starLabel}>
@@ -389,8 +377,26 @@ const SingleMerch = () => {
                             </div>
                         ))}
                     </div> */}
+            {/* </div>
+            </div> */}
+
+            <SingleProductReview product={merch} />
+
+
+            <div className={styles.attitudeSection}>
+                {/* <div className={styles.twoColumnSection}> */}
+                <div className={styles.leftContent}>
+                    <h3 className={styles.attitudeTagline}>
+                        Chill out — it’s just water with attitude
+                    </h3>
+                    <p className={styles.attitudeDesc}>Beyond boring bottles—can life is here. Save your aura, save the environment.</p>
                 </div>
             </div>
+            <Plastic />
+
+            <WildMerchSection />
+
+
 
         </>
     );
