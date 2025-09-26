@@ -39,13 +39,35 @@
 }
 
 .merchPrice {
-  font-size: 56px;
+  font-size: 34px;
   font-weight: bold;
   color: var(--primary-black);
   /* A solid dark color */
   margin-top: 0px;
   margin-bottom: 0px;
   letter-spacing: 0.5px;
+}
+
+.mrp {
+  color: var(--radial-color);
+  text-decoration: line-through;
+  font-weight: normal;
+  margin-left: 8px;
+  font-size: 25px;
+}
+
+.discount {
+  color: green;
+  font-weight: 500;
+  margin-left: 8px;
+}
+
+.discountContent {
+  display: inline-flex;
+  align-items: center;
+  color: green;
+  font-weight: 500;
+  font-size: 20px
 }
 
 .stars {
@@ -308,6 +330,21 @@
     text-align: start;
   }
 
+    .mrp {
+    font-size: 16px;
+    margin-left: 4px;
+  }
+
+   .discount {
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
+  .discountContent {
+    font-size: 14px;
+    margin-left: 4px;
+  }
+
   .stars {
     justify-content: start;
   }
@@ -454,6 +491,15 @@
     margin-top: 0;
     margin-bottom: 0;
     letter-spacing: 0.3px;
+  }
+
+   .mrp {
+    font-size: 14px;
+  }
+
+   .discount,
+  .discountContent {
+    font-size: 12px;
   }
 
   .stars {

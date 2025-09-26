@@ -31,7 +31,7 @@
 
 .card {
   width: 430px;
-  height: 403px;
+  height: 380px;
   background: var(--primary-white);
   border-radius: 12px;
   text-align: center;
@@ -42,8 +42,6 @@
   justify-content: space-between;
   /* margin: 10px 20px; */
   background-color: #e3e4e4;
-
-  box-shadow: 0px 2px 25px rgba(0, 0, 0, 0.1);
 }
 
 .image {
@@ -95,7 +93,6 @@
   color: #555;
   /* darker text for contrast */
   letter-spacing: 1px;
-  margin-top: 1.5px;
 }
 
 
