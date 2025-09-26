@@ -606,35 +606,50 @@ const CheckOut = () => {
         }
     };
 
- const decreaseProductStock = async (cartItems) => {
+const decreaseProductStock = async (cartItems) => {
   try {
     for (const item of cartItems) {
-      // Fetch the product document first
+
+      // Determine the type
+      const type = item.type === 'beverage' ? 'beverages' : 'merch';
+
+     // Fetch the product by a field that matches your cart item (e.g., productName or slug)
       const product = await sanityClient.fetch(
-        `*[_type == "beverages" && _id == $id][0]`,
-        { id: item.id }
+        `*[_type == $type && productName == $name][0]`,
+        { type, name: item.name } // match by productName
       );
+
+      console.log("Sanity Product", product)
 
       if (!product) continue;
 
       let patchData = {};
 
-      // Determine which stock field to decrement based on packSize
-      if (item.packSize === 4 && product.stockpack4 >= item.quantity) {
-        patchData.stockpack4 = product.stockpack4 - item.quantity;
-      } else if (item.packSize === 6 && product.stockpack6 >= item.quantity) {
-        patchData.stockpack6 = product.stockpack6 - item.quantity;
-      } else if (item.packSize === 12 && product.stockpack12 >= item.quantity) {
-        patchData.stockpack12 = product.stockpack12 - item.quantity;
-      } else {
-        console.warn(`Insufficient stock for ${product.productName} Pack of ${item.packSize}`);
-        continue;
-      }
+      if (type === 'beverages') {
+        // Decrement stock based on packSize
+        if (item.packSize === 4 && product.stockpack4 >= item.quantity) {
+          patchData.stockpack4 = product.stockpack4 - item.quantity;
+        } else if (item.packSize === 6 && product.stockpack6 >= item.quantity) {
+          patchData.stockpack6 = product.stockpack6 - item.quantity;
+        } else if (item.packSize === 12 && product.stockpack12 >= item.quantity) {
+          patchData.stockpack12 = product.stockpack12 - item.quantity;
+        } else {
+          console.warn(`⚠️ Insufficient stock for ${product.productName} Pack of ${item.packSize}`);
+          continue;
+        }
+      } 
+    //   else if (type === 'merch') {
+    //     // Assume merch only has `stock` field (not packSize)
+    //     if (product.stock >= item.quantity) {
+    //       patchData.stock = product.stock - item.quantity;
+    //     } else {
+    //       console.warn(`⚠️ Insufficient stock for merch ${product.productName}`);
+    //       continue;
+    //     }
+    //   }
 
       // Patch the product in Sanity
-      await sanityClient.patch(item.id)
-        .set(patchData)
-        .commit();
+      await sanityClient.patch(product._id).set(patchData).commit();
 
       console.log(`✅ Stock updated for ${product.productName}:`, patchData);
     }
