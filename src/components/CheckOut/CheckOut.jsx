@@ -595,6 +595,9 @@ const CheckOut = () => {
             const result = await sanityClient.create(orderDoc);
             console.log('📦 COD Order saved to Sanity:', result);
 
+            await decreaseProductStock(cartItems);
+
+
             setShowSuccessModal(true); // or redirect to confirmation page
             dispatch(clearCart()); // clear the cart
         } catch (error) {
@@ -602,6 +605,43 @@ const CheckOut = () => {
             alert("Failed to place COD order.");
         }
     };
+
+ const decreaseProductStock = async (cartItems) => {
+  try {
+    for (const item of cartItems) {
+      // Fetch the product document first
+      const product = await sanityClient.fetch(
+        `*[_type == "beverages" && _id == $id][0]`,
+        { id: item.id }
+      );
+
+      if (!product) continue;
+
+      let patchData = {};
+
+      // Determine which stock field to decrement based on packSize
+      if (item.packSize === 4 && product.stockpack4 >= item.quantity) {
+        patchData.stockpack4 = product.stockpack4 - item.quantity;
+      } else if (item.packSize === 6 && product.stockpack6 >= item.quantity) {
+        patchData.stockpack6 = product.stockpack6 - item.quantity;
+      } else if (item.packSize === 12 && product.stockpack12 >= item.quantity) {
+        patchData.stockpack12 = product.stockpack12 - item.quantity;
+      } else {
+        console.warn(`Insufficient stock for ${product.productName} Pack of ${item.packSize}`);
+        continue;
+      }
+
+      // Patch the product in Sanity
+      await sanityClient.patch(item.id)
+        .set(patchData)
+        .commit();
+
+      console.log(`✅ Stock updated for ${product.productName}:`, patchData);
+    }
+  } catch (error) {
+    console.error('❌ Failed to update product stock:', error);
+  }
+};
 
 
 

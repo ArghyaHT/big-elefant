@@ -39,7 +39,7 @@ const sampleMerch = [
   },
   {
     id: 3,
-    name: "Elefant Hoddy",
+    name: "Elefant Hoddie",
     price: "2499",
     currency: "₹",
     image: hoddy,
