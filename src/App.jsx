@@ -20,6 +20,8 @@ import PrivacyPolicyPage from './Pages/PrivacyPolicy'
 import TermsContionsPage from './Pages/T&CPage'
 import ElefantsClubPage from './Pages/ElefantClubPage'
 import ForgetPasswordPage from './Pages/ForgetPasswordpage'
+import VerifyOtpPage from './Pages/verifyOtpPage'
+import ChangePasswordPage from './Pages/ChangePasswordPage'
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
         <Route path="/terms-and-conditions" element={<TermsContionsPage />} />
         <Route path="/elefant-club" element={<ElefantsClubPage />} />
         <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
+        <Route path="/change-password" element={<ChangePasswordPage />} />
 
 
 

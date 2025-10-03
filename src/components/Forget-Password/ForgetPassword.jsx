@@ -101,7 +101,7 @@ const ForgetPassword = () => {
       }
 
       // Call backend API to send OTP
-      const response = await fetch("http://localhost:5000/send-otp", {
+      const response = await fetch("https://big-elefant-payment.onrender.com/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
