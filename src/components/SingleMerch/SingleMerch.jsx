@@ -85,16 +85,12 @@ const SingleMerch = () => {
             return;
         }
         const cartItem = {
-            id: merch.id,
-            name: merch.name,
-            price: merch.price,
-            currency: merch.currency,
-            productImage: merch.merchImages?.[0],
-            size: selectedSize,
-            color: selectedColor,
+            ...merch,
+            id: `${merch._id}-${selectedSize}-${selectedColor}`, // unique cart ID
+            selectedSize,         // add chosen size
+            selectedColor,
+            id: `${merch._id}-${selectedSize}`, // 🔑 Make ID unique by pack
         };
-
-        console.log("Adding to cart:", cartItem); // ✅ log the item
 
         dispatch(addMerchToCart(cartItem));
         dispatch(toggleCart());         // Open the cart screen

@@ -96,6 +96,9 @@ const CheckOut = () => {
     const cartItems = [...beverageCartItems, ...merchCartItems];
 
 
+    console.log("CheckOut Items", cartItems)
+
+
 
     const navigate = useNavigate();
 
@@ -509,18 +512,48 @@ const CheckOut = () => {
             totalPrice: Number(total),
             paymentMode: "payment online",
             // Products
-            products: cartItems.map((item) => ({
-                _key: uuidv4(), // ✅ Required for Sanity array items
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity,
-                packSize: item.packSize,
-                currency: item.currency,
-                productImage: item.productImage,
-            })),
+            //     products: cartItems.map((item) => ({
+            //         _key: uuidv4(), // ✅ Required for Sanity array items
+            //         id: item.id,
+            //         name: item.name,
+            //         price: item.price,
+            //         quantity: item.quantity,
+            //         packSize: item.packSize,
+            //         currency: item.currency,
+            //         productImage: item.productImage,
+            //     })),
 
-            // Timestamp
+            //     // Timestamp
+            //     submittedAt: new Date().toISOString(),
+            // };
+            products: cartItems.map((item) => {
+                if (item.type === "beverage") {
+                    return {
+                        _key: uuidv4(),
+                        _type: "beverage",
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                        packSize: item.packSize,
+                        currency: item.currency,
+                        productImage: item.productImage,
+                    };
+                } else if (item.type === "merch") {
+                    return {
+                        _key: uuidv4(),
+                        _type: "merch",
+                        id: item.id,  // ✅ consistent now
+                        merchName: item.merchName, // merchName mapped to 'name'
+                        price: item.price,
+                        quantity: item.quantity,
+                        currency: item.currency,
+                        selectedSize: item.selectedSize,
+                        selectedColor: item.selectedColor,
+                        productImage: item.productImage,
+                    };
+                }
+            }),
             submittedAt: new Date().toISOString(),
         };
 
@@ -529,6 +562,9 @@ const CheckOut = () => {
             console.log('📦 Order saved to Sanity:', result);
 
             // alert("🎉 Payment Successful and Order Saved!");
+
+            await decreaseProductStock(cartItems);
+
 
             setShowSuccessModal(true);
 
@@ -578,22 +614,51 @@ const CheckOut = () => {
             discountCharges: Number(discount),
             totalPrice: Number(total),
             paymentMode: "cash on delivery",
-            products: cartItems.map((item) => ({
-                _key: uuidv4(),
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity,
-                packSize: item.packSize,
-                currency: item.currency,
-                productImage: item.productImage,
-            })),
+            // products: cartItems.map((item) => ({
+            //     _key: uuidv4(),
+            //     id: item.id,
+            //     name: item.name,
+            //     price: item.price,
+            //     quantity: item.quantity,
+            //     packSize: item.packSize,
+            //     currency: item.currency,
+            //     productImage: item.productImage,
+            // })),
+            products: cartItems.map((item) => {
+                if (item.type === "beverage") {
+                    return {
+                        _key: uuidv4(),
+                        _type: "beverage",
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        quantity: item.quantity,
+                        packSize: item.packSize,
+                        currency: item.currency,
+                        productImage: item.productImage,
+                    };
+                } else if (item.type === "merch") {
+                    return {
+                        _key: uuidv4(),
+                        _type: "merch",
+                        id: item.id,  // ✅ consistent now
+                        merchName: item.merchName, // merchName mapped to 'name'
+                        price: item.price,
+                        quantity: item.quantity,
+                        currency: item.currency,
+                        selectedSize: item.selectedSize,
+                        selectedColor: item.selectedColor,
+                        productImage: item.productImage,
+                    };
+                }
+            }),
             submittedAt: new Date().toISOString(),
         };
 
         try {
             const result = await sanityClient.create(orderDoc);
             console.log('📦 COD Order saved to Sanity:', result);
+
 
             await decreaseProductStock(cartItems);
 
@@ -606,57 +671,78 @@ const CheckOut = () => {
         }
     };
 
-const decreaseProductStock = async (cartItems) => {
-  try {
-    for (const item of cartItems) {
+    const decreaseProductStock = async (cartItems) => {
+        try {
+            for (const item of cartItems) {
 
-      // Determine the type
-      const type = item.type === 'beverage' ? 'beverages' : 'merch';
+                // Determine the type
+                const type = item.type === 'beverage' ? 'beverages' : 'merch';
 
-     // Fetch the product by a field that matches your cart item (e.g., productName or slug)
-      const product = await sanityClient.fetch(
-        `*[_type == $type && productName == $name][0]`,
-        { type, name: item.name } // match by productName
-      );
+                // Fetch the product by a field that matches your cart item (e.g., productName or slug)
+                const product = await sanityClient.fetch(
+                    `*[_type == $type && productName == $name][0]`,
+                    { type, name: item.name } // match by productName
+                );
 
-      console.log("Sanity Product", product)
+                console.log("Sanity Product", product)
 
-      if (!product) continue;
+                if (!product) continue;
 
-      let patchData = {};
+                let patchData = {};
 
-      if (type === 'beverages') {
-        // Decrement stock based on packSize
-        if (item.packSize === 4 && product.stockpack4 >= item.quantity) {
-          patchData.stockpack4 = product.stockpack4 - item.quantity;
-        } else if (item.packSize === 6 && product.stockpack6 >= item.quantity) {
-          patchData.stockpack6 = product.stockpack6 - item.quantity;
-        } else if (item.packSize === 12 && product.stockpack12 >= item.quantity) {
-          patchData.stockpack12 = product.stockpack12 - item.quantity;
-        } else {
-          console.warn(`⚠️ Insufficient stock for ${product.productName} Pack of ${item.packSize}`);
-          continue;
+                if (type === 'beverages') {
+                    // Decrement stock based on packSize
+                    if (item.packSize === 4 && product.stockpack4 >= item.quantity) {
+                        patchData.stockpack4 = product.stockpack4 - item.quantity;
+                    } else if (item.packSize === 6 && product.stockpack6 >= item.quantity) {
+                        patchData.stockpack6 = product.stockpack6 - item.quantity;
+                    } else if (item.packSize === 12 && product.stockpack12 >= item.quantity) {
+                        patchData.stockpack12 = product.stockpack12 - item.quantity;
+                    } else {
+                        console.warn(`⚠️ Insufficient stock for ${product.productName} Pack of ${item.packSize}`);
+                        continue;
+                    }
+                }
+                else if (type === 'merch') {
+                    const variant = product.variants.find(
+                        v => v.productType === 'Cloth' && v.merchColor.hex === item.selectedColor
+                    );
+
+                    if (!variant) {
+                        console.warn(`⚠️ No variant found for color ${item.selectedColor}`);
+                        continue;
+                    }
+
+                    const sizeObj = variant.clothSizes.find(s => s.sizeName === item.selectedSize);
+
+                    if (!sizeObj) {
+                        console.warn(`⚠️ No size found for ${item.selectedSize}`);
+                        continue;
+                    }
+
+                    if (sizeObj.stock >= item.quantity) {
+                        sizeObj.stock -= item.quantity;
+                    } else {
+                        console.warn(`⚠️ Insufficient stock for ${product.merchName} ${item.selectedSize}`);
+                        continue;
+                    }
+
+                    // Patch back to Sanity
+                    await sanityClient
+                        .patch(product._id)
+                        .set({ variants: product.variants })
+                        .commit();
+                }
+
+                // Patch the product in Sanity
+                await sanityClient.patch(product._id).set(patchData).commit();
+
+                console.log(`✅ Stock updated for ${product.productName}:`, patchData);
+            }
+        } catch (error) {
+            console.error('❌ Failed to update product stock:', error);
         }
-      } 
-    //   else if (type === 'merch') {
-    //     // Assume merch only has `stock` field (not packSize)
-    //     if (product.stock >= item.quantity) {
-    //       patchData.stock = product.stock - item.quantity;
-    //     } else {
-    //       console.warn(`⚠️ Insufficient stock for merch ${product.productName}`);
-    //       continue;
-    //     }
-    //   }
-
-      // Patch the product in Sanity
-      await sanityClient.patch(product._id).set(patchData).commit();
-
-      console.log(`✅ Stock updated for ${product.productName}:`, patchData);
-    }
-  } catch (error) {
-    console.error('❌ Failed to update product stock:', error);
-  }
-};
+    };
 
 
 
@@ -723,55 +809,6 @@ const decreaseProductStock = async (cartItems) => {
             <div className={styles.leftSection}>
                 <h2>Shipping Details</h2>
                 <form className={styles.checkoutForm}>
-
-                    {/* {loggedInuser && loggedInuser.addresses?.length > 0 && (
-  <div className={styles.inlineFields}>
-    <label>
-      Select Address
-      <select
-        name="selectedAddress"
-        value={selectedAddressIndex}
-        onChange={(e) => {
-          const selectedValue = e.target.value;
-
-          if (selectedValue === 'new') {
-            // Clear form for new address entry
-            setSelectedAddressIndex('new');
-            setFormData((prev) => ({
-              ...prev,
-              firstName: '',
-              lastName: '',
-              phoneNumber: '',
-              addressLine: '',
-              city: '',
-              state: '',
-              locality: '',
-              landmark: '',
-              pin: '',
-            }));
-          } else {
-            const selectedIndex = Number(selectedValue);
-            setSelectedAddressIndex(selectedIndex);
-            const selectedAddress = loggedInuser?.addresses?.[selectedIndex];
-            if (selectedAddress) {
-              setFormData((prev) => ({
-                ...prev,
-                ...selectedAddress,
-              }));
-            }
-          }
-        }}
-      >
-        {loggedInuser?.addresses?.map((address, index) => (
-          <option key={index} value={index}>
-            {address.addressLine}, {address.city}, {address.state}
-          </option>
-        ))}
-        <option value="new">+ Add New Address</option>
-      </select>
-    </label>
-  </div>
-)} */}
 
                     {loggedInuser && (
                         <div className={styles.inlineFields}>

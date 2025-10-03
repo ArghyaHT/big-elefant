@@ -19,27 +19,34 @@ const merchCartSlice = createSlice({
 
     addMerchToCart: (state, action) => {
       const merch = action.payload;
+
+      // check by _id + size + color (to distinguish different selections)
       const existingItem = state.items.find(
-        item => item.id === merch.id && item.size === merch.size && item.color === merch.color
+        item =>
+          item.id === merch._id &&
+          item.selectedSize === merch.selectedSize &&
+          item.selectedColor === merch.selectedColor
       );
 
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
         state.items.push({
-          id: merch.id,
-          name: merch.name,
-          price: merch.price,
-          productImage: merch.productImage,
-          currency: merch.currency,
-          size: merch.size || null,
-          color: merch.color || null,
-          quantity: 1,
-          type: "merch"
+          ...merch,
+          id: `${merch._id}-${merch.selectedSize}-${merch.selectedColor}`, // unique cart ID             
+          quantity: 1,                       // add cart-specific field
+          type: "merch",                     // so you can differentiate in UI
+          productImage: merch.merchImages?.[0] || merch.merchImage, // fallback
+          name: merch.merchName,             // convenience for display
+          price: merch.variants
+            ?.flatMap(v => v.clothSizes || [])
+            .find(s => s.sizeName === merch.selectedSize)?.price || 0,
+          size: merch.selectedSize,
+          color: merch.selectedColor,
         });
       }
 
-      localStorage.setItem('merchCartItems', JSON.stringify(state.items));
+      localStorage.setItem("merchCartItems", JSON.stringify(state.items));
     },
 
     removeMerchFromCart: (state, action) => {
