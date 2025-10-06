@@ -20,7 +20,7 @@ import PrivacyPolicyPage from './Pages/PrivacyPolicy'
 import TermsContionsPage from './Pages/T&CPage'
 import ElefantsClubPage from './Pages/ElefantClubPage'
 import ForgetPasswordPage from './Pages/ForgetPasswordpage'
-import VerifyOtpPage from './Pages/verifyOtpPage'
+import VerifyOtpPage from './Pages/VerifyOtpPage'
 import ChangePasswordPage from './Pages/ChangePasswordPage'
 
 function App() {
