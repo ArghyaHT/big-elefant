@@ -99,7 +99,6 @@ const ForgetPassword = () => {
         setError("User with this email does not exist.");
         return;
       }
-
       // Call backend API to send OTP
       const response = await fetch("https://big-elefant-payment.onrender.com/send-otp", {
         method: "POST",
