@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import styles from "./VerifyOtp.module.css"; // optional styling
 import { sanityClient } from "../../utils/sanityClient";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VerifyOtp = () => {
     const [otp, setOtp] = useState("");
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate(); // initialize navigate
-
+    const location = useLocation();
 
     const handleVerifyOtp = async (e) => {
         e.preventDefault();
         setError("");
         setSuccess("");
 
-        const hardcodedEmail = "bikkihimanstech@gmail.com";
-
+        const params = new URLSearchParams(location.search);
+        const email = params.get("email");
 
         try {
             // 1️⃣ Fetch the user by email from Sanity
             const user = await sanityClient.fetch(
                 `*[_type == "customer" && email == $email][0]`,
-                { email: hardcodedEmail }
+                { email: email }
             );
 
 
@@ -42,7 +42,7 @@ const VerifyOtp = () => {
                 setOtp("");
                 // Optionally, you can clear OTP in Sanity after verification
                 // await sanityClient.patch(user._id).unset(['otp']).commit();
-                navigate(`/change-password?email=${encodeURIComponent(hardcodedEmail)}`);
+                navigate(`/change-password?email=${encodeURIComponent(email)}`);
 
             } else {
                 setError("Invalid OTP. Please try again.");
