@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./ChangePassword.module.css";
 import { sanityClient } from "../../utils/sanityClient";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const ChangePassword = ({ }) => {
@@ -11,6 +11,10 @@ const ChangePassword = ({ }) => {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+    const navigate = useNavigate()
+
 
 
     // ✅ get email from query param
@@ -51,6 +55,7 @@ const ChangePassword = ({ }) => {
             setSuccess("Password updated successfully!");
             setNewPassword("");
             setConfirmPassword("");
+            setShowSuccessModal(true);
         } catch (err) {
             console.error("Error updating password:", err);
             setError("Something went wrong. Please try again.");
@@ -104,8 +109,28 @@ const ChangePassword = ({ }) => {
 
             {error && <p className={styles.error}>{error}</p>}
             {success && <p className={styles.success}>{success}</p>}
+
+            {/* ✅ Success Modal */}
+      {showSuccessModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h2>🎉 Password Changed</h2>
+            <p>Your password has been updated successfully!</p>
+            <button
+              onClick={() => {
+                setShowSuccessModal(false);
+                navigate("/sign-in"); // 👈 redirect to login after password change
+              }}
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      )}
         </div>
     );
+
 };
+
 
 export default ChangePassword;
