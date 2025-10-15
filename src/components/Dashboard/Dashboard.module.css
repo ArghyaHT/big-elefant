@@ -1,97 +1,97 @@
-.dashboard{
-    border-bottom: 2px solid var(--primary-black);
+.dashboard {
+  border-bottom: 2px solid var(--primary-black);
 
 }
 
 .dashboardWrapper {
-    display: flex;
-    height: auto;
-    width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
+  display: flex;
+  height: auto;
+  width: 1200px;
+  margin: 0 auto;
+  gap: 40px;
 
 }
 
 .sidebar {
-    margin: 80px 10px;
-    width: 300px;
+  margin: 80px 10px;
+  width: 300px;
 }
 
 .userContainer {
-    margin: 0px;
-    padding: 10px 20px;
-    background-color: #f5f5f5;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
-    text-transform: uppercase;
-    color: var(--button-color);
+  margin: 0px;
+  padding: 10px 20px;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  color: var(--button-color);
 }
 
 .heading {
-    font-size: 25px;
-    margin: 0px;
-    font-weight: 500;
+  font-size: 25px;
+  margin: 0px;
+  font-weight: 500;
 }
 
 .userName {
-    font-size: 35px;
-    margin: 0px;
-    font-weight: 600;
+  font-size: 35px;
+  margin: 0px;
+  font-weight: 600;
 }
 
 .accountWrapper {
-    max-width: 700px;
-    margin: 40px auto;
-    /* center horizontally with margin on top/bottom */
-    background-color: #f5f5f5;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  max-width: 700px;
+  margin: 40px auto;
+  /* center horizontally with margin on top/bottom */
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Menu Item Row */
 .menuItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 24px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .menuItem:hover {
-    background-color: #f9f9f9;
-    border-radius: 8px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
 /* Left section: Icon + Text */
 .leftSection {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Icon size */
 .menuIcon {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .orders {
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 /* Arrow icon (>) */
 .arrow {
-    font-size: 20px;
-    color: var(--primary-black);
+  font-size: 20px;
+  color: var(--primary-black);
 }
 
 /* Divider between sections */
 .menuDivider {
-    height: 1px;
-    background-color: var(--primary-black);
+  height: 1px;
+  background-color: var(--primary-black);
 }
 
 .orderFilters {
@@ -115,7 +115,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 16px; /* some spacing above date filters */
+  margin-top: 16px;
+  /* some spacing above date filters */
 }
 
 .checkboxLabel {
@@ -128,9 +129,9 @@
   user-select: none;
 }
 
-.checkboxLabel span{
-font-size: 1rem;
-font-weight: 400;
+.checkboxLabel span {
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .statusCheckbox {
@@ -141,7 +142,8 @@ font-weight: 400;
   width: 16px;
   height: 16px;
   cursor: pointer;
-  accent-color: var(--primary-black); /* checkbox color */
+  accent-color: var(--primary-black);
+  /* checkbox color */
   flex-shrink: 0;
 }
 
@@ -157,368 +159,376 @@ font-weight: 400;
 
 /* Account section styles */
 .accountSection {
-    margin: 0px;
+  margin: 0px;
 }
 
 .accountList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-radius: 8px;
-    max-width: 400px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  max-width: 400px;
 }
 
 .accountListItem {
-    padding: 14px 20px;
-    color: #444;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s, color 0.2s;
-    user-select: none;
-    outline-offset: 4px;
+  padding: 14px 20px;
+  color: #444;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.2s;
+  user-select: none;
+  outline-offset: 4px;
 }
 
 /* Remove border from last item */
 .accountListItem:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* Hover and focus states */
 .accountListItem:hover,
 .accountListItem:focus {
-    color: var(--button-color);
-    outline: none;
+  color: var(--button-color);
+  outline: none;
 }
 
 .activeTab {
-    color: var(--button-color);
+  color: var(--button-color);
 }
 
 .tabContent {
-    margin: 60px 10px;
+  margin: 60px 10px;
 }
 
 .profileSection {
-    padding: 24px;
-    width: 730px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
+  padding: 24px;
+  width: 730px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .sectionContainer {
-    border-radius: 12px;
-    padding: 20px;
+  border-radius: 12px;
+  padding: 20px;
 }
 
 .sectionHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 20px;
 }
 
 .sectionHeader span {
-    font-size: 20px;
-    font-weight: bold;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .editButton {
-    color: #007bff;
-    background-color: transparent;
-    border: none;
-    font-size: 14px;
-    cursor: pointer;
+  color: #007bff;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .nameRow {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-    text-transform: capitalize;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  text-transform: capitalize;
 }
 
 .nameField {
-    flex: 1;
-    font-weight: 500;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    background-color: #dddddd;
-    border-radius: 4px;
-    font-size: 15px;
-    color: rgba(33, 37, 41, 0.4);
-    width: 100%;
+  flex: 1;
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  background-color: #dddddd;
+  border-radius: 4px;
+  font-size: 15px;
+  color: rgba(33, 37, 41, 0.4);
+  width: 100%;
 }
 
 .nameRow input {
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    width: 100%;
-    text-transform: capitalize;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 100%;
+  text-transform: capitalize;
+  color: var(--primary-black);
 }
 
 
 .inputGroup {
-    margin-top: 50px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .inputGroup label {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
 .emailInput {
-    font-weight: 500;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    background-color: #dddddd;
-    border-radius: 4px;
-    font-size: 15px;
-    color: rgba(33, 37, 41, 0.4);
-    width: 100%;
-    text-transform: lowercase;
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  background-color: #dddddd;
+  border-radius: 4px;
+  font-size: 15px;
+  color: rgba(33, 37, 41, 0.4);
+  width: 100%;
+  text-transform: lowercase;
 }
 
 .sectionContainer1 {
-    border-radius: 12px;
-    margin-bottom: 0px;
-    padding: 0px 20px;
-    margin-top: 10px;
+  border-radius: 12px;
+  margin-bottom: 0px;
+  padding: 0px 20px;
+  margin-top: 10px;
 }
 
 .sectionHeader1 {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 0px;
-    margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 0px;
+  margin-bottom: 16px;
 
 }
 
 .sectionHeader1 span {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 0px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0px;
 }
 
 
 .inputGroup1 {
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    height: 44px;
-    /* Ensure stable height to avoid jumping */
-    justify-content: center;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 44px;
+  /* Ensure stable height to avoid jumping */
+  justify-content: center;
 }
 
 /* Apply consistent styling between input and view mode */
 .phoneInput {
-    font-weight: 500;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    color: rgba(33, 37, 41, 0.4);
-    width: 100%;
-    background-color: #dddddd;
-    /* Match input background */
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+  font-weight: 500;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  color: rgba(33, 37, 41, 0.4);
+  width: 100%;
+  background-color: #dddddd;
+  /* Match input background */
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .inputGroup1 input {
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    width: 100%;
-    box-sizing: border-box;
-    text-transform: capitalize;
-    transition: all 0.2s ease;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  transition: all 0.2s ease;
+  color: var(--primary-black);
+
 }
 
 
 .addressSection {
-    padding: 24px;
-    width: 720px;
-    margin: auto;
+  padding: 24px;
+  width: 720px;
+  margin: auto;
 }
 
 .addButton {
-    margin-top: 5px;
-    margin-bottom: 30px;
-    padding: 8px 16px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .addressList {
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border: 1px solid var(--primary-black-50);
-    border-radius: 4px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--primary-black-50);
+  border-radius: 4px;
 }
 
 .addressItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border-bottom: 1px solid var(--primary-black-50);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--primary-black-50);
 }
 
 /* Remove bottom border for the last address item */
 .addressItem:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .addressDetails {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
 }
 
 .namePhone {
-    display: flex;
-    margin-bottom: 4px;
-    font-weight: 600;
-    gap: 20px;
+  display: flex;
+  margin-bottom: 4px;
+  font-weight: 600;
+  gap: 20px;
+    text-transform: capitalize;
+
 }
 
 .addressLines {
-    font-size: 14px;
-    color: #444;
+  font-size: 14px;
+  color: #444;
 }
 
 .landmark {
-    font-size: 13px;
-    color: #777;
-    margin-top: 2px;
+  font-size: 13px;
+  color: #777;
+  margin-top: 2px;
 }
 
 .lastItem {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .deleteButton {
-    background-color: var(--border-background);
-    color: var(--primary-black);
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    border-radius: 50%;
-    /* makes it circular */
+  background-color: var(--border-background);
+  color: var(--primary-black);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  /* makes it circular */
 
 }
 
 /* Container for the form */
 .addressForm {
-    width: 100%;
-    width: 700px;
-    margin: 0 auto;
-    padding: 24px;
+  width: 100%;
+  width: 700px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 /* Label and input styling inside the form */
 .addressForm label {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 16px;
 }
 
 .addressForm input,
 .addressForm textarea,
 .addressForm select {
-    padding: 10px 12px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    margin-top: 6px;
-    outline: none;
-    transition: border 0.2s;
-    border-radius: 0px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  outline: none;
+  transition: border 0.2s;
+  border-radius: 4px;
 }
 
 .addressForm input:focus,
 .addressForm textarea:focus,
 .addressForm select:focus {
-    border-color: #007bff;
+  border-color: #007bff;
+    color: var(--primary-black);
 }
 
 /* Textarea specific */
 .addressForm textarea {
-    resize: vertical;
-    min-height: 80px;
+  resize: vertical;
+  min-height: 80px;
 }
 
 /* Inline fields (side by side) */
 .addressForm .inlineFields {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .addressForm .inlineFields label {
-    flex: 1 1 48%;
+  flex: 1 1 48%;
 }
 
 
 .addressForm .buttonGroup {
-    margin-top: 24px;
-    flex-wrap: nowrap; /* prevent wrapping */
+  margin-top: 24px;
+  flex-wrap: nowrap;
+  /* prevent wrapping */
 }
 
 
 
-.addButton{
-    margin-right: 30px;
+.addButton {
+  margin-right: 30px;
 }
 
 .addressForm .addButton,
 .addressForm .cancelButton {
-    width: 180px;
-    height: 50px;
-    border-radius: 0px;
-    border: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    display: inline-flex; /* ensure inline-flex for buttons */
-    align-items: center;
-    justify-content: center;
+  width: 180px;
+  height: 50px;
+  border-radius: 0px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: inline-flex;
+  /* ensure inline-flex for buttons */
+  align-items: center;
+  justify-content: center;
 }
 
 .addressForm .addButton {
-    background-color: var(--primary-black);
-    color: white;
+  background-color: var(--primary-black);
+  color: white;
 }
 
 .addressForm .cancelButton {
-    background-color: #f0f0f0;
-    color: #333;
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 .addressForm .cancelButton:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 
@@ -559,7 +569,7 @@ font-weight: 400;
     font-size: 16px;
   }
 
-  .tabContent{
+  .tabContent {
     margin: 20px 20px;
   }
 
@@ -571,12 +581,12 @@ font-weight: 400;
     margin-top: 0px;
   }
 
-  .sectionContainer{
+  .sectionContainer {
     padding: 0px;
     margin-top: 0px;
   }
 
-  .sectionContainer1{
+  .sectionContainer1 {
     padding: 0px;
   }
 

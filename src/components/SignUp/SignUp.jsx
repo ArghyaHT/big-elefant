@@ -52,8 +52,8 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
       // 2. If email unique, create new user
       const newUser = {
         _type: 'customer',
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+        fullName: formData.fullName,
+        // lastName: formData.lastName,
         email: formData.email,
         password: formData.password, // Consider hashing passwords before storing!
         phoneNumber: phone,
@@ -74,7 +74,7 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
       alert("User registered successfully!");
     }
 
-      setFormData({ firstName: "", lastName: "", email: "", password: "" });
+      setFormData({ fullName: "",  email: "", password: "" });
       setPhone("");
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -91,17 +91,17 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.nameRow}>
             <div className={styles.inputGroup}>
-              <label>First Name</label>
+              <label>Full Name</label>
               <input
-                name="firstName"
+                name="fullName"
                 type="text"
-                placeholder="First Name"
-                value={formData.firstName}
+                placeholder="Full Name"
+                value={formData.fullName}
                 onChange={handleChange}
                 required
               />
             </div>
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <label>Last Name</label>
               <input
                 name="lastName"
@@ -111,7 +111,7 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
                 onChange={handleChange}
                 required
               />
-            </div>
+            </div> */}
           </div>
 
           <div className={styles.inputGroup}>
@@ -146,6 +146,7 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
               onChange={handlePhoneChange}
               inputStyle={{ width: "100%" }}
               enableSearch
+               countryCodeEditable={false} 
             />
           </div>
 

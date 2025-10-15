@@ -137,8 +137,7 @@ const CheckOut = () => {
     // const filteredData = allData[selectedTab];
 
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
+        fullName: '',
         email: '',
         phoneNumber: '',
         addressLine1: '',
@@ -167,8 +166,7 @@ const CheckOut = () => {
                 // User has no addresses
                 setSelectedAddressIndex('new'); // mark as new
                 setFormData({
-                    firstName: '',
-                    lastName: '',
+                    fullName: '',
                     phoneNumber: '',
                     email: user.email || '',
                     addressLine1: '',
@@ -211,8 +209,7 @@ const CheckOut = () => {
         // Prepare new address data from formData
         const newAddressData = {
             _key: uuidv4(),  // generate unique key
-            firstName: formData.firstName,
-            lastName: formData.lastName,
+            fullName: formData.fullName,
             phoneNumber: formData.phoneNumber,
             addressLine1: formData.addressLine1,
             addressLine2: formData.addressLine2,
@@ -255,8 +252,7 @@ const CheckOut = () => {
 
             // Clear form or reset as needed
             setFormData({
-                firstName: '',
-                lastName: '',
+                fullName: '',
                 phoneNumber: '',
                 addressLine1: '',
                 addressLine2: '',
@@ -278,8 +274,7 @@ const CheckOut = () => {
         e.preventDefault();
 
         setFormData({
-            firstName: '',
-            lastName: '',
+            fullName: '',
             email: '',
             phoneNumber: '',
             address: '',
@@ -460,8 +455,7 @@ const CheckOut = () => {
         console.log("✅ Payment full data:", fullData);
 
         const {
-            firstName,
-            lastName,
+            fullName,
             email,
             contact,
             addressLine1,
@@ -496,7 +490,7 @@ const CheckOut = () => {
             paymentId: razorpay_payment_id,
             status: "ordered",
             // Shipping Details
-            name: `${firstName} ${lastName}`,
+            name: `${fullName}`,
             email,
             contact,
             addressLine1,
@@ -579,8 +573,7 @@ const CheckOut = () => {
 
     const handleCOD = async () => {
         const {
-            firstName,
-            lastName,
+            fullName,
             phoneNumber,
             addressLine1,
             addressLine2,
@@ -599,7 +592,7 @@ const CheckOut = () => {
             orderId: orderId,
             paymentId: "COD",
             status: "ordered",
-            name: `${firstName} ${lastName}`,
+            name: `${fullName}`,
             email: loggedInuser?.email,
             contact: phoneNumber.startsWith('91') ? phoneNumber.slice(2) : phoneNumber,
             addressLine1,
@@ -754,29 +747,27 @@ const CheckOut = () => {
 
     const validateForm = () => {
         const {
-            firstName,
-            lastName,
-            email,
+            fullName,
+            // email,
             phoneNumber,
             addressLine1,
             addressLine2,
             city,
             state,
-            locality,
+            // locality,
             pin
         } = formData;
 
         // Basic presence checks
         if (
-            !firstName?.trim() ||
-            !lastName?.trim() ||
-            !email?.trim() ||
+            !fullName?.trim() ||
+            // !email?.trim() ||
             !phoneNumber?.trim() ||
             !addressLine1?.trim() ||
             !addressLine2?.trim() ||
             !city?.trim() ||
-            !state?.trim() ||
-            !locality?.trim()
+            !state?.trim() 
+            // !locality?.trim()
         ) {
             alert("Please fill in all shipping details fields.");
             return false;
@@ -788,11 +779,11 @@ const CheckOut = () => {
             return false;
         }
 
-        // (Optional) validate email pattern
-        if (!/^\S+@\S+\.\S+$/.test(email)) {
-            alert("Please enter a valid email address.");
-            return false;
-        }
+        // // (Optional) validate email pattern
+        // if (!/^\S+@\S+\.\S+$/.test(email)) {
+        //     alert("Please enter a valid email address.");
+        //     return false;
+        // }
 
         // (Optional) validate phone length (basic)
         if (phoneNumber.length < 10) {
@@ -825,8 +816,7 @@ const CheckOut = () => {
                                             setSelectedAddressIndex('new');
                                             setFormData((prev) => ({
                                                 ...prev,
-                                                firstName: '',
-                                                lastName: '',
+                                                fullName: '',
                                                 phoneNumber: '',
                                                 addressLine1: '',
                                                 addressLine2: '',
@@ -866,21 +856,17 @@ const CheckOut = () => {
 
                     <div className={styles.inlineFields}>
                         <label>
-                            First Name
-                            <input type="text" name="firstName" placeholder="Firstname" value={formData.firstName} onChange={handleChange} required />
-                        </label>
-                        <label>
-                            Last Name
-                            <input type="text" name="lastName" placeholder="Lastname" value={formData.lastName} onChange={handleChange} required />
+                            Full Name
+                            <input type="text" name="fullName" placeholder="Full Name" value={formData.fullName} onChange={handleChange} required />
                         </label>
                     </div>
 
                     {/* Email & Phone */}
                     <div className={styles.inlineFields}>
-                        <label>
+                        {/* <label>
                             Email
                             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-                        </label>
+                        </label> */}
 
                         <label>
                             Phone Number
@@ -913,23 +899,49 @@ const CheckOut = () => {
                     {/* Address */}
                     <div className={styles.inlineFields}>
                         <label>
-                            Address 1
-                            <textarea name="addressLine1" placeholder="address (Area and street)" value={formData.addressLine1} onChange={handleChange} required />
+                            Flat, House Number
+                            <textarea name="addressLine1" placeholder="Flat, House Number" value={formData.addressLine1} onChange={handleChange} required />
                         </label>
                     </div>
 
                     <div className={styles.inlineFields}>
                         <label>
-                            Address 2
-                            <textarea name="addressLine2" placeholder="address (Area and street)" value={formData.addressLine2} onChange={handleChange} required />
+                            Apartment, Area, Sector, Village
+                            <textarea name="addressLine2" placeholder="Apartment, Area, Sector, Village" value={formData.addressLine2} onChange={handleChange} required />
                         </label>
+                    </div>
+
+                     {/* Locality & Landmark */}
+                    <div className={styles.inlineFields}>
+                                                <label>
+                            PIN Code
+                            <input
+                                type="text"
+                                name="pin"
+                                placeholder="Pin Code"
+                                value={formData.pin}
+                                maxLength={6}        // Limit length to 6 characters
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    // Allow only digits and max 6 chars
+                                    if (/^\d{0,6}$/.test(value)) {
+                                        handleChange(e);
+                                    }
+                                }}
+                                required
+                            />
+                        </label>
+                        {/* <label>
+                            Flat No/Locality
+                            <input type="text" name="locality" placeholder="Flat No/Locality" value={formData.locality} onChange={handleChange} required />
+                        </label> */}
                     </div>
 
                     {/* City & State */}
                     <div className={styles.inlineFields}>
                         <label>
-                            City / Town
-                            <input type="text" name="city" placeholder="City/town" value={formData.city} onChange={handleChange} required />
+                            City/ District / Town
+                            <input type="text" name="city" placeholder="City/District/town" value={formData.city} onChange={handleChange} required />
                         </label>
                         <label>
                             State
@@ -967,38 +979,12 @@ const CheckOut = () => {
                             </select>
                         </label>
                     </div>
-
-                    {/* Locality & Landmark */}
-                    <div className={styles.inlineFields}>
-                        <label>
-                            Flat No/Locality
-                            <input type="text" name="locality" placeholder="Flat No/Locality" value={formData.locality} onChange={handleChange} required />
-                        </label>
-                        <label>
-                            Pin Code
-                            <input
-                                type="text"
-                                name="pin"
-                                placeholder="Pin Code"
-                                value={formData.pin}
-                                maxLength={6}        // Limit length to 6 characters
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    // Allow only digits and max 6 chars
-                                    if (/^\d{0,6}$/.test(value)) {
-                                        handleChange(e);
-                                    }
-                                }}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div className={styles.inlineFields}>
+                    {/* <div className={styles.inlineFields}>
                         <label>
                             Landmark (Optional)
                             <input type="text" name="landmark" placeholder="landmark (optional)" value={formData.landmark} onChange={handleChange} required />
                         </label>
-                    </div>
+                    </div> */}
 
                     {/* Conditionally show buttons only when 'new' is selected */}
                     {selectedAddressIndex === 'new' && (
@@ -1213,8 +1199,7 @@ const CheckOut = () => {
                         onSuccess={handlePaymentSuccess}
                         onFailure={handlePaymentFailure}
                         customerData={{
-                            firstName: formData.firstName,
-                            lastName: formData.lastName,
+                            fullName: formData.fullName,
                             email: loggedInuser?.email,
                             contact: formData.phoneNumber.startsWith('91')
                                 ? formData.phoneNumber.slice(2)

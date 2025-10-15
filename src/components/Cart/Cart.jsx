@@ -129,14 +129,17 @@ const Cart = () => {
   const handleCheckout = () => {
     const user = localStorage.getItem("user");
 
-    if (!user) {
-      // ⬅️ If not logged in, show modal instead
-      setShowLoginModal(true);
-      setLoginFormType("signin")
-    } else {
-      dispatch(toggleCart());
+     dispatch(toggleCart());
       navigate("/check-out", { state: { cartItems } });
-    }
+
+    // if (!user) {
+    //   // ⬅️ If not logged in, show modal instead
+    //   setShowLoginModal(true);
+    //   setLoginFormType("signin")
+    // } else {
+    //   dispatch(toggleCart());
+    //   navigate("/check-out", { state: { cartItems } });
+    // }
   };
 
 

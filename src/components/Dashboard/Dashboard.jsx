@@ -31,15 +31,13 @@ const Dashboard = () => {
     const user = state?.user;
 
     const [editFields, setEditFields] = useState({
-        firstName: false,
-        lastName: false,
+        fullName: false,
         email: false,
         phone: false,
     });
 
     const [formData, setFormData] = useState({
-        firstName: user?.firstName || "",
-        lastName: user?.lastName || "",
+        fullName: user?.fullName || "",
         email: user?.email || "",
         phone: user?.phoneNumber || "", // leave empty if not present
     });
@@ -74,8 +72,7 @@ const Dashboard = () => {
             const updatedFields = {};
 
             if (field === "personalInfo") {
-                updatedFields.firstName = formData.firstName;
-                updatedFields.lastName = formData.lastName;
+                updatedFields.fullName = formData.fullName;
             } else if (field === "phone") {
                 updatedFields.phoneNumber = formData.phone;
             }
@@ -98,8 +95,7 @@ const Dashboard = () => {
     };
 
     const [newAddress, setNewAddress] = useState({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         phoneNumber: '', // update your form and handler too
         addressLine1: "",
         addressLine2: "",
@@ -163,8 +159,7 @@ const Dashboard = () => {
 
         const newAddressData = {
             _key: uuidv4(),
-            firstName: newAddress.firstName,
-            lastName: newAddress.lastName,
+            fullName: newAddress.fullName,
             phoneNumber: newAddress.phoneNumber,
             addressLine1: newAddress.addressLine1,
             addressLine2: newAddress.addressLine2,
@@ -206,8 +201,7 @@ const Dashboard = () => {
 
             // Clear form
             setNewAddress({
-                firstName: '',
-                lastName: '',
+                fullName: '',
                 phoneNumber: '',
                 addressLine1: '',
                 addressLine2: '',
@@ -284,7 +278,7 @@ const Dashboard = () => {
                 <div className={styles.sidebar}>
                     <div className={styles.userContainer}>
                         <h2 className={styles.heading}>Hello,</h2>
-                        <p className={styles.userName}>{user?.firstName} {user?.lastName}</p>
+                        <p className={styles.userName}>{user?.fullName}</p>
                     </div>
                     <div className={styles.accountWrapper}>
                         {/* My Orders Block */}
@@ -399,24 +393,16 @@ const Dashboard = () => {
                                     {editFields.personalInfo ? (
                                         <>
                                             <input
-                                                name="firstName"
-                                                value={formData.firstName}
+                                                name="fullName"
+                                                value={formData.fullName}
                                                 onChange={handleChange}
                                                 className={styles.input}
-                                                placeholder="First Name"
-                                            />
-                                            <input
-                                                name="lastName"
-                                                value={formData.lastName}
-                                                onChange={handleChange}
-                                                className={styles.input}
-                                                placeholder="Last Name"
+                                                placeholder="Full Name"
                                             />
                                         </>
                                     ) : (
                                         <>
-                                            <span className={styles.nameField}>{formData.firstName}</span>
-                                            <span className={styles.nameField}>{formData.lastName}</span>
+                                            <span className={styles.nameField}>{formData.fullName}</span>
                                         </>
                                     )}
                                 </div>
@@ -459,6 +445,7 @@ const Dashboard = () => {
                                             onChange={(value) => handleInputChange('phoneNumber', value)}
                                             inputStyle={{ width: '100%', marginTop: "10px" }}
                                             enableSearch
+                                            countryCodeEditable={false}   // ✅ Prevent country code from being deleted
                                         />
 
                                     ) : (
@@ -478,12 +465,8 @@ const Dashboard = () => {
                                 <form className={styles.addressForm} onSubmit={handleSubmitNewAddress}>
                                     <div className={styles.inlineFields}>
                                         <label>
-                                            First Name
-                                            <input type="text" name="firstName" placeholder="Firstname" value={newAddress.firstName} onChange={handleInputChange} />
-                                        </label>
-                                        <label>
-                                            Last Name
-                                            <input type="text" name="lastName" placeholder="Lastname" value={newAddress.lastName} onChange={handleInputChange} />
+                                            Full Name
+                                            <input type="text" name="fullName" placeholder="Full Name" value={newAddress.fullName} onChange={handleInputChange} />
                                         </label>
                                     </div>
 
@@ -506,7 +489,7 @@ const Dashboard = () => {
                                                 onChange={(value) => handleInputChange('phoneNumber', value)}
                                                 containerStyle={{
                                                     marginTop: "6px",   // 👈 this will actually add top margin
-                                                    width: "100%"
+                                                    width: "100%",
                                                 }}
                                                 inputStyle={{
                                                     borderRadius: "0px",
@@ -515,8 +498,15 @@ const Dashboard = () => {
                                                     fontSize: "15px",
                                                     textTransform: "capitalize",
                                                     paddingLeft: "45px",
+                                                    borderRadius: "4px"
 
-                                                }} enableSearch
+                                                }}
+                                                enableSearch
+                                                countryCodeEditable={false}   // ✅ Prevent country code from being deleted
+                                                inputProps={{
+                                                    required: true,          // ✅ HTML required attribute
+                                                    name: "phoneNumber",
+                                                }}
                                             />
                                         </label>
                                     </div>
@@ -618,7 +608,7 @@ const Dashboard = () => {
                                                 <div className={styles.addressDetails}>
                                                     <div className={styles.namePhone}>
                                                         <span className={styles.name}>
-                                                            {item.firstName} {item.lastName}
+                                                            {item.fullName}
                                                         </span>
                                                         <span className={styles.phone}>+{item.phoneNumber}</span>
                                                     </div>

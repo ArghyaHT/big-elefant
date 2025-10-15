@@ -123,7 +123,7 @@ const totalQuantity = [...beverageCartItems, ...merchCartItems].reduce(
                 state={{ user: loggedInUser }}
                 className={styles.customerName}
               >
-                {loggedInUser.firstName}
+                {loggedInUser.fullName}
               </Link>) : (
               <Link to="/sign-in">
                 <FiUser className={styles.icon} />
