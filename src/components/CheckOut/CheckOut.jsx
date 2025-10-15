@@ -887,7 +887,8 @@ const CheckOut = () => {
                                     height: "100%",
                                     fontSize: "15px",
                                     textTransform: "capitalize",
-                                    paddingLeft: "45px"
+                                    paddingLeft: "45px",
+                        
                                 }} enableSearch
                                 placeholder={country === 'in' ? '+91 1234567890' : undefined}
                                 required
