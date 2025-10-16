@@ -444,8 +444,8 @@ input[type="email"] {
 }
 
 .applyButton {
-  background-color: var(--checkout-button-background);
-  color: var(--primary-black-50);
+  background-color: var(--primary-black);
+  color: var(--primary-white);
   padding: 10px 16px;
   border: none;
   border-radius: 6px;
@@ -469,16 +469,17 @@ input[type="email"] {
 }
 
 .totalRow {
+  border-top: 1px solid var(--primary-white-40);
   font-weight: bold;
   font-size: 18px;
   margin-top: 10px;
 }
 
-.summaryDivider {
+/* .summaryDivider {
   border: none;
-  border-top: 1px solid #ccc;
-  margin: 12px 0;
-}
+  border-top: 1px solid var(--primary-white-40);
+  margin-bottom: 0px;
+} */
 
 .promoInput {
   display: flex;
@@ -505,6 +506,36 @@ input[type="email"] {
 .promoInput button:hover {
   opacity: 0.9;
 }
+
+/* CheckoutSummary.module.css or your styles file */
+
+.discountMessage {
+  color: #4caf50; /* green for success */
+  font-size: 14px;
+  margin: 6px 0;
+  font-weight: 500;
+}
+
+.summaryWrapper {
+  /* border-top: 1px solid #ccc; */
+  padding: 6px 0;
+  margin-top: 12px;
+  font-size: 14px;
+  padding: 10px;
+  color: #fff;
+  font-weight: 500;
+   border-radius: 0;
+   background-color: #000000;
+   border-radius: 8px;
+}
+
+.summaryWrapper p {
+  font-weight: 600;
+  color: #000;
+  padding: 6px 0;
+  margin-bottom: 0;
+}
+
 
 
 .importantNote {

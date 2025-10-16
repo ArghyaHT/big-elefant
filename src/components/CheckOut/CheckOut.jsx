@@ -84,8 +84,10 @@ const CheckOut = () => {
     const [loggedInuser, setloggedInuser] = useState(null);
     const [openIndex, setOpenIndex] = useState(null);
     const [selectedApp, setSelectedApp] = useState("");
-    const [discountCode, setDiscountCode] = useState("");
+    const [discount, setDiscount] = useState("");
     const [promoCode, setPromoCode] = useState("");
+    const [discountType, setDiscountType] = useState("");
+    const [message, setMessage] = useState("");
     const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('payNow'); // default selection
@@ -97,17 +99,17 @@ const CheckOut = () => {
 
 
     useEffect(() => {
-  if (showSuccessModal) {
-    document.body.style.overflow = 'hidden'; // block scroll
-  } else {
-    document.body.style.overflow = 'auto';   // restore scroll
-  }
+        if (showSuccessModal) {
+            document.body.style.overflow = 'hidden'; // block scroll
+        } else {
+            document.body.style.overflow = 'auto';   // restore scroll
+        }
 
-  // Cleanup on unmount
-  return () => {
-    document.body.style.overflow = 'auto';
-  };
-}, [showSuccessModal]);
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [showSuccessModal]);
 
 
     console.log("CheckOut Items", cartItems)
@@ -127,26 +129,99 @@ const CheckOut = () => {
     );
     const deliveryCharges = 150;
     const currency = cartItems[0]?.currency || "₹";
-    const discount = promoCode.trim().toLowerCase() === "save25" ? 25 : 0;
 
-    // const applyPromo = () => {
-    //     if (promoCode.trim().toLowerCase() === "save25") {
-    //         setDiscount(25);
-    //     } else if (promoCode.trim().toLowerCase() === "free") {
-    //         setDiscount(deliveryCharges);
-    //     } else {
-    //         setDiscount(0);
-    //     }
-    // };
+    const handleApplyDiscount = async () => {
+        const code = promoCode.trim().toLowerCase();
+        if (!code) {
+            setMessage("Please enter a promo code.");
+            return;
+        }
 
-    const total = subtotal + deliveryCharges - discount;
+        try {
+            // ✅ Fetch matching coupon
+            const coupon = await sanityClient.fetch(
+                `*[_type == "discountCoupon" && lower(couponCode) == $code][0]{
+      ...,
+      "products": products[]->{
+  _id,
+  "name": coalesce(productName, merchName),
+  _type,
+  price
+}
+  }`,
+                { code }
+            );
+
+            console.log("Populated Coupon Products:", coupon.products);
 
 
-    const handleApplyDiscount = () => {
-        if (!discountCode.trim()) return;
-        // Add your logic to validate and apply the discount
-        console.log("Applying code:", discountCode);
+            if (!coupon) {
+                setMessage("❌ Invalid promo code.");
+                return;
+            }
+
+            // ✅ Check if coupon is active
+            if (!coupon.isActive) {
+                setMessage("⚠️ This promo code is not active.");
+                return;
+            }
+
+            // ✅ Validate date range
+            const now = new Date();
+            const start = new Date(coupon.validity?.startDate);
+            const end = new Date(coupon.validity?.endDate);
+
+            if (now < start || now > end) {
+                setMessage("⚠️ This promo code is expired or not yet valid.");
+                return;
+            }
+
+            // ✅ Calculate eligible subtotal based on coupon
+            let eligibleSubtotal = 0;
+
+            if (coupon.applyToAll) {
+                // Apply to all items
+                eligibleSubtotal = subtotal;
+            } else {
+                // Apply only to specific products
+                cartItems.forEach(item => {
+                    if (coupon.products.some(p => p.name === item.name)) {
+                        eligibleSubtotal += item.price * item.quantity;
+                    }
+                });
+            }
+
+            if (eligibleSubtotal === 0) {
+                setMessage("⚠️ This coupon does not apply to any products in your cart.");
+                setDiscount(0);
+                setDiscountType("");
+                return;
+            }
+            // ✅ Calculate discount based on type
+            let calculatedDiscount = 0;
+            if (coupon.discountType === "percentage") {
+                calculatedDiscount = Math.round((eligibleSubtotal * coupon.discountValue) / 100);
+            } else if (coupon.discountType === "fixed") {
+                calculatedDiscount = coupon.discountValue;
+            }
+
+            setDiscount(calculatedDiscount);
+            setDiscountType(coupon.discountType);
+            setMessage(
+                `🎉 ${coupon.couponCode} applied! ${coupon.discountType === "percentage"
+                    ? `${coupon.discountValue}% off`
+                    : `₹${coupon.discountValue} off`
+                }`
+            );
+        } catch (error) {
+            console.error("Error applying coupon:", error);
+            setMessage("Something went wrong. Please try again later.");
+        }
     };
+
+
+    const total = (subtotal - discount) + deliveryCharges;
+
 
     // const filteredData = allData[selectedTab];
 
@@ -158,8 +233,8 @@ const CheckOut = () => {
         addressLine2: '',
         city: '',
         state: '',
-        locality: '',
-        landmark: '',
+        // locality: '',
+        // landmark: '',
         pin: '',
     });
 
@@ -187,8 +262,8 @@ const CheckOut = () => {
                     addressLine2: '',
                     city: '',
                     state: '',
-                    locality: '',
-                    landmark: '',
+                    // locality: '',
+                    // landmark: '',
                     pin: '',
                 });
             }
@@ -229,8 +304,8 @@ const CheckOut = () => {
             addressLine2: formData.addressLine2,
             city: formData.city,
             state: formData.state,
-            locality: formData.locality,
-            landmark: formData.landmark,
+            // locality: formData.locality,
+            // landmark: formData.landmark,
             pin: Number(formData.pin), // make sure pin is number
         };
 
@@ -272,8 +347,8 @@ const CheckOut = () => {
                 addressLine2: '',
                 city: '',
                 state: '',
-                locality: '',
-                landmark: '',
+                // locality: '',
+                // landmark: '',
                 pin: '',
             });
 
@@ -294,10 +369,39 @@ const CheckOut = () => {
             address: '',
             city: '',
             state: '',
-            locality: '',
-            landmark: '',
+            // locality: '',
+            // landmark: '',
             pin: '',
         });
+    };
+
+
+    const handlePinChange = async (e) => {
+        const value = e.target.value;
+
+        // Allow only digits and max 6 chars
+        if (/^\d{0,7}$/.test(value)) {
+            handleChange(e); // Update formData.pin
+
+            if (value.length === 6) {
+                try {
+                    const res = await fetch(`https://api.postalpincode.in/pincode/${value}`);
+                    const data = await res.json();
+
+                    if (data[0].Status === "Success" && data[0].PostOffice.length > 0) {
+                        const postOffice = data[0].PostOffice[0];
+                        const city = postOffice.Block || postOffice.Name || "";
+                        const state = postOffice.State || "";
+
+                        setFormData(prev => ({ ...prev, city, state })); // ✅ use direct setFormData
+                    } else {
+                        setFormData(prev => ({ ...prev, city: "", state: "" }));
+                    }
+                } catch (error) {
+                    console.error("Error fetching PIN details:", error);
+                }
+            }
+        }
     };
 
 
@@ -476,8 +580,8 @@ const CheckOut = () => {
             addressLine2,
             city,
             state,
-            locality,
-            landmark,
+            // locality,
+            // landmark,
             pin,
             payment,
             orderId,
@@ -511,8 +615,8 @@ const CheckOut = () => {
             addressLine2,
             city,
             state,
-            locality,
-            landmark,
+            // locality,
+            // landmark,
             subtotalPrice: Number(subtotal),
             deliveryCharges: Number(deliveryCharges),
             discountCharges: Number(discount),
@@ -593,8 +697,8 @@ const CheckOut = () => {
             addressLine2,
             city,
             state,
-            locality,
-            landmark,
+            // locality,
+            // landmark,
             pin,
         } = formData;
 
@@ -613,8 +717,8 @@ const CheckOut = () => {
             addressLine2,
             city,
             state,
-            locality,
-            landmark,
+            // locality,
+            // landmark,
             pin: Number(pin),
             subtotalPrice: Number(subtotal),
             deliveryCharges: Number(deliveryCharges),
@@ -836,8 +940,8 @@ const CheckOut = () => {
                                                 addressLine2: '',
                                                 city: '',
                                                 state: '',
-                                                locality: '',
-                                                landmark: '',
+                                                // locality: '',
+                                                // landmark: '',
                                                 pin: '',
                                             }));
                                         } else {
@@ -940,13 +1044,15 @@ const CheckOut = () => {
                                 placeholder="Pin Code"
                                 value={formData.pin}
                                 maxLength={6}        // Limit length to 6 characters
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    // Allow only digits and max 6 chars
-                                    if (/^\d{0,6}$/.test(value)) {
-                                        handleChange(e);
-                                    }
-                                }}
+                                // onChange={(e) => {
+                                //     const value = e.target.value;
+                                //     // Allow only digits and max 6 chars
+                                //     if (/^\d{0,6}$/.test(value)) {
+                                //         handleChange(e);
+                                //     }
+                                // }}
+                                onChange={handlePinChange} // ✅ use new handler
+
                                 required
                             />
                         </label>
@@ -962,7 +1068,7 @@ const CheckOut = () => {
                             City/ District / Town
                             <input type="text" name="city" placeholder="City/District/town" value={formData.city} onChange={handleChange} required />
                         </label>
-                        <label>
+                        {/* <label>
                             State
                             <select name="state" value={formData.state} className={styles.inlineFields} onChange={handleChange} required>
                                 <option value="">Select state</option>
@@ -996,6 +1102,18 @@ const CheckOut = () => {
                                 <option value="Uttarakhand">Uttarakhand</option>
                                 <option value="West Bengal">West Bengal</option>
                             </select>
+                        </label> */}
+
+                        <label>
+                            State
+                            <input
+                                type="text"
+                                name="state"
+                                value={formData.state}
+                                readOnly
+                                className={styles.inlineFields}
+                                placeholder="State"
+                            />
                         </label>
                     </div>
                     {/* <div className={styles.inlineFields}>
@@ -1106,13 +1224,13 @@ const CheckOut = () => {
                         ))}
                     </ul>
 
-                    <div className={styles.discountWrapper}>
+                    {/* <div className={styles.discountWrapper}>
                         <input
                             type="text"
                             placeholder="Enter discount code"
                             className={styles.discountInput}
-                            value={discountCode}
-                            onChange={(e) => setDiscountCode(e.target.value)}
+                            value={promoCode}
+                            onChange={(e) => setPromoCode(e.target.value)}
                         />
                         <button
                             className={styles.applyButton}
@@ -1120,7 +1238,22 @@ const CheckOut = () => {
                         >
                             Apply
                         </button>
-                    </div>
+                    </div> */}
+
+                    {/* {message && <p className={styles.discountMessage}>{message}</p>}
+
+                    <div className={styles.summaryWrapper}>
+                        <p>
+                            Discount Applied:{" "}
+                            <span>
+                                {discountType === "percentage"
+                                    ? `₹${(discount || 0).toFixed(2)}`
+                                    : discountType === "fixed"
+                                        ? `₹${(discount || 0).toFixed(2)}`
+                                        : "None"}
+                            </span>
+                        </p>
+                    </div> */}
 
                     <div className={styles.summaryWrapper}>
                         <div className={styles.summaryRow}>
@@ -1128,17 +1261,17 @@ const CheckOut = () => {
                             <span>{currency}{subtotal.toFixed(2)}</span>
                         </div>
 
+                        {/* <div className={styles.summaryRow}>
+                            <span>Discount</span>
+                            <span>{currency}{(discount || 0).toFixed(2)}</span>
+                        </div> */}
+
                         <div className={styles.summaryRow}>
                             <span>Delivery Charges</span>
                             <span>{currency}{deliveryCharges.toFixed(2)}</span>
                         </div>
 
-                        <div className={styles.summaryRow}>
-                            <span>Discount</span>
-                            <span>{currency}{discount.toFixed(2)}</span>
-                        </div>
-
-                        <hr className={styles.summaryDivider} />
+                        {/* <hr className={styles.summaryDivider} /> */}
 
                         <div className={`${styles.summaryRow} ${styles.totalRow}`}>
                             <span>Total</span>
@@ -1227,8 +1360,8 @@ const CheckOut = () => {
                             addressLine2: formData.addressLine2,
                             city: formData.city,
                             state: formData.state,
-                            locality: formData.locality,
-                            landmark: formData.landmark,
+                            // locality: formData.locality,
+                            // landmark: formData.landmark,
                             pin: formData.pin
                         }}
                     />
