@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaChevronDown } from "react-icons/fa";
+import { FaCheckCircle, FaChevronDown } from "react-icons/fa";
 
 import paytm from "../../assets/paytm.png"
 import gpay from "../../assets/gpay.png"
@@ -94,6 +94,20 @@ const CheckOut = () => {
     const merchCartItems = useSelector((state) => state.merchCart.items);
 
     const cartItems = [...beverageCartItems, ...merchCartItems];
+
+
+    useEffect(() => {
+  if (showSuccessModal) {
+    document.body.style.overflow = 'hidden'; // block scroll
+  } else {
+    document.body.style.overflow = 'auto';   // restore scroll
+  }
+
+  // Cleanup on unmount
+  return () => {
+    document.body.style.overflow = 'auto';
+  };
+}, [showSuccessModal]);
 
 
     console.log("CheckOut Items", cartItems)
@@ -1222,15 +1236,26 @@ const CheckOut = () => {
                     {showSuccessModal && (
                         <div className={styles.modalOverlay}>
                             <div className={styles.modalContent}>
-                                <h2>🎉 Order Confirmed</h2>
-                                <p>Your order has been saved successfully!</p>
+                                <div className={styles.checkIconWrapper}>
+                                    <FaCheckCircle className={styles.checkIcon} />
+                                </div>
+
+                                <h2 className={styles.congratsText}>Congratulations!</h2>
+                                <p className={styles.confirmationTitle}>Your Order is Confirmed!</p>
+                                <p className={styles.confirmationSubtext}>
+                                    We’ll send you a shipping confirmation<br />
+                                    as soon as your order ships.
+                                </p>
+
                                 <button
                                     onClick={() => {
                                         setShowSuccessModal(false);
                                         navigate('/'); // 👈 navigate to home
                                     }}
+                                    className={styles.closeButton}
                                 >
-                                    Close</button>
+                                    Go to Home
+                                </button>
                             </div>
                         </div>
                     )}
