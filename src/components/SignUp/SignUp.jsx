@@ -65,16 +65,16 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
       localStorage.setItem("user", JSON.stringify(createdUser));
 
 
-    if (isModal && onSignUpSuccess) {
-      // ✅ If opened in modal (checkout flow)
-      onSignUpSuccess(createdUser);
-    } else {
-      // ✅ Normal signup page flow
-      navigate("/");
-      alert("User registered successfully!");
-    }
+      if (isModal && onSignUpSuccess) {
+        // ✅ If opened in modal (checkout flow)
+        onSignUpSuccess(createdUser);
+      } else {
+        // ✅ Normal signup page flow
+        navigate("/");
+        alert("User registered successfully!");
+      }
 
-      setFormData({ fullName: "",  email: "", password: "" });
+      setFormData({ fullName: "", email: "", password: "" });
       setPhone("");
     } catch (err) {
       setError("Something went wrong. Please try again.");
@@ -85,7 +85,7 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={isModal? styles.containerModal: styles.container}>
+      <div className={isModal ? styles.containerModal : styles.container}>
         <h2 className={styles.title}>Create your account</h2>
 
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -146,7 +146,7 @@ const SignUp = ({ isModal = false, onSignUpSuccess, onSwitchToSignIn }) => {
               onChange={handlePhoneChange}
               inputStyle={{ width: "100%" }}
               enableSearch
-               countryCodeEditable={false} 
+              countryCodeEditable={false}
             />
           </div>
 

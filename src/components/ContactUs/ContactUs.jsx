@@ -11,13 +11,11 @@ import { sanityClient } from "../../utils/sanityClient";
 const Contactus = () => {
     // Form state
     const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
+        fullName: "",
         email: "",
         phoneNumber: "",
         message: ""
     });
-
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
@@ -43,7 +41,7 @@ const Contactus = () => {
         e.preventDefault();
 
         // Basic validation
-        if (!formData.firstName || !formData.email || !formData.phoneNumber) {
+        if (!formData.fullName || !formData.email || !formData.phoneNumber) {
             setError("Please fill in all required fields.");
             return;
         }
@@ -55,7 +53,7 @@ const Contactus = () => {
         // Prepare the lead document to send to Sanity
         const leadDocument = {
             _type: "lead",
-            firstName: formData.firstName,
+            fullName: formData.fullName,
             lastName: formData.lastName,
             email: formData.email,
             phoneNumber: formData.phoneNumber,
@@ -68,8 +66,7 @@ const Contactus = () => {
 
             setSuccess("Thank you! Your message has been sent.");
             setFormData({
-                firstName: "",
-                lastName: "",
+                fullName: "",
                 email: "",
                 phoneNumber: "91",
                 message: ""
@@ -119,20 +116,20 @@ const Contactus = () => {
                     <form className={styles.contactForm} onSubmit={handleSubmit}>
                         <div className={styles.row}>
                             <div className={styles.formGroup}>
-                                <label htmlFor="firstName">
-                                    First Name<span className={styles.requiredTag}>(Required)</span>
+                                <label htmlFor="fullName">
+                                    Full Name<span className={styles.requiredTag}>(Required)</span>
                                 </label>
                                 <input
                                     type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    value={formData.firstName}
+                                    id="fullName"
+                                    name="fullName"
+                                    value={formData.fullName}
                                     onChange={handleChange}
                                     required
                                 />
                             </div>
 
-                            <div className={styles.formGroup}>
+                            {/* <div className={styles.formGroup}>
                                 <label htmlFor="lastName">Last Name</label>
                                 <input
                                     type="text"
@@ -141,7 +138,7 @@ const Contactus = () => {
                                     value={formData.lastName}
                                     onChange={handleChange}
                                 />
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className={styles.formGroup}>
@@ -169,6 +166,8 @@ const Contactus = () => {
                                     required: true,
                                     id: 'phoneNumber',
                                 }}
+                                enableSearch
+                                countryCodeEditable={false}
                                 inputStyle={{ width: "100%" }}
                                 value={formData.phoneNumber}
                                 onChange={handlePhoneChange}

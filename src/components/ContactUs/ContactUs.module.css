@@ -1,57 +1,65 @@
 .contactWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid var(--primary-black);
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid var(--primary-black);
 }
 
+/* ===== Banner ===== */
 .banner {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .bannerImage {
-    width: 100%;
-    height: 90vh;
-    object-fit: cover;
+  width: 100%;
+  height: 90vh;
+  object-fit: cover;
 }
 
+/* ===== Contact Content (Main Layout) ===== */
 .contactContent {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: 70px 135px;
-    /* for responsiveness */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap; /* wraps gracefully on small screens */
+  padding: 70px 135px;
+  gap: 60px; /* space between left & right sections */
+  box-sizing: border-box;
 }
 
-/* Left: Image */
+/* ===== Left: Contact Info ===== */
 .contactInfoWrapper {
-    padding: 10px 32px 32px 32px;
-    background-color: var(--primary-black);
-    border-radius: 12px;
-    max-width: 400px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: var(--primary-black);
+  border-radius: 12px;
+  padding: 32px;
+  color: var(--primary-white);
+  height: 380px;
 }
 
 .contactHeading {
-    font-size: 28px;
-    font-weight: bold;
-    margin-top:20px;
-    margin-bottom: 0px;
-    color: var(--primary-white);
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  color: var(--primary-white);
 }
 
 .contactDescription {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    color: var(--secondary-text-color);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--secondary-text-color);
 }
 
+/* Flex Container for items */
 .contactFlexContainer {
   display: flex;
   flex-direction: column;
@@ -59,13 +67,20 @@
   margin-top: 70px;
 }
 
-/* Flex row for each item */
+/* Contact Items */
 .contactItem {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 1rem;
+  font-size: 16px;
   color: var(--primary-white);
+  text-decoration: none;
+}
+
+.contactItem a {
+  font-size: 16px;
+  color: var(--primary-white);
+  text-decoration: none;
 }
 
 .icon {
@@ -73,124 +88,150 @@
   color: var(--primary-white);
 }
 
-.contactItem {
-    font-size: 16px;
-    margin-bottom: 0.5rem;
-    color: var(--primary-white);
-    text-decoration: none;
+/* ===== Right: Form Section ===== */
+.formSection {
+  flex: 1.5;               /* take more space than the left box */
+  min-width: 400px;        /* ensures it doesn’t collapse */
+  padding-left: 30px;
 }
-
-.contactItem a {
-  font-size: 16px;
-  color: var(--primary-white);
-  text-decoration: none; 
-}
-
 
 .contactForm {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.formSection {
-    padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .formHeading {
-    font-size: 40px;
-    font-weight: 400;
-    color: var(--primary-black);
+  font-size: 40px;
+  font-weight: 400;
+  color: var(--primary-black);
+  margin-bottom: 20px;
 }
 
 .row {
-    display: flex;
-    gap: 16px;
+  gap: 16px;
 }
 
 .fullWidth {
-    width: 100%;
+  width: 100%;
 }
 
 input,
 textarea,
 select {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-    font-family: inherit;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  box-sizing: border-box;
+  color: var(--input-color) !important;
 }
 
 .selectField {
-    color: var(--primary-grey);
+  color: var(--primary-grey);
 }
 
 .formGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
 .requiredTag {
-    color: var(--primary-black);
-    font-weight: 400;
-    padding-left: 2px;
+  color: var(--primary-black);
+  font-weight: 400;
+  padding-left: 2px;
 }
 
 textarea {
-    resize: vertical;
+  resize: vertical;
+  color: var(--input-color);
 }
 
 .submitButton {
-    background-color: var(--primary-black);
-    color: var(--primary-white);
-    padding: 15px;
-    text-transform: uppercase;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-weight: bold;
+  background-color: var(--primary-black);
+  color: var(--primary-white);
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
+.submitButton:hover {
+  background-color: #222; /* slight hover effect */
+}
 
-@media (max-width: 480px) {
-     .banner {
-    height: auto;
-  }
-
-  .bannerImage {
-    height: 300px; /* or 50vh or any value that looks good on small screens */
-    object-fit: inherit;
-  }
+/* ===== Mobile: Responsive Fix ===== */
+@media (max-width: 768px) {
   .contactContent {
     flex-direction: column;
-    padding: 20px 20px;
+    align-items: center;
+    padding: 40px 30px;
+  }
+  .contactInfoWrapper{
+    width: 80%;
   }
 
-  .contactInfoWrapper {
-    margin-bottom: 20px;
+  
+  .formSection {
+    width: 100%;
+    max-width: 100%;
   }
 
   .formSection {
     padding-left: 0;
-    width: 100%;
   }
 
   .formHeading {
-    font-size: 28px;
+    font-size: 32px;
     text-align: center;
+  }
+
+  .contactFlexContainer {
+    margin-top: 40px;
+    gap: 24px;
+  }
+
+  .contactHeading,
+  .contactDescription {
+    text-align: center;
+  }
+}
+
+/* ===== Extra Small Screens ===== */
+@media (max-width: 480px) {
+  .banner {
+    height: auto;
+  }
+
+  .bannerImage {
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .formHeading {
+    font-size: 26px;
+  }
+
+  .contactHeading {
+    font-size: 22px;
+  }
+
+  .contactDescription {
+    font-size: 15px;
   }
 
   .row {
@@ -209,46 +250,31 @@ textarea {
     font-size: 14px;
     padding: 12px;
   }
-
-  .contactFlexContainer {
-    margin-top: 40px;
-    gap: 24px;
-  }
-
-  .contactHeading {
-    font-size: 22px;
-    text-align: center;
-  }
-
-  .contactDescription {
-    font-size: 16px;
-    text-align: center;
-  }
 }
 
-
 @media (max-width: 390px) {
-      .bannerImage {
-    height: 250px; /* slightly less for ultra-small screens */
+  .bannerImage {
+    height: 250px;
   }
+
   .formHeading {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .contactHeading {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .contactDescription {
     font-size: 14px;
   }
 
+  label {
+    font-size: 13px;
+  }
+
   .submitButton {
     font-size: 13px;
     padding: 10px;
-  }
-
-  label {
-    font-size: 13px;
   }
 }

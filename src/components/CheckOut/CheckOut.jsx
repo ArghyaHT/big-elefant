@@ -766,7 +766,7 @@ const CheckOut = () => {
             !addressLine1?.trim() ||
             !addressLine2?.trim() ||
             !city?.trim() ||
-            !state?.trim() 
+            !state?.trim()
             // !locality?.trim()
         ) {
             alert("Please fill in all shipping details fields.");
@@ -873,7 +873,6 @@ const CheckOut = () => {
                             {/* <input type="tel" name="phone" placeholder="+91 1234567890" value={formData.phoneNumber} onChange={handleChange} /> */}
                             <PhoneInput
                                 country={country}
-
                                 value={formData.phoneNumber}
                                 onChange={(value) =>
                                     setFormData((prev) => ({
@@ -881,15 +880,20 @@ const CheckOut = () => {
                                         phoneNumber: value,
                                     }))
                                 }
+                                containerStyle={{
+                                    width: "100%",
+                                }}
                                 inputStyle={{
-                                    borderRadius: "0px",
+                                    borderRadius: "4px",
                                     width: "100%",
                                     height: "100%",
                                     fontSize: "15px",
                                     textTransform: "capitalize",
                                     paddingLeft: "45px",
-                        
-                                }} enableSearch
+
+                                }}
+                                enableSearch
+                                countryCodeEditable={false}
                                 placeholder={country === 'in' ? '+91 1234567890' : undefined}
                                 required
 
@@ -912,9 +916,9 @@ const CheckOut = () => {
                         </label>
                     </div>
 
-                     {/* Locality & Landmark */}
+                    {/* Locality & Landmark */}
                     <div className={styles.inlineFields}>
-                                                <label>
+                        <label>
                             PIN Code
                             <input
                                 type="text"
