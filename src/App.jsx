@@ -22,6 +22,7 @@ import ElefantsClubPage from './Pages/ElefantClubPage'
 import ForgetPasswordPage from './Pages/ForgetPasswordpage'
 import VerifyOtpPage from './Pages/VerifyOtpPage'
 import ChangePasswordPage from './Pages/ChangePasswordPage'
+import NotFoundPage from './Pages/NotFoundPage'
 
 function App() {
   return (
@@ -49,6 +50,8 @@ function App() {
         <Route path="/change-password" element={<ChangePasswordPage />} />
 
 
+        {/* 👇 Catch-all route for unknown pages */}
+        <Route path="*" element={<NotFoundPage />} />
 
       </Routes>
 
