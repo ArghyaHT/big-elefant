@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ScrollToTop from './utils/scrollToTop'
@@ -23,9 +23,20 @@ import ForgetPasswordPage from './Pages/ForgetPasswordpage'
 import VerifyOtpPage from './Pages/VerifyOtpPage'
 import ChangePasswordPage from './Pages/ChangePasswordPage'
 import NotFoundPage from './Pages/NotFoundPage'
+import IntroVideo from './components/IntroVideo/IntroVideo'
 
 function App() {
+    const [showIntro, setShowIntro] = useState(true);
+
+      useEffect(() => {
+    // Show intro only if screen width is greater than 768px
+    if (window.innerWidth > 768) {
+      setShowIntro(true);
+    }
+  }, []);
+
   return (
+    <>
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -56,6 +67,12 @@ function App() {
       </Routes>
 
     </BrowserRouter>
+
+      {/* Show intro only on desktop */}
+      {showIntro && (
+        <IntroVideo onFinish={() => setShowIntro(false)} />
+      )}
+    </>
 
   )
 }
